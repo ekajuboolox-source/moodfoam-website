@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command -v magick)",
+      "Bash(command -v convert)",
+      "Bash(command -v ffmpeg)",
+      "Bash(command -v cwebp)",
+      "Bash(echo \"magick:$?\")",
+      "Bash(echo \"ffmpeg:$?\")",
+      "Bash(command -v python)",
+      "Bash(echo \"python:$?\")",
+      "Bash(command -v python3)",
+      "Bash(python -c \"import PIL; print\\(PIL.__version__\\)\")"
+    ]
+  }
+}

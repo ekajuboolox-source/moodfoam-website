@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <title>Showroom & Gallery | Mood Foam Mattresses</title>
+  <meta name="description" content="Browse Mood Foam's full showroom gallery - mattresses, beds, sofas, cushions and beddings, organized by category.">
+  <!-- Favicon - Multiple formats for all devices -->
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon_io/favicon-48x48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="shortcut icon" href="/favicon_io/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<style>
+/* Fixed: .dropbtn used to have a hardcoded width:90px, too narrow for
+   two-word labels ("STANDARD MATTRESS"), which forced them onto two
+   lines while single-word items stayed on one line -- the ragged,
+   overflowing header. Auto width + nowrap + fluid font-size fixes it. */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background: none;
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  font-size: clamp(12.5px, 1.05vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  line-height: normal;
+  white-space: nowrap;
+  width: auto;
+  padding: 10px 6px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.dropbtn:hover {
+  color: #d9ffd9;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  min-width: 190px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: #10c21f;
+}
+
+@media (max-width: 900px) {
+  .dropdown-content {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    min-width: 0;
+  }
+}
+</style>
+<body>
+  <div class="top-info-bar">
+    <div class="top-info-bar-inner">
+      <a href="tel:+256764513341"><i class="fas fa-phone-alt"></i> 0764 513341</a>
+      <a href="https://wa.me/256743053096" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+      <a href="mailto:busujjuindustries@gmail.com"><i class="fas fa-envelope"></i> busujjuindustries@gmail.com</a>
+      <span><i class="fas fa-clock"></i> Mon&ndash;Sun, 8:00&ndash;18:00</span>
+    </div>
+  </div>
+ <header class="header">
+    <div class="nav-bar">
+      <div class="hamburger" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="MOOD FOAM logo" class="logo-img" />
+      </a>
+      <nav>
+  <ul class="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <!-- Standard Mattress Dropdown -->
+    <li class="dropdown">
+      <button class="dropbtn">Standard Mattress</button>
+      <div class="dropdown-content">
+        <a href="pvc.html">PVC Mattress</a>
+        <a href="delux-quilted-mattress.html">Delux Mattress</a>
+        <a href="tape-edge.html">Tape Edge Mattress</a>
+        <a href="open-end.html">Open End Mattress</a>
+      </div>
+    </li>
+
+    <!-- Premium Mattress Dropdown -->
+    <li class="dropdown">
+      <button class="dropbtn">Premium Mattress</button>
+      <div class="dropdown-content">
+        <a href="Orthopedic.html">Orthopedic Mattress</a>
+        <a href="Rebonded.html">Rebonded Mattress</a>
+      </div>
+    </li>
+
+          <li><a href="beds.html">Beds</a></li>
+    <!-- Beddings Dropdown -->
+    <li class="dropdown">
+      <button class="dropbtn">Beddings</button>
+      <div class="dropdown-content">
+        <a href="pillow.html">Pillows</a>
+        <a href="topper.html">Toppers</a>
+        <a href="mattres-protectors.html">Mattress Protectors</a>
+        <a href="leather.html">Leather Cover</a>
+      </div>
+    </li>
+
+    <!-- Sofas Dropdown -->
+    <li class="dropdown">
+      <button class="dropbtn">Sofas</button>
+      <div class="dropdown-content">
+        <a href="sofas.html">Sofas</a>
+        <a href="cushions.html">Cushions & Foam Sheets</a>
+      </div>
+    </li>
+
+          <li><a href="spring.html">Spring Mattress</a></li>
+    <li><a href="about.html#blog">BlOG</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+  </ul>
+</nav>
+
+    </div>
+  </header>        
+
+  <section class="hero2" id="home">
+    <img src="New folder-1/Model2.jpg" alt="Mood Foam mattress lifestyle display" class="img3">
+    <img src="New folder-1/showroom Duvets - Copy.jpg" alt="Mood Foam bedding display" class="img2">
+    <img src="New folder-1/Model1.jpg" alt="Mood Foam mattress collection" class="img1">
+    
+   
+    <div class="container2-hero-content">
+      <div class="hero-text">
+        <h1>Mood Foam Showroom</h1>
+        <p>
+          Experience unrivaled comfort.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <header>
+    <h2>Buying Your Next Mattress Just Got a Lot Quicker</h2>
+    <p>We are here to help you find the right mattress right for you. Discover our mattresses.</p>
+  </header>
+
+  <section class="cards-container gallery-section">
+  <h2 class="gallery-heading">Standard Mattresses</h2>
+  <div class="gallery-grid">
+      <div class="card gallery-card" data-full="New folder-1/Quilted Deluxe Mattress (6ft X 3ft X 6_).JPG" data-caption="Quilted Deluxe Mattress" tabindex="0" role="button" aria-label="View larger image: Quilted Deluxe Mattress">
+        <img src="New folder-1/Quilted Deluxe Mattress (6ft X 3ft X 6_).JPG" alt="Quilted Deluxe Mattress" loading="lazy" />
+        <a href="delux-quilted-mattress.html" class="btn">Quilted Deluxe Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Quilted Deluxe Mattress (6ft X 5ft X 6_) - Copy.JPG" data-caption="Quilted Deluxe Mattress" tabindex="0" role="button" aria-label="View larger image: Quilted Deluxe Mattress">
+        <img src="New folder-1/Quilted Deluxe Mattress (6ft X 5ft X 6_) - Copy.JPG" alt="Quilted Deluxe Mattress" loading="lazy" />
+        <a href="delux-quilted-mattress.html" class="btn">Quilted Deluxe Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Quilted Deluxe Mattress-2 (6ft X 5ft X 8_) - Copy.JPG" data-caption="Quilted Deluxe Mattress" tabindex="0" role="button" aria-label="View larger image: Quilted Deluxe Mattress">
+        <img src="New folder-1/Quilted Deluxe Mattress-2 (6ft X 5ft X 8_) - Copy.JPG" alt="Quilted Deluxe Mattress" loading="lazy" />
+        <a href="delux-quilted-mattress.html" class="btn">Quilted Deluxe Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Quilted Deluxe Mattress (6ft X 4ft X 10_).JPG" data-caption="Quilted Deluxe Mattress" tabindex="0" role="button" aria-label="View larger image: Quilted Deluxe Mattress">
+        <img src="New folder-1/Quilted Deluxe Mattress (6ft X 4ft X 10_).JPG" alt="Quilted Deluxe Mattress" loading="lazy" />
+        <a href="delux-quilted-mattress.html" class="btn">Quilted Deluxe Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Open End Mattress (6ft X 3ft X 6_) (2) - Copy.JPG" data-caption="Open End Mattress" tabindex="0" role="button" aria-label="View larger image: Open End Mattress">
+        <img src="New folder-1/Open End Mattress (6ft X 3ft X 6_) (2) - Copy.JPG" alt="Open End Mattress" loading="lazy" />
+        <a href="open-end.html" class="btn">Open End Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Open End Mattress (6ft X 3ft X 6_).JPG" data-caption="Open End Mattress" tabindex="0" role="button" aria-label="View larger image: Open End Mattress">
+        <img src="New folder-1/Open End Mattress (6ft X 3ft X 6_).JPG" alt="Open End Mattress" loading="lazy" />
+        <a href="open-end.html" class="btn">Open End Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Open End Mattresses (6ft X 3ft X 4_).JPG" data-caption="Open End Mattress" tabindex="0" role="button" aria-label="View larger image: Open End Mattress">
+        <img src="New folder-1/Open End Mattresses (6ft X 3ft X 4_).JPG" alt="Open End Mattress" loading="lazy" />
+        <a href="open-end.html" class="btn">Open End Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Open End Mattresses (6ft X 3ft X 6_) (2).JPG" data-caption="Open End Mattress" tabindex="0" role="button" aria-label="View larger image: Open End Mattress">
+        <img src="New folder-1/Open End Mattresses (6ft X 3ft X 6_) (2).JPG" alt="Open End Mattress" loading="lazy" />
+        <a href="open-end.html" class="btn">Open End Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Open End Mattresses-1 (6ft X 3ft X 4_).JPG" data-caption="Open End Mattress" tabindex="0" role="button" aria-label="View larger image: Open End Mattress">
+        <img src="New folder-1/Open End Mattresses-1 (6ft X 3ft X 4_).JPG" alt="Open End Mattress" loading="lazy" />
+        <a href="open-end.html" class="btn">Open End Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Open End Mattresses-3 (6ft X 3ft X 6_).JPG" data-caption="Open End Mattress" tabindex="0" role="button" aria-label="View larger image: Open End Mattress">
+        <img src="New folder-1/Open End Mattresses-3 (6ft X 3ft X 6_).JPG" alt="Open End Mattress" loading="lazy" />
+        <a href="open-end.html" class="btn">Open End Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Tape Edge 6x6.jpg" data-caption="Tape Edge Mattress 3.5 x 6" tabindex="0" role="button" aria-label="View larger image: Tape Edge Mattress 3.5 x 6">
+        <img src="New folder-1/Tape Edge 6x6.jpg" alt="Tape Edge Mattress 3.5 x 6" loading="lazy" />
+        <a href="tape-edge.html" class="btn">Tape Edge Mattress 3.5 x 6</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Tape Edge Matress 4x4 .jpg" data-caption="Tape Edge Mattress (6ft X 3ft X 4in)" tabindex="0" role="button" aria-label="View larger image: Tape Edge Mattress (6ft X 3ft X 4in)">
+        <img src="New folder-1/Tape Edge Matress 4x4 .jpg" alt="Tape Edge Mattress (6ft X 3ft X 4in)" loading="lazy" />
+        <a href="tape-edge.html" class="btn">Tape Edge Mattress (6ft X 3ft X 4in)</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Tape Edge Mattress (6ft X 4ft X 6_) (2) - Copy.JPG" data-caption="Tape Edge Mattress (6ft X 4ft X 6in)" tabindex="0" role="button" aria-label="View larger image: Tape Edge Mattress (6ft X 4ft X 6in)">
+        <img src="New folder-1/Tape Edge Mattress (6ft X 4ft X 6_) (2) - Copy.JPG" alt="Tape Edge Mattress (6ft X 4ft X 6in)" loading="lazy" />
+        <a href="tape-edge.html" class="btn">Tape Edge Mattress (6ft X 4ft X 6in)</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Tape Edge Mattress-1 (6ft X 4ft X 6_) - Copy.JPG" data-caption="Tape Edge Mattress (6ft X 4ft X 6in)" tabindex="0" role="button" aria-label="View larger image: Tape Edge Mattress (6ft X 4ft X 6in)">
+        <img src="New folder-1/Tape Edge Mattress-1 (6ft X 4ft X 6_) - Copy.JPG" alt="Tape Edge Mattress (6ft X 4ft X 6in)" loading="lazy" />
+        <a href="tape-edge.html" class="btn">Tape Edge Mattress (6ft X 4ft X 6in)</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Tape Edge Mattress-2 (6ft X 3ft X 6_) - Copy.JPG" data-caption="Tape Edge Mattress (6ft X 4ft X 6in)" tabindex="0" role="button" aria-label="View larger image: Tape Edge Mattress (6ft X 4ft X 6in)">
+        <img src="New folder-1/Tape Edge Mattress-2 (6ft X 3ft X 6_) - Copy.JPG" alt="Tape Edge Mattress (6ft X 4ft X 6in)" loading="lazy" />
+        <a href="tape-edge.html" class="btn">Tape Edge Mattress (6ft X 4ft X 6in)</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Tape Edge Mattresses (6ft X 4ft X 6_) (2) - Copy.JPG" data-caption="Tape Edge Mattress-1 (6ft X 3ft X 6in)" tabindex="0" role="button" aria-label="View larger image: Tape Edge Mattress-1 (6ft X 3ft X 6in)">
+        <img src="New folder-1/Tape Edge Mattresses (6ft X 4ft X 6_) (2) - Copy.JPG" alt="Tape Edge Mattress-1 (6ft X 3ft X 6in)" loading="lazy" />
+        <a href="tape-edge.html" class="btn">Tape Edge Mattress-1 (6ft X 3ft X 6in)</a>
+      </div>
+  </div>
+
+  <h2 class="gallery-heading">Premium Mattresses</h2>
+  <div class="gallery-grid">
+      <div class="card gallery-card" data-full="New folder-1/Premium Round Mattress (6ft X 8_) - Copy.JPG" data-caption="Premium Round Mattress" tabindex="0" role="button" aria-label="View larger image: Premium Round Mattress">
+        <img src="New folder-1/Premium Round Mattress (6ft X 8_) - Copy.JPG" alt="Premium Round Mattress" loading="lazy" />
+        <a href="Rebonded.html" class="btn">Premium Round Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Premium Round Mattress (6ft X 8_).JPG" data-caption="Premium Round Mattress" tabindex="0" role="button" aria-label="View larger image: Premium Round Mattress">
+        <img src="New folder-1/Premium Round Mattress (6ft X 8_).JPG" alt="Premium Round Mattress" loading="lazy" />
+        <a href="Rebonded.html" class="btn">Premium Round Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Premium Round Mattress-2 (6ft X 8_).JPG" data-caption="Premium Round Mattress" tabindex="0" role="button" aria-label="View larger image: Premium Round Mattress">
+        <img src="New folder-1/Premium Round Mattress-2 (6ft X 8_).JPG" alt="Premium Round Mattress" loading="lazy" />
+        <a href="Rebonded.html" class="btn">Premium Round Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Premium Round Mattress-2 (6ft X 12_) - Copy.JPG" data-caption="Premium Round Mattress" tabindex="0" role="button" aria-label="View larger image: Premium Round Mattress">
+        <img src="New folder-1/Premium Round Mattress-2 (6ft X 12_) - Copy.JPG" alt="Premium Round Mattress" loading="lazy" />
+        <a href="Rebonded.html" class="btn">Premium Round Mattress</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Premium Round Mattress-2 (6ft X 12_).JPG" data-caption="Premium Round Mattress" tabindex="0" role="button" aria-label="View larger image: Premium Round Mattress">
+        <img src="New folder-1/Premium Round Mattress-2 (6ft X 12_).JPG" alt="Premium Round Mattress" loading="lazy" />
+        <a href="Rebonded.html" class="btn">Premium Round Mattress</a>
+      </div>
+  </div>
+
+  <h2 class="gallery-heading">Beds</h2>
+  <div class="gallery-grid">
+      <div class="card gallery-card" data-full="Mood Foam Beds/Mood Foam Beds/Canopy Bed1.jpg" data-caption="Canopy Bed" tabindex="0" role="button" aria-label="View larger image: Canopy Bed">
+        <img src="Mood Foam Beds/Mood Foam Beds/Canopy Bed1.jpg" alt="Canopy Bed" loading="lazy" />
+        <a href="beds.html" class="btn">Canopy Bed</a>
+      </div>
+      <div class="card gallery-card" data-full="Mood Foam Beds/Mood Foam Beds/Divan Beds.jpg" data-caption="Divan Bed" tabindex="0" role="button" aria-label="View larger image: Divan Bed">
+        <img src="Mood Foam Beds/Mood Foam Beds/Divan Beds.jpg" alt="Divan Bed" loading="lazy" />
+        <a href="beds.html" class="btn">Divan Bed</a>
+      </div>
+      <div class="card gallery-card" data-full="Mood Foam Beds/Mood Foam Beds/Storage Bed 6x6.jpg" data-caption="Storage Bed" tabindex="0" role="button" aria-label="View larger image: Storage Bed">
+        <img src="Mood Foam Beds/Mood Foam Beds/Storage Bed 6x6.jpg" alt="Storage Bed" loading="lazy" />
+        <a href="beds.html" class="btn">Storage Bed</a>
+      </div>
+      <div class="card gallery-card" data-full="Mood Foam Beds/Mood Foam Beds/upholstered2 bed.jpg" data-caption="Upholstered Bed" tabindex="0" role="button" aria-label="View larger image: Upholstered Bed">
+        <img src="Mood Foam Beds/Mood Foam Beds/upholstered2 bed.jpg" alt="Upholstered Bed" loading="lazy" />
+        <a href="beds.html" class="btn">Upholstered Bed</a>
+      </div>
+  </div>
+
+  <h2 class="gallery-heading">Beddings</h2>
+  <div class="gallery-grid">
+      <div class="card gallery-card" data-full="New folder-1/Quilted Deluxe pilllows - Copy.JPG" data-caption="Quilted Deluxe Pillow" tabindex="0" role="button" aria-label="View larger image: Quilted Deluxe Pillow">
+        <img src="New folder-1/Quilted Deluxe pilllows - Copy.JPG" alt="Quilted Deluxe Pillow" loading="lazy" />
+        <a href="pillow.html" class="btn">Quilted Deluxe Pillow</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Quilted Deluxe Pillows-1 - Copy.JPG" data-caption="Quilted Deluxe Pillow" tabindex="0" role="button" aria-label="View larger image: Quilted Deluxe Pillow">
+        <img src="New folder-1/Quilted Deluxe Pillows-1 - Copy.JPG" alt="Quilted Deluxe Pillow" loading="lazy" />
+        <a href="pillow.html" class="btn">Quilted Deluxe Pillow</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Quilted Deluxe pillow-2 - Copy.JPG" data-caption="Quilted Deluxe Pillow" tabindex="0" role="button" aria-label="View larger image: Quilted Deluxe Pillow">
+        <img src="New folder-1/Quilted Deluxe pillow-2 - Copy.JPG" alt="Quilted Deluxe Pillow" loading="lazy" />
+        <a href="pillow.html" class="btn">Quilted Deluxe Pillow</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/topper.jpg" data-caption="Mattress Topper" tabindex="0" role="button" aria-label="View larger image: Mattress Topper">
+        <img src="New folder-1/topper.jpg" alt="Mattress Topper" loading="lazy" />
+        <a href="topper.html" class="btn">Mattress Topper</a>
+      </div>
+      <div class="card gallery-card" data-full="New folder-1/Topper2.jpg" data-caption="Mattress Topper" tabindex="0" role="button" aria-label="View larger image: Mattress Topper">
+        <img src="New folder-1/Topper2.jpg" alt="Mattress Topper" loading="lazy" />
+        <a href="topper.html" class="btn">Mattress Topper</a>
+      </div>
+  </div>
+
+  <h2 class="gallery-heading">Sofas</h2>
+  <div class="gallery-grid">
+      <div class="card gallery-card" data-full="New folder-1/Show Room Sofa1.jpg" data-caption="Sofa Set" tabindex="0" role="button" aria-label="View larger image: Sofa Set">
+        <img src="New folder-1/Show Room Sofa1.jpg" alt="Sofa Set" loading="lazy" />
+        <a href="sofas.html" class="btn">Sofa Set</a>
+      </div>
+      <div class="card gallery-card" data-full="Sofas/Sofas/Chesterfield sofa1.jpg" data-caption="Chesterfield Sofa" tabindex="0" role="button" aria-label="View larger image: Chesterfield Sofa">
+        <img src="Sofas/Sofas/Chesterfield sofa1.jpg" alt="Chesterfield Sofa" loading="lazy" />
+        <a href="sofas.html" class="btn">Chesterfield Sofa</a>
+      </div>
+      <div class="card gallery-card" data-full="Sofas/Sofas/divan-style premium sofa1.jpg" data-caption="Divan-Style Premium Sofa" tabindex="0" role="button" aria-label="View larger image: Divan-Style Premium Sofa">
+        <img src="Sofas/Sofas/divan-style premium sofa1.jpg" alt="Divan-Style Premium Sofa" loading="lazy" />
+        <a href="sofas.html" class="btn">Divan-Style Premium Sofa</a>
+      </div>
+      <div class="card gallery-card" data-full="Sofas/Sofas/modular recliner sofa1.jpg" data-caption="Modular Recliner Sofa" tabindex="0" role="button" aria-label="View larger image: Modular Recliner Sofa">
+        <img src="Sofas/Sofas/modular recliner sofa1.jpg" alt="Modular Recliner Sofa" loading="lazy" />
+        <a href="sofas.html" class="btn">Modular Recliner Sofa</a>
+      </div>
+  </div>
+
+  <h2 class="gallery-heading">Cushions & Foam Sheets</h2>
+  <div class="gallery-grid">
+      <div class="card gallery-card" data-full="Chusions & Foam Sheets/Chusions & Foam Sheets/High-Density Cushion.jpg" data-caption="High-Density Cushion" tabindex="0" role="button" aria-label="View larger image: High-Density Cushion">
+        <img src="Chusions & Foam Sheets/Chusions & Foam Sheets/High-Density Cushion.jpg" alt="High-Density Cushion" loading="lazy" />
+        <a href="cushions.html" class="btn">High-Density Cushion</a>
+      </div>
+      <div class="card gallery-card" data-full="Chusions & Foam Sheets/Chusions & Foam Sheets/Standard Foam Sheet1.jpg" data-caption="Standard Foam Sheet" tabindex="0" role="button" aria-label="View larger image: Standard Foam Sheet">
+        <img src="Chusions & Foam Sheets/Chusions & Foam Sheets/Standard Foam Sheet1.jpg" alt="Standard Foam Sheet" loading="lazy" />
+        <a href="cushions.html" class="btn">Standard Foam Sheet</a>
+      </div>
+      <div class="card gallery-card" data-full="Chusions & Foam Sheets/Chusions & Foam Sheets/orthopedic foam sheet2.jpg" data-caption="Orthopedic Foam Sheet" tabindex="0" role="button" aria-label="View larger image: Orthopedic Foam Sheet">
+        <img src="Chusions & Foam Sheets/Chusions & Foam Sheets/orthopedic foam sheet2.jpg" alt="Orthopedic Foam Sheet" loading="lazy" />
+        <a href="cushions.html" class="btn">Orthopedic Foam Sheet</a>
+      </div>
+      <div class="card gallery-card" data-full="Chusions & Foam Sheets/Chusions & Foam Sheets/High-Density Cushion1.jpg" data-caption="High-Density Cushion" tabindex="0" role="button" aria-label="View larger image: High-Density Cushion">
+        <img src="Chusions & Foam Sheets/Chusions & Foam Sheets/High-Density Cushion1.jpg" alt="High-Density Cushion" loading="lazy" />
+        <a href="cushions.html" class="btn">High-Density Cushion</a>
+      </div>
+  </div>
+
+  <h2 class="gallery-heading">More From Our Showroom</h2>
+  <div class="gallery-grid">
+      <div class="card gallery-card gallery-card--figure" data-full="New folder-1/showroom Baby Coats - Copy.JPG" data-caption="Baby Coat (6ft x 3ft x 6in)" tabindex="0" role="button" aria-label="View larger image: Baby Coat (6ft x 3ft x 6in)">
+        <img src="New folder-1/showroom Baby Coats - Copy.JPG" alt="Baby Coat (6ft x 3ft x 6in)" loading="lazy" />
+        <p class="gallery-caption">Baby Coat (6ft x 3ft x 6in)</p>
+      </div>
+      <div class="card gallery-card gallery-card--figure" data-full="New folder-1/Baby Coat (6ft X 3ft X 6_).JPG" data-caption="Baby Coat (6ft x 3ft x 6in)" tabindex="0" role="button" aria-label="View larger image: Baby Coat (6ft x 3ft x 6in)">
+        <img src="New folder-1/Baby Coat (6ft X 3ft X 6_).JPG" alt="Baby Coat (6ft x 3ft x 6in)" loading="lazy" />
+        <p class="gallery-caption">Baby Coat (6ft x 3ft x 6in)</p>
+      </div>
+      <div class="card gallery-card gallery-card--figure" data-full="New folder-1/showroom Baby Coats.JPG" data-caption="Baby Coats" tabindex="0" role="button" aria-label="View larger image: Baby Coats">
+        <img src="New folder-1/showroom Baby Coats.JPG" alt="Baby Coats" loading="lazy" />
+        <p class="gallery-caption">Baby Coats</p>
+      </div>
+      <div class="card gallery-card gallery-card--figure" data-full="New folder-1/showroom Duvets - Copy.jpg" data-caption="Duvets" tabindex="0" role="button" aria-label="View larger image: Duvets">
+        <img src="New folder-1/showroom Duvets - Copy.jpg" alt="Duvets" loading="lazy" />
+        <p class="gallery-caption">Duvets</p>
+      </div>
+  </div>
+
+  <a href="contact.html" class="btn see-all-btn">Don&rsquo;t see what you need? Contact Us</a>
+</section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img src="" alt="" id="lightbox-img">
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <script src="java/script.js"></script>
+  <a href="https://wa.me/256743053096" target="_blank" class="whatsapp-button">
+    <i class="fab fa-whatsapp"></i> Chat with us
+  </a>
+  <footer class="footer" id="contact">
+    <div class="container footer-grid">
+      <div id="footer_one">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="index.html#about">Reviews</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="delux-quilted-mattress.html">Mattresses</a></li>
+          <li><a href="beds.html">Beds</a></li>
+          <li><a href="showroom.html">Beddings</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-contact-info">
+      <p>
+        <i class="fas fa-map-marker-alt"></i>
+        Nalugazi LC, Naama Central, Mityana District, Uganda <br>
+        P.O. Box 247, Mityana
+      </p>
+      <p>
+        <i class="fas fa-phone"></i>
+        <a href="tel:+256764513341">0764513341</a>,
+        <a href="tel:+256743053096">0743053096</a>
+      </p>
+      <p>
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:busujjuindustries@gmail.com">busujjuindustries@gmail.com</a>
+      </p>
+    </div>
+    <p class="copyright" style="margin-top: 20px; font-size: 14px; color: #666;">
+      &copy; 2025 Busujju Industries Limited. All rights reserved.
+    </p>
+  </footer>
+</body>
+</html>
