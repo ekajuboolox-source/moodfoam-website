@@ -1967,11 +1967,20 @@ h1, h2, h3, h4 {
   background: linear-gradient(135deg, var(--color-brand-dark) 0%, var(--color-primary-dark) 100%);
   color: var(--color-white);
   text-align: center;
-  padding: 4rem 1.5rem;
+  padding: 4.5rem 1.5rem;
+}
+/* Keep the band itself full-bleed (that's the premium look), but
+   contain the heading/copy/buttons to a width that reads as one
+   deliberate block instead of sparse text floating in a wide expanse
+   of color - the site's usual 1200px .container is too wide for a
+   heading + one line + 3 buttons. */
+.contact-cta .container {
+  max-width: 640px;
 }
 .contact-cta h2 {
   color: var(--color-white);
   margin-bottom: 0.75rem;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
 }
 .contact-cta p {
   max-width: 560px;
@@ -2038,15 +2047,45 @@ header h1 { color: var(--color-primary); font-weight: 800; }
 }
 .about-image {
   flex: 1 1 420px;
-}
-.about-image img {
-  display: block;
+  position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
   max-height: 460px;
-  object-fit: cover;
   border-radius: 16px;
+  overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+/* Crossfade carousel: same technique as the homepage hero, sized down
+   for this smaller frame. 5 images x 4s each = 20s full cycle. */
+.about-image img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0; /* base state, not just the keyframe 0% - without this, an
+    image sits at the browser's default opacity:1 during its own
+    animation-delay countdown (fill-mode defaults to "none"), so
+    every image but the first would render fully visible, stacked on
+    top of each other, until its delay elapsed */
+  animation: aboutImageCrossfade 20s infinite;
+}
+.about-image img:nth-of-type(1) { animation-delay: 0s; }
+.about-image img:nth-of-type(2) { animation-delay: 4s; }
+.about-image img:nth-of-type(3) { animation-delay: 8s; }
+.about-image img:nth-of-type(4) { animation-delay: 12s; }
+.about-image img:nth-of-type(5) { animation-delay: 16s; }
+@keyframes aboutImageCrossfade {
+  0%   { opacity: 0; }
+  2%   { opacity: 1; }
+  18%  { opacity: 1; }
+  20%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-image img { animation: none; opacity: 0; }
+  .about-image img:first-of-type { opacity: 1; }
 }
 .about-content {
   flex: 1 1 480px;
@@ -2075,7 +2114,7 @@ header h1 { color: var(--color-primary); font-weight: 800; }
   .about-content, .about-content h1, .about-content h2 { text-align: center; }
   .about-content .about-features,
   .about-content .trust-indicators { justify-content: center; }
-  .about-image img { max-height: 320px; }
+  .about-image { max-height: 320px; }
 }
 .about p {
   font-size: 1.05rem;
@@ -2505,37 +2544,49 @@ textarea:focus-visible,
 }
 
 /* Value proposition strip (below header) and About-page feature cards /
-   testimonials — likewise consolidated from a per-page <style> block. */
+   testimonials — likewise consolidated from a per-page <style> block.
+   Compact single-row layout (icon inline with text, not stacked) with
+   a max-width so it reads as one tight, classy group on large/ultrawide
+   screens instead of 5 items sprawled edge to edge. */
 .trust-strip {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
-  gap: 0;
+  align-items: center;
+  gap: 0.6rem 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
   background: linear-gradient(var(--color-primary-dark), var(--color-primary-light), var(--color-primary-dark));
-  padding: 30px 20px;
+  padding: 14px 20px;
 }
 
 .trust-item {
-  flex: 1 1 180px;
-  max-width: 220px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: var(--color-white);
-  padding: 15px 10px;
+  white-space: nowrap;
 }
 
 .trust-item i {
-  display: block;
-  font-size: 26px;
+  font-size: 15px;
   color: var(--color-accent-gold);
-  margin-bottom: 10px;
 }
 
 .trust-item span,
 .trust-item a {
   font-weight: 600;
+  font-size: 0.85rem;
   color: var(--color-white);
   text-decoration: none;
+}
+@media (max-width: 700px) {
+  .trust-strip { gap: 0.5rem 1.25rem; padding: 12px 16px; }
+  .trust-item i { font-size: 13px; }
+  .trust-item span, .trust-item a { font-size: 0.78rem; }
+}
+@media (max-width: 420px) {
+  .trust-strip { gap: 0.4rem 0.85rem; }
 }
 
 .about-features {
