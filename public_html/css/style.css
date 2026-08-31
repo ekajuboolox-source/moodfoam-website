@@ -568,7 +568,7 @@ h1.product-card2 {
   margin: 5px 0;
 }
 .choose-options-btn {
-  background-color: var(--color-primary); /* Mood Foam brand green */
+  background-color: var(--color-primary-deep); /* var(--color-primary) only gives ~2.3:1 contrast against white text, under WCAG AA's 4.5:1 */
   color: white;
   padding: 12px 20px;
   font-size: 16px;
@@ -581,7 +581,7 @@ h1.product-card2 {
 }
 
 .choose-options-btn:hover {
-  background-color: var(--color-primary-hover); /* Darker brand green on hover */
+  background-color: var(--color-primary-dark); /* var(--color-primary-hover) is lighter than the -deep resting state, which would make hover less readable, not more */
 }
 
 .choose-options-btn:active {
@@ -964,6 +964,17 @@ h1.product-card2 {
     object-fit: cover;
   }
 }
+/* Even at its narrowest tier above, .footer-grid's 3 columns
+   (Company/Products/Support) need 3*100px + 2*20px gap = 340px
+   minimum - already tight, and real column content (padding, "Support"
+   plus its list items) pushed actual width past that, overflowing the
+   page by 50+px on a 320px-wide phone. Stack to one column instead of
+   trying to shrink 3 columns to fit under ~360px. */
+@media (max-width: 480px) {
+  .footer-grid {
+    flex-direction: column;
+  }
+}
 
 /* Fix for grid display on mobile */
 @media (max-width: 900px) {
@@ -1070,7 +1081,7 @@ h1.product-card2 {
 }
 
 .size-option.selected {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-deep); /* var(--color-primary) only gives ~2.3:1 contrast against white text */
   color: var(--color-white);
   border-color: var(--color-primary);
 }
@@ -1246,7 +1257,7 @@ h1.product-card2 {
     .order-button {
   display: inline-block;
   padding: 10px 16px;
-  background-color: var(--color-primary); /* Mood Foam brand green */
+  background-color: var(--color-primary-deep); /* var(--color-primary) only gives ~2.3:1 contrast against white text, under WCAG AA's 4.5:1 */
   color: white;
   max-height: 60px;
   text-decoration: none;
@@ -1425,9 +1436,9 @@ ul.menu ul li > ul li a {
 }
 
 #productModal .size-option.selected {
-  background: var(--color-primary);
+  background: var(--color-primary-deep); /* var(--color-primary) only gives ~2.3:1 contrast against white text */
   color: var(--color-white);
-  border-color: var(--color-primary);
+  border-color: var(--color-primary-deep);
 }
 
 #modalPrice {
@@ -1898,7 +1909,7 @@ h1, h2, h3, h4 {
    .contact-cta) can reuse the same primary/secondary button look. */
 .hero-cta .btn-primary,
 .btn-primary {
-  background: var(--color-primary);
+  background: var(--color-primary-deep); /* var(--color-primary) only gives ~2.3:1 contrast against white text, under WCAG AA's 4.5:1 */
   color: var(--color-white);
   padding: 0.9rem 1.9rem;
   border-radius: 8px;
@@ -1909,7 +1920,7 @@ h1, h2, h3, h4 {
   display: inline-block;
 }
 .hero-cta .btn-primary:hover,
-.btn-primary:hover { background: var(--color-primary-hover); transform: translateY(-2px); }
+.btn-primary:hover { background: var(--color-primary-dark); transform: translateY(-2px); }
 .hero-cta .btn-secondary,
 .btn-secondary {
   background: transparent;
@@ -1975,38 +1986,38 @@ h1, h2, h3, h4 {
   .contact-cta-actions .btn-secondary { text-align: center; }
 }
 
-/* --- Trust strip (value proposition bar, sits under the nav) --- */
-.trust-strip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.25rem;
-  flex-wrap: wrap;
-  background: var(--color-primary-dark);
-  color: var(--color-white);
-  padding: 0.65rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-}
-.trust-item { display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
-.trust-item i { font-size: 0.95rem; }
-.trust-item a { color: var(--color-white); text-decoration: none; }
-.trust-item a:hover { text-decoration: underline; }
-@media (max-width: 700px) {
-  .trust-strip { gap: 1.1rem; font-size: 0.72rem; padding: 0.5rem 0.75rem; }
-}
-@media (max-width: 420px) {
-  .trust-strip { gap: 0.7rem; }
-  .trust-item span { display: none; } /* icons only on the smallest phones to avoid wrapping */
-}
+/* Trust strip (.trust-strip/.trust-item) styling lives lower in this
+   file (search "value proposition"), near .about-features - a
+   duplicate definition used to live here too (an older nowrap/inline
+   layout, versus the vertical icon-over-text cards actually in use).
+   Because the later block never set white-space itself, this block's
+   "white-space: nowrap" kept applying on top of it regardless of which
+   rule "won" the rest of the layout - the longest trust-strip item
+   ("Direct-from-Manufacturer Pricing") couldn't wrap and overflowed
+   past the page at ~1200px width. Removed the whole duplicate block
+   rather than just the one property, since every other property here
+   was already fully shadowed and dead. */
 
 /* --- Brand color consistency (client brand green var(--color-primary)) --- */
+/* var(--color-primary) (#10c21f) only gives ~2.3:1 contrast against
+   the white badge text, well under WCAG AA's 4.5:1 for normal text -
+   var(--color-primary-deep) passes and matches what .badge.economy/
+   deluxe/premium/luxury already used further up before this rule
+   (over-eagerly applied for "brand color consistency") overrode them;
+   also covers beds/beddings/sofas/spring, which had no other rule. */
 .badge.economy, .badge.deluxe, .badge.premium, .badge.luxury,
-.badge.beds, .badge.beddings, .badge.sofas, .badge.spring { background: var(--color-primary); }
-.btn { background-color: var(--color-primary); }
-.btn:hover { background-color: var(--color-primary-hover); }
-.learn-more { background-color: var(--color-primary); }
+.badge.beds, .badge.beddings, .badge.sofas, .badge.spring { background: var(--color-primary-deep); }
+/* Both of these used to read var(--color-primary) here, silently
+   overriding the accessible var(--color-primary-deep) background
+   that .btn/.learn-more's own earlier rules set (11.71:1 contrast
+   with their white text) with the much lower 2.3:1 of the lighter
+   green - the same "brand color consistency" over-application as the
+   badges above. Hover now steps to --color-primary-dark rather than
+   --color-primary-hover, which is lighter than -deep and would have
+   made hovering a button less readable, not more. */
+.btn { background-color: var(--color-primary-deep); }
+.btn:hover { background-color: var(--color-primary-dark); }
+.learn-more { background-color: var(--color-primary-deep); }
 .about h2 { color: var(--color-primary); font-weight: 800; letter-spacing: 0.3px; }
 header h1 { color: var(--color-primary); font-weight: 800; }
 
@@ -2249,7 +2260,12 @@ textarea:focus-visible,
   align-items: flex-start;
   flex-wrap: wrap;
 }
-.contact-details, .contact-form-wrap { flex: 1 1 400px; }
+/* min-width:0 overrides the flex-item default of min-width:auto,
+   which otherwise stops a flex item from shrinking past its content's
+   intrinsic width even with flex-shrink:1 - without it, this wrapper
+   couldn't shrink enough on a 320px-wide phone and overflowed the
+   page by a few px. */
+.contact-details, .contact-form-wrap { flex: 1 1 400px; min-width: 0; }
 .contact-details h2, .contact-form-wrap h2 {
   color: var(--color-brand-dark);
   margin-bottom: 1rem;
@@ -2299,10 +2315,10 @@ textarea:focus-visible,
   align-self: flex-start;
   border: none;
   cursor: pointer;
-  background: var(--color-primary);
+  background: var(--color-primary-deep); /* var(--color-primary) only gives ~2.3:1 contrast against white text */
   color: var(--color-white);
 }
-#contactForm button:hover { background: var(--color-primary-hover); }
+#contactForm button:hover { background: var(--color-primary-dark); }
 @media (max-width: 600px) {
   .contact-layout { gap: 2rem; }
   #contactForm button { align-self: stretch; text-align: center; }
@@ -2334,7 +2350,7 @@ textarea:focus-visible,
 }
 .category-tabs a:hover,
 .category-tabs a:focus-visible {
-  background: var(--color-primary);
+  background: var(--color-primary-deep); /* var(--color-primary) only gives ~2.3:1 contrast against white text - matters especially here since :focus-visible is the keyboard focus indicator */
   color: var(--color-white);
 }
 @media (max-width: 700px) {
