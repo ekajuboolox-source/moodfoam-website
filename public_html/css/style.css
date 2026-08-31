@@ -107,17 +107,22 @@ body {
 
 /* Hamburger menu styles */
 .hamburger {
+  /* 44x44 is the standard minimum touch-target size (WCAG 2.5.5 /
+     platform HIGs); the icon itself stays visually the same (28px
+     bars, centered) - this just grows the invisible tappable area.
+     top/right shifted by half the size delta (32->44 = +12, so -6 on
+     each) to keep the icon's visual center where it was. */
   display: none;
   flex-direction: column;
   cursor: pointer;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   justify-content: center;
   align-items: center;
   z-index: 1001;
   position: absolute;
-  top: 18px;
-  right: 20px;
+  top: 12px;
+  right: 14px;
 }
 
 .hamburger span {
@@ -159,8 +164,8 @@ padding-left: 15px;
   .hamburger {
     display: flex;
     position: absolute;
-    top: 18px;
-    right: 20px;
+    top: 12px;
+    right: 14px;
   }
   .nav-bar {
     position: relative;
@@ -1597,6 +1602,16 @@ header h1 {
 }
 
 .cards-container {
+  /* No max-width meant this stretched edge-to-edge on wide screens,
+     inconsistent with the ~1200px content width used everywhere else
+     on the site (brief: "sensible maximum content width, generally
+     around 1200-1400px"). It also fit exactly 6 of the 7 product
+     cards per row at large-desktop widths, orphaning the 7th card as
+     a lone centered item on its own row. Constraining the width fixes
+     both: cards now wrap 4+3, and the second row's 3 cards center as
+     a group instead of a single stray card. */
+  max-width: var(--content-max-width);
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -2587,9 +2602,25 @@ textarea:focus-visible,
     padding-left: 0;
     font-size: 16px;
   }
+  /* Nav links/dropdown buttons had no padding in the mobile menu, so
+     their tappable area was just the text's line height (~22px) -
+     under the ~44px minimum touch-target size. Padding on the link
+     itself (not just gap between list items) fixes this without
+     changing the visual text size. */
+  .nav-links > li > a {
+    display: block;
+    padding: 12px 0;
+  }
   .dropbtn {
+    /* .dropbtn's own base rule sets font-size via a desktop-oriented
+       clamp(12.5px, 1.05vw, 15px), which bottoms out at 12.5px on a
+       narrow phone - both visually smaller than and (with the padding
+       below) a shorter tap target than its sibling plain nav links.
+       Match them at 16px, same as .nav-links li's mobile font-size. */
     display: block;
     width: 100%;
     text-align: left;
+    padding: 12px 0;
+    font-size: 16px;
   }
 }
