@@ -28,78 +28,6 @@
     referrerpolicy="no-referrer"
   />
 </head>
-<style>
-/* Fixed: .dropbtn used to have a hardcoded width:90px, too narrow for
-   two-word labels ("STANDARD MATTRESS"), which forced them onto two
-   lines while single-word items stayed on one line -- the ragged,
-   overflowing header. Auto width + nowrap + fluid font-size fixes it. */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropbtn {
-  background: none;
-  color: #fff;
-  border: none;
-  font-family: inherit;
-  font-size: clamp(12.5px, 1.05vw, 15px);
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  line-height: normal;
-  white-space: nowrap;
-  width: auto;
-  padding: 10px 6px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.dropbtn:hover {
-  color: #d9ffd9;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ffffff;
-  min-width: 190px;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-}
-
-.dropdown-content a {
-  padding: 12px 16px;
-  display: block;
-  text-decoration: none;
-  color: #1a1a1a;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-  color: #10c21f;
-}
-
-@media (max-width: 900px) {
-  .dropdown-content {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border-radius: 0;
-    width: 100%;
-    min-width: 0;
-  }
-}
-</style>
 <body>
   <div class="top-info-bar">
     <div class="top-info-bar-inner">
@@ -174,18 +102,21 @@
     </div>
   </header>        
 
-  <section class="hero2" id="home">
-    <img src="New folder-1/Model2.jpg" alt="Mood Foam mattress lifestyle display" class="img3">
-    <img src="New folder-1/showroom Duvets - Copy.jpg" alt="Mood Foam bedding display" class="img2">
+  <section class="hero" id="home">
     <img src="New folder-1/Model1.jpg" alt="Mood Foam mattress collection" class="img1">
-    
-   
-    <div class="container2-hero-content">
+    <img src="New folder-1/Model2.jpg" alt="Mood Foam mattress lifestyle display" class="img2">
+    <img src="New folder-1/showroom Duvets - Copy.jpg" alt="Mood Foam bedding display" class="img3">
+    <div class="container-hero-content">
       <div class="hero-text">
+        <p class="hero-eyebrow">Full Product Range</p>
         <h1>Mood Foam Showroom</h1>
-        <p>
-          Experience unrivaled comfort.
+        <p class="hero-desc">
+          Experience unrivaled comfort. Browse our full range of mattresses, beds, sofas, cushions and beddings in one place.
         </p>
+        <p class="hero-desc-short">Browse our full product range.</p>
+        <div class="hero-cta">
+          <a href="contact.html" class="btn-primary">Contact Us</a>
+        </div>
       </div>
     </div>
   </section>

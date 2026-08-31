@@ -46,6 +46,7 @@ body {
   font-size: 2rem;
   font-weight: 400;
   color: #fdfefc;
+  text-decoration: none;
 }
 
 /* Hamburger menu styles */
@@ -182,48 +183,13 @@ width: 200px;
 }
 
 
-/* Hero Section */
-.hero {
-  padding: 6rem 0;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-}
-.hero2 {
-  padding: 6rem 0;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-  height: 450px;
-}
+/* Hero section CSS lives in the "HOMEPAGE REFRESH" block near the end of
+   this file (search .hero) — the rules that used to be here (.hero,
+   .hero2, duplicate .hero-content, duplicate crossfade keyframes) were
+   legacy, redundant with that block, and the source of the mobile hero
+   text-overlap bug (a fit-content overlay that didn't cover the photo). */
 .about-us{
   margin-top: 0;
-}
-.container-hero-content{
-  position: relative;
-  z-index: 1;
-  margin-top: 0;
-  text-align: center;
-  padding: 2rem;
-  padding-left: 10%;  
-  width: 100%;
-}
-.container2-hero-content{
-  position: relative;
-  z-index: 9999;
-  margin-top: 0;
-  text-align: center;
-  padding: 2rem;
-  padding-left: 2%;  
-  width: 50%;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  height: fit-content;
 }
 .container-contact-info {
   display: flex;
@@ -258,122 +224,6 @@ footer .copyright {
   color: #666;
 }
 
-.hero img {
-  position: absolute;
-  inset: 0;
-  margin-top: 0; /* Adjust to center vertically */
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  animation: crossfade 24s infinite;
-  transition: opacity 1.5s ease-in-out;
-  z-index: 0;
-}
-.hero .img1 { animation-delay: 0s; }
-.hero .img2 { animation-delay: 4.8s; } /* 4.8s after the first image */
-.hero .img3 { animation-delay: 9.6s; } /* 4.8s after the second image */
-.hero .img4 { animation-delay: 14.4s; } /* 4.8s after the third image */
-.hero .img5 { animation-delay: 16.2s; } 
-.hero .img6 { animation-delay: 19s; } /* 4.8s after the fifth image */
-.hero .img7 { animation-delay: 24.8s; } /* 4.8s after the sixth image */
-
-
-@keyframes crossfade {
-  0% { opacity: 0.4; }
-  8% { opacity: 1; }
-  25% { opacity: 1; }
-  33% { opacity: 0; }
-  100% { opacity: 0.3;}
-}
-
-
-.hero2 img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  animation: crossfade 14.4s infinite;
-  transition: opacity 1.5s ease-in-out;
-  z-index: 0;
-}
-
-/* Individual image animation delays */
-.hero2 .img1 { animation-delay: 0s; }
-.hero2 .img2 { animation-delay: 4.8s; }
-.hero2 .img3 { animation-delay: 9.6s; }
-
-/* Crossfade animation keyframes */
-@keyframes crossfade {
-  0% { opacity: 0; }
-  8% { opacity: 1; }
-  25% { opacity: 1; }
-  33% { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-
-/* Ensure hero text sits above images */
-.hero-content {
-  position: relative;
-  z-index: 1;
-  padding-top: 5rem;
-  padding-left: 2.5rem;
-  color: #0f0f0f;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-  max-width: 800px;
-}
-
-.hero h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  color: #2d863d;
-  font-weight: 700;
-  text-shadow: 1 5px 10px rgba(0,0,0,0.6);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: heroTitleFadeIn 1s ease-out forwards;
-  animation-delay: 0.3s;
-}
-.hero2 h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  color:rgb(207, 143, 24);
-  font-weight: 700;
-  text-shadow: 1 5px 10px rgba(0,0,0,0.6);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: heroTitleFadeIn 1s ease-out forwards;
-  animation-delay: 0.3s;
-}
-@keyframes TitleFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero p {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: #77d694;
-  text-shadow: 1px 2px 4px rgba(0,0,0,0.5);
-}
-.hero2 p {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color:rgb(206, 169, 48);
-}
 .btn {
   padding: 0.8rem 2rem;
   background-color: #69d965;
@@ -387,21 +237,6 @@ footer .copyright {
 .btn:hover {
   background-color: #28ed39;
 }
-.hero-content {
-  position: relative;
-  z-index: 1;
-  padding-top: 5rem;
-  padding-left: 2.5rem;
-  color: #0f0f0f;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  text-align: left;
-  max-width: 600px;
-}
-
-
 
 @keyframes heroTitleFadeIn {
   from {
@@ -412,24 +247,6 @@ footer .copyright {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-
-.btn:hover {
-  background-color: #28ed39;
-}
-.-content {
-  position: relative;
-  z-index: 1;
-  padding-top: 5rem;
-  padding-left: 2.5rem;
-  color: #0f0f0f;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  text-align: left;
-  max-width: 600px;
 }
 
 /* Section Titles */
@@ -1030,14 +847,6 @@ section h2 {
     gap: 1rem;
     font-size: 1.1rem;
   }
-  .hero {
-    padding: 3rem 0;
-    height: auto;
-    object-fit:fill;
-  }
-  .hero h1 {
-    font-size: 2rem;
-  }
   .section-icon {
     width: 80px;
     height: 80px;
@@ -1350,146 +1159,15 @@ section h2 {
     
     
 
-    /* Footer */
-    footer {
-      background-color: #1e40af;
-      color: white;
-      padding: 48px 24px;
-      margin-top: 64px;
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 32px;
-    }
-    .footer-logo img {
-      width: 112px;
-      margin-bottom: 24px;
-    }
-    .footer-section h4 {
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    /* Primary logo sizing - user requested much larger logo */
-    .logo-img, .logo img {
-      height: 180px; /* large desktop logo */
-      display: block;
-      width: auto;
-      max-width: 420px; /* cap width */
-      object-fit: contain;
-    }
-    .footer-section p,
-    .footer-section li {
-      font-size: .9rem;
-      line-height: 1.4;
-    }
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    .logo {
-      text-decoration: none;
-    }
-
-    @media (max-width: 900px) {
-      .logo-img, .logo img { height: 56px; }
-    }
-
-    @media (max-width: 480px) {
-      .logo-img, .logo img { height: 44px; }
-    }
-
-    /* Header redesign for professional layout */
-    .header {
-      background: linear-gradient(180deg, #1da21e 0%, #0f8b13 100%);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    }
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 8px 20px; /* compact navbar padding */
-      min-height: 64px; /* compact navbar height */
-    }
-    .nav-bar .hamburger {
-      order: 1;
-    }
-    .logo {
-      order: 0;
-      display: flex;
-      align-items: center;
-      padding-right: 12px;
-      /* pull the large logo down so it visually overlaps the header while navbar stays compact */
-      margin-top: -60px;
-    }
-    nav {
-      order: 2;
-      flex: 1 1 auto;
-    }
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-    }
-    .nav-links a {
-      color: #fff;
-      font-size: 16px; /* slightly smaller so logo dominates */
-      font-weight: 600;
-      letter-spacing: 0.6px;
-      text-decoration: none;
-      padding: 10px 6px;
-    }
-    .nav-links li { display: inline-flex; align-items:center; }
-
-    /* Keep logo larger than menu text on wide screens */
-    @media (min-width: 1600px) {
-      .logo-img, .logo img { height: 220px; max-width: 520px; }
-      .nav-bar { padding: 26px 40px; }
-    }
-
-    @media (min-width: 1200px) {
-      .logo-img, .logo img { height: 180px; max-width: 420px; }
-      .nav-links a { font-size: 16px; }
-    }
-
-    @media (max-width: 900px) {
-      .nav-links { gap: 16px; }
-      .logo-img, .logo img { height: 100px; max-width: 260px; }
-      .nav-bar { padding: 8px 16px; min-height: 64px; }
-      .logo { margin-top: -28px; }
-    }
-
-    @media (max-width: 600px) {
-      .nav-bar { padding: 6px 12px; min-height: 56px; }
-      .logo-img, .logo img { height: 64px; max-width: 180px; }
-      .logo { margin-top: -12px; }
-      .nav-links { display: none; } /* hide links on very small screens - hamburger toggles nav */
-    }
-    }
-
-/* Ensure header can grow to fit large logo (override earlier fixed height) */
-.header {
-  height: auto !important;
-  min-height: 160px !important; /* match logo size; adjust if needed */
-}
-    .footer-section li {
-      margin-bottom: 8px;
-    }
-    .payment-icons img {
-      height: 24px;
-      margin-right: 12px;
-      vertical-align: middle;
-    }
-    .payment-icons {
-      margin-top: 16px;
-    }
+    /* The old "Header redesign for professional layout" block that used to
+       sit here (duplicate .header/.nav-bar/.logo rules, a negative-margin
+       logo overlap hack, and an unrelated dark-blue .footer/.footer-section/
+       .payment-icons variant) has been removed: none of those classes are
+       used in any page's markup (the real footer is the .footer/.footer-grid
+       rules above), and the block contained an unclosed .footer-section ul
+       selector that silently corrupted CSS parsing for the whole region.
+       Header/logo/nav sizing now lives solely in the "HOMEPAGE REFRESH"
+       block near the end of this file. */
 
     /* Responsive */
     @media (max-width: 900px) {
@@ -2570,19 +2248,185 @@ textarea:focus-visible,
   font-weight: 300;
 }
 
-/* .dropbtn had no unconditional base style anywhere in this file - only a
-   >=901px rule further up gave it font/padding. Below that it fell back to
-   plain browser button chrome (grey box, border) next to plain-text nav
-   links. Give it a real base style so it matches .nav-links a at every
-   width. */
+/* Dropdown nav (Standard/Premium Mattress, Beddings, Sofas). Previously
+   duplicated verbatim inside a <style> block in the <head> of every page
+   (19 copies of the same ~70 lines) — consolidated here as the single
+   source of truth. .dropbtn used to have a hardcoded width:90px, too
+   narrow for two-word labels ("STANDARD MATTRESS"), which forced them
+   onto two lines while single-word items stayed on one line — the
+   ragged, overflowing header. Auto width + nowrap + fluid font-size
+   fixes it. */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
 .dropbtn {
   background: none;
+  color: #fff;
   border: none;
-  color: #fafcfa;
-  font: inherit;
+  font-family: inherit;
+  font-size: clamp(12.5px, 1.05vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  line-height: normal;
+  white-space: nowrap;
+  width: auto;
+  padding: 10px 6px;
   cursor: pointer;
-  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.dropbtn:hover {
+  color: #d9ffd9;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  min-width: 190px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: #10c21f;
+}
+
+@media (max-width: 900px) {
+  .dropdown-content {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Value proposition strip (below header) and About-page feature cards /
+   testimonials — likewise consolidated from a per-page <style> block. */
+.trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  background: linear-gradient(#0a8010, #1ba320, #0a8010);
+  padding: 30px 20px;
+}
+
+.trust-item {
+  flex: 1 1 180px;
+  max-width: 220px;
+  text-align: center;
+  color: #fff;
+  padding: 15px 10px;
+}
+
+.trust-item i {
+  display: block;
+  font-size: 26px;
+  color: #d4a437;
+  margin-bottom: 10px;
+}
+
+.trust-item span,
+.trust-item a {
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.about-features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin: 30px auto;
+  max-width: 1100px;
+}
+
+.about-feature-card {
+  background-color: #f2ede4;
+  border-radius: 10px;
+  padding: 28px 24px;
+  flex: 1 1 260px;
+  max-width: 320px;
+}
+
+.about-feature-card i {
+  font-size: 22px;
+  color: #10c21f;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.about-feature-card h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #14331f;
+}
+
+.about-feature-card p {
+  margin: 0;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.testimonials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.testimonials blockquote {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 28px 24px;
+  flex: 1 1 300px;
+  max-width: 340px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  margin: 0;
+  font-style: italic;
+  color: #333;
+}
+
+.testimonials .stars {
+  color: #d4a437;
+  font-style: normal;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.testimonials cite {
+  display: block;
+  margin-top: 14px;
+  font-style: normal;
+  font-weight: 700;
+  color: #14331f;
 }
 
 /* Mobile nav items (<=900px) had no width/font override of their own, so
