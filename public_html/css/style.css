@@ -1,6 +1,58 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
+/* =====================================================================
+   DESIGN TOKENS — Moodfoam's existing brand colours, consolidated.
+   This file had grown ~90 distinct hex/rgba colour values across many
+   editing passes (several near-duplicate dark greens, several near-white
+   backgrounds). These variables capture the colours that actually recur
+   as brand identity (headings, buttons, links, nav accents, icons) so
+   they're defined once and used consistently, per the brand guideline of
+   using Moodfoam's own colours strategically rather than ad hoc. Rare,
+   genuinely one-off decorative values (shadow tints etc.) were left as
+   literals rather than forced into tokens that would only ever be used
+   once. WhatsApp green (#25D366) is intentionally kept separate — it's
+   WhatsApp's own brand colour, not Moodfoam's.
+   ===================================================================== */
+:root {
+  /* Brand green family */
+  --color-primary: #10c21f;        /* primary CTA green - buttons, links, accents */
+  --color-primary-hover: #0ea01a;  /* primary button/link hover state */
+  --color-primary-dark: #0a8010;   /* header/trust-strip gradient, dark accents */
+  --color-primary-light: #1ba320;  /* header/trust-strip gradient midpoint */
+  --color-primary-deep: #084208;   /* deepest green - secondary button bg */
+  --color-brand-dark: #14331f;     /* footer background, dark heading accents */
+  --color-mint-light: #eafff1;     /* light mint - footer links, hero body text */
+  --color-mint-pale: #d9ffd9;      /* pale mint - hover tint on dark green nav */
+
+  /* Accent */
+  --color-accent-gold: #d4a437;    /* icons, eyebrow text, star ratings */
+
+  /* Text */
+  --color-text: #333;              /* default body text */
+  --color-text-muted: #444;        /* secondary/supporting body text */
+  --color-heading-dark: #042b00;   /* section heading colour on light backgrounds */
+
+  /* Neutrals */
+  --color-white: #fff;
+  --color-bg-page: #f8f9fa;        /* page background */
+  --color-bg-cream: #f2ede4;       /* feature-card / info-card background */
+
+  /* Third-party brand colour (not Moodfoam's - do not repurpose) */
+  --color-whatsapp: #25D366;
+
+  /* Typography scale */
+  --font-h1: clamp(1.85rem, 4.2vw, 3.25rem);
+  --font-h2: clamp(1.75rem, 4vw, 2.5rem);
+  --font-h3: 1.25rem;
+  --font-body: 1rem;
+  --font-small: 0.875rem;
+
+  /* Layout */
+  --content-max-width: 1200px;
+  --section-padding: 60px 20px;
+}
+
 /* Reset */
 * {
   margin: 0;
@@ -10,20 +62,20 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: #333;
+  color: var(--color-text);
   line-height: 1.6;
-  background-color: #f8f9fa;
+  background-color: var(--color-bg-page);
 }
 
 .container {
   width: 90%;
-  max-width: 1200px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
 }
 
 /* Header */
 .header {
-  background: linear-gradient(#0a8010, #1ba320, #0a8010);
+  background: linear-gradient(var(--color-primary-dark), var(--color-primary-light), var(--color-primary-dark));
   padding: 0;
   color: #faf8f8;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -67,7 +119,7 @@ body {
 .hamburger span {
   height: 4px;
   width: 28px;
-  background: #fff;
+  background: var(--color-white);
   margin: 4px 0;
   border-radius: 2px;
   display: block;
@@ -201,7 +253,7 @@ width: 200px;
   margin-top: 20px; /* Optional: add space at the top */
 }
 footer a{
-  color: #eafff1; /* Link color - Mood Foam brand */
+  color: var(--color-mint-light); /* Link color - Mood Foam brand */
   text-decoration: none; /* Remove underline */
   font-weight: 600; /* Make links bold */
 }
@@ -252,9 +304,9 @@ footer .copyright {
 /* Section Titles */
 section h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: var(--font-h2);
   margin: 3rem 0 1rem;
-  color: #042b00;
+  color: var(--color-heading-dark);
   font-weight: 700;
 }
 
@@ -299,7 +351,7 @@ section h2 {
 
 .info-grid div {
   flex: 1 1 30%;
-  background-color: #f2ede4; /* matches the homepage's feature-card cream */
+  background-color: var(--color-bg-cream); /* matches the homepage's feature-card cream */
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -320,14 +372,14 @@ section h2 {
 /* Goals Section */
 .goals {
   padding: 60px 20px;
-  background-color: #fff;
+  background-color: var(--color-white);
 }
 
 .goals h2 {
   text-align: center;
   margin-bottom: 40px;
-  font-size: 28px;
-  color: #051e01;
+  font-size: var(--font-h2);
+  color: var(--color-heading-dark);
 }
 
 .goals-row {
@@ -347,7 +399,7 @@ section h2 {
   padding-left: 20px;
   line-height: 1.6;
   font-size: 16px;
-  color: #333;
+  color: var(--color-text);
 }
 
 .goals-content ul li {
@@ -375,8 +427,8 @@ section h2 {
 .institutional h2 {
   text-align: center;
   margin-bottom: 40px;
-  font-size: 28px;
-  color: #002b05;
+  font-size: var(--font-h2);
+  color: var(--color-heading-dark);
 }
 
 .institutional-row {
@@ -431,7 +483,7 @@ section h2 {
 .institutional-content p {
   margin-top: 10px;
   line-height: 1.6;
-  color: #333;
+  color: var(--color-text);
 }
 
 /* === PRODUCTS SECTION === */
@@ -443,9 +495,9 @@ section h2 {
 
 .products h2 {
   text-align: center;
-  font-size: 2.8rem;
+  font-size: var(--font-h2);
   margin-bottom: 2rem;
-  color: #002b05;
+  color: var(--color-heading-dark);
 }
 
 .product-category {
@@ -468,7 +520,7 @@ section h2 {
 
 .product-card {
   flex: 1 1 250px;
-  background: #fff;
+  background: var(--color-white);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -489,15 +541,17 @@ section h2 {
   display: block;
   border-radius: 10px;
 }
-.product-card2 h1 {
+/* This was ".product-card2 h1" (a descendant selector), but the markup
+   is <h1 class="product-card2">, i.e. the h1 IS the element with that
+   class, not a container around one - the rule never matched anything
+   and every product page's H1 fell back to unstyled browser defaults.
+   Corrected to an element+class selector and brought onto the shared
+   heading scale/colour. */
+h1.product-card2 {
   font-weight: 700;
-  font-size: 1.3rem;
-  color: #021f02;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 6px;
-  margin: 0 0 10px;
-  margin-bottom: 0;
+  font-size: var(--font-h2);
+  color: var(--color-heading-dark);
+  margin: 1.5rem 0 0.5rem;
 }
 .product-card p {
   font-size: 16px;
@@ -505,7 +559,7 @@ section h2 {
   margin: 5px 0;
 }
 .choose-options-btn {
-  background-color: #10c21f; /* Mood Foam brand green */
+  background-color: var(--color-primary); /* Mood Foam brand green */
   color: white;
   padding: 12px 20px;
   font-size: 16px;
@@ -518,7 +572,7 @@ section h2 {
 }
 
 .choose-options-btn:hover {
-  background-color: #0ea01a; /* Darker brand green on hover */
+  background-color: var(--color-primary-hover); /* Darker brand green on hover */
 }
 
 .choose-options-btn:active {
@@ -551,7 +605,7 @@ section h2 {
 }
 .blog-preview article {
   flex: 1;
-  background: #fff;
+  background: var(--color-white);
   padding: 1.5rem;
   border-radius: 2px;
   box-shadow: 0 5px 11px rgba(0,0,0,0.1);
@@ -569,7 +623,7 @@ section h2 {
   color: #ddd;
   padding: 40px 20px 20px;
   font-family: Arial, sans-serif;
-  background-color: #14331f; /* Mood Foam brand dark green (was an off-brand blue) */
+  background-color: var(--color-brand-dark); /* Mood Foam brand dark green (was an off-brand blue) */
   margin-top: 4rem;
   background-size: cover;
   background-position: center;
@@ -634,7 +688,7 @@ section h2 {
 }
 
 .footer ul li a:hover {
-  color: #fff;
+  color: var(--color-white);
 }
 
 
@@ -665,7 +719,7 @@ section h2 {
 
 /* Contact Info Section */
 .contact-info {
-  border-top: 1px solid #444;
+  border-top: 1px solid var(--color-text-muted);
   margin-top: 30px;
   padding-top: 25px;
   color: #ccc;
@@ -714,11 +768,11 @@ section h2 {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: var(--color-white);
   margin: 5% auto;
   padding: 20px;
   font-size: large;
-  border: 1px solid #d9ffd9;
+  border: 1px solid var(--color-mint-pale);
   width: 80%;
   justify-content: center;
   text-align: center;
@@ -930,7 +984,7 @@ section h2 {
 
 /* Modal Content */
 .modal-content {
-  background-color: #fff;
+  background-color: var(--color-white);
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -980,13 +1034,13 @@ section h2 {
 
 .modal-details p {
   font-size: 16px;
-  color: #333;
+  color: var(--color-text);
 }
 
 #modalPrice {
   font-size: 18px;
   font-weight: bold;
-  color: #d4a437; /* Mood Foam brand gold - price accent */
+  color: var(--color-accent-gold); /* Mood Foam brand gold - price accent */
 }
 
 /* Size Options */
@@ -1007,13 +1061,13 @@ section h2 {
 }
 
 .size-option.selected {
-  background-color: #10c21f;
-  color: #fff;
-  border-color: #10c21f;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
 }
 
 .size-option:hover {
-  background-color: #d9ffd9;
+  background-color: var(--color-mint-pale);
 }
 
 
@@ -1063,7 +1117,7 @@ section h2 {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #1a202c;
-      background: #fff;
+      background: var(--color-white);
     }
   
 
@@ -1135,8 +1189,8 @@ section h2 {
 
     /* Newsletter */
     .newsletter {
-      background: linear-gradient(#0a8010, #1ba320, #0a8010); /* Mood Foam brand green (was an off-brand pale mint) */
-      color: #fff;
+      background: linear-gradient(var(--color-primary-dark), var(--color-primary-light), var(--color-primary-dark)); /* Mood Foam brand green (was an off-brand pale mint) */
+      color: var(--color-white);
       text-align: center;
       padding: 8px 8px;
       margin-top: 10px;
@@ -1149,7 +1203,7 @@ section h2 {
       font-weight: 700;
       margin-bottom: 2.5px;
       margin-top: 0px;
-      color: #fff;
+      color: var(--color-white);
 
     }
     .newsletter p {
@@ -1183,7 +1237,7 @@ section h2 {
     .order-button {
   display: inline-block;
   padding: 10px 16px;
-  background-color: #10c21f; /* Mood Foam brand green */
+  background-color: var(--color-primary); /* Mood Foam brand green */
   color: white;
   max-height: 60px;
   text-decoration: none;
@@ -1195,7 +1249,7 @@ section h2 {
   position: relative;
 }
 .order-button:hover {
-  background-color: #0ea01a;
+  background-color: var(--color-primary-hover);
 }
  ul.menu, ul.menu ul {
   list-style: none;
@@ -1210,7 +1264,7 @@ ul.menu > li > a {
   padding: 10px 20px;
   display: block;
   background: transparent;
-  color: #fff;
+  color: var(--color-white);
   text-decoration: none;
   cursor: pointer;
 }
@@ -1219,7 +1273,7 @@ ul.menu > li > ul {
   position: absolute;
   left: 20%;
   top: 100%;
-  background: #fff;
+  background: var(--color-white);
   min-width: 220px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   z-index: 10;
@@ -1236,7 +1290,7 @@ ul.menu ul li > a {
   padding: 10px 16px;
   display: inline-block;
   color: #222;
-  background: #fff;
+  background: var(--color-white);
   width: 200px;
   text-decoration: none;
   border-bottom: 1px solid #f0f0f0;
@@ -1271,7 +1325,7 @@ ul.menu ul li > ul {
   left: 100%;
   top: 0;
   min-width: 180px;
-  background: #fff;
+  background: var(--color-white);
   box-shadow: 0 2px 6px rgba(0,0,0,0.13);
   z-index: 20;
 }
@@ -1279,7 +1333,7 @@ ul.menu ul li.open > ul {
   display: block;
 }
 ul.menu ul li > ul li a {
-  background: #fff;
+  background: var(--color-white);
   color: #222;
   width: 150px;
 }
@@ -1358,18 +1412,18 @@ ul.menu ul li > ul li a {
 }
 
 #productModal .size-option:hover {
-  background: #d9ffd9;
+  background: var(--color-mint-pale);
 }
 
 #productModal .size-option.selected {
-  background: #10c21f;
-  color: #fff;
-  border-color: #10c21f;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
 }
 
 #modalPrice {
   font-weight: 700;
-  color: #d4a437; /* Mood Foam brand gold - price accent */
+  color: var(--color-accent-gold); /* Mood Foam brand gold - price accent */
   margin-top: 8px;
 }
  @media (max-width: 900px) {
@@ -1478,7 +1532,7 @@ ul.menu ul li > ul li a {
         text-align: center;
         height:350px;
         min-width: 220px;
-        background: #fff;
+        background: var(--color-white);
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         padding: 10px;
@@ -1507,7 +1561,7 @@ ul.menu ul li > ul li a {
         text-align: center;
         height:350px;
         min-width: 320px;
-        background: #fff;
+        background: var(--color-white);
         margin-left: 40%;
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -1524,17 +1578,17 @@ ul.menu ul li > ul li a {
   margin: 0;
   padding: 0;
   background: #f7f7f7;
-  color: #333;
+  color: var(--color-text);
 }
 
 header {
   text-align: center;
   padding: 40px 20px 20px;
-  background: #fff;
+  background: var(--color-white);
 }
 
 header h1 {
-  color:#084208;
+  color:var(--color-primary-deep);
   margin-bottom: 10px;
 }
 
@@ -1544,11 +1598,11 @@ header h1 {
   justify-content: center;
   padding: 40px 20px;
   gap: 20px;
-  background: #fff;
+  background: var(--color-white);
 }
 
 .card {
-  background: #ffffff;
+  background: var(--color-white);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   max-width: 280px;
@@ -1572,20 +1626,20 @@ header h1 {
   top: 15px;
   left: 15px;
   padding: 5px 10px;
-  color: #fff;
+  color: var(--color-white);
   border-radius: 5px;
   font-size: 0.8em;
 }
 
-.badge.economy { background: #084208; }
-.badge.deluxe  { background: #084208; }
-.badge.premium { background:#084208; }
-.badge.luxury  { background: #084208; }
+.badge.economy { background: var(--color-primary-deep); }
+.badge.deluxe  { background: var(--color-primary-deep); }
+.badge.premium { background:var(--color-primary-deep); }
+.badge.luxury  { background: var(--color-primary-deep); }
 
 .card h3 {
   margin-top: 15px;
   margin-bottom: 10px;
-  color: #333;
+  color: var(--color-text);
 }
 
 .card ul {
@@ -1596,7 +1650,7 @@ header h1 {
 .btn {
   display: inline-block;
   padding: 10px 15px;
-  background-color: #084208;
+  background-color: var(--color-primary-deep);
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -1618,7 +1672,7 @@ header h1 {
 
 .learn-more {
   margin-top: 20px;
-  background-color: #084208;
+  background-color: var(--color-primary-deep);
 }
 
 /* =====================================================================
@@ -1720,7 +1774,7 @@ h1, h2, h3, h4 {
 .hero {
   position: relative;
   overflow: hidden;
-  color: #fff;
+  color: var(--color-white);
   display: flex;
   align-items: center;
   min-height: 640px;
@@ -1784,7 +1838,7 @@ h1, h2, h3, h4 {
   font-weight: 700;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: #d4a437;
+  color: var(--color-accent-gold);
   margin-bottom: 0.6rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.5);
 }
@@ -1792,7 +1846,7 @@ h1, h2, h3, h4 {
   font-size: clamp(1.85rem, 4.2vw, 3.25rem);
   line-height: 1.2;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: var(--color-white);
   font-weight: 800;
   letter-spacing: 0.3px;
   text-shadow: 0 3px 12px rgba(0,0,0,.55);
@@ -1803,7 +1857,7 @@ h1, h2, h3, h4 {
 }
 .hero .hero-desc {
   font-size: 1.05rem;
-  color: #eafff1;
+  color: var(--color-mint-light);
   max-width: 560px;
   margin: 0 auto 1.5rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.5);
@@ -1811,7 +1865,7 @@ h1, h2, h3, h4 {
 .hero .hero-desc-short {
   display: none;
   font-size: 1rem;
-  color: #eafff1;
+  color: var(--color-mint-light);
   margin: 0 auto 1.5rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.5);
 }
@@ -1822,8 +1876,8 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 .hero-cta .btn-primary {
-  background: #10c21f;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-white);
   padding: 0.9rem 1.9rem;
   border-radius: 8px;
   font-weight: 700;
@@ -1831,11 +1885,11 @@ h1, h2, h3, h4 {
   box-shadow: 0 6px 16px rgba(16,194,31,0.4);
   transition: background .25s ease, transform .25s ease;
 }
-.hero-cta .btn-primary:hover { background: #0ea01a; transform: translateY(-2px); }
+.hero-cta .btn-primary:hover { background: var(--color-primary-hover); transform: translateY(-2px); }
 .hero-cta .btn-secondary {
   background: transparent;
-  border: 2px solid #fff;
-  color: #fff;
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
   padding: 0.82rem 1.8rem;
   border-radius: 8px;
   font-weight: 700;
@@ -1869,8 +1923,8 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 2.25rem;
   flex-wrap: wrap;
-  background: #0a8010;
-  color: #fff;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
   padding: 0.65rem 1rem;
   font-size: 0.85rem;
   font-weight: 600;
@@ -1878,7 +1932,7 @@ h1, h2, h3, h4 {
 }
 .trust-item { display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
 .trust-item i { font-size: 0.95rem; }
-.trust-item a { color: #fff; text-decoration: none; }
+.trust-item a { color: var(--color-white); text-decoration: none; }
 .trust-item a:hover { text-decoration: underline; }
 @media (max-width: 700px) {
   .trust-strip { gap: 1.1rem; font-size: 0.72rem; padding: 0.5rem 0.75rem; }
@@ -1888,14 +1942,14 @@ h1, h2, h3, h4 {
   .trust-item span { display: none; } /* icons only on the smallest phones to avoid wrapping */
 }
 
-/* --- Brand color consistency (client brand green #10c21f) --- */
+/* --- Brand color consistency (client brand green var(--color-primary)) --- */
 .badge.economy, .badge.deluxe, .badge.premium, .badge.luxury,
-.badge.beds, .badge.beddings, .badge.sofas, .badge.spring { background: #10c21f; }
-.btn { background-color: #10c21f; }
-.btn:hover { background-color: #0ea01a; }
-.learn-more { background-color: #10c21f; }
-.about h2 { color: #10c21f; font-weight: 800; letter-spacing: 0.3px; }
-header h1 { color: #10c21f; font-weight: 800; }
+.badge.beds, .badge.beddings, .badge.sofas, .badge.spring { background: var(--color-primary); }
+.btn { background-color: var(--color-primary); }
+.btn:hover { background-color: var(--color-primary-hover); }
+.learn-more { background-color: var(--color-primary); }
+.about h2 { color: var(--color-primary); font-weight: 800; letter-spacing: 0.3px; }
+header h1 { color: var(--color-primary); font-weight: 800; }
 
 /* --- About section: split image/story layout + trust indicators + testimonials --- */
 .about-split {
@@ -1936,7 +1990,7 @@ header h1 { color: #10c21f; font-weight: 800; }
 }
 .about p {
   font-size: 1.05rem;
-  color: #444;
+  color: var(--color-text-muted);
   max-width: 700px;
   margin: 0 auto 1rem;
   line-height: 1.7;
@@ -1957,7 +2011,7 @@ header h1 { color: #10c21f; font-weight: 800; }
   display: block;
   font-size: 1.6rem;
   font-weight: 800;
-  color: #10c21f;
+  color: var(--color-primary);
 }
 .trust-indicators .stat-label {
   display: block;
@@ -1975,13 +2029,13 @@ header h1 { color: #10c21f; font-weight: 800; }
   margin-top: 1.75rem;
 }
 .testimonials blockquote {
-  background: #fff;
-  border-left: 4px solid #10c21f;
+  background: var(--color-white);
+  border-left: 4px solid var(--color-primary);
   border-radius: 8px;
   padding: 1.1rem 1.3rem;
   max-width: 320px;
   font-style: italic;
-  color: #333;
+  color: var(--color-text);
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   margin: 0;
   text-align: left;
@@ -1991,7 +2045,7 @@ header h1 { color: #10c21f; font-weight: 800; }
   margin-top: 0.6rem;
   font-style: normal;
   font-weight: 600;
-  color: #10c21f;
+  color: var(--color-primary);
   font-size: 0.85rem;
 }
 @media (max-width: 600px) {
@@ -2035,8 +2089,8 @@ header h1 { color: #10c21f; font-weight: 800; }
     font-size: 15px;
     text-decoration: none;
   }
-  .call-pill { background: #0a8010; color: #fff; }
-  .whatsapp-pill { background: #25D366; color: #fff; }
+  .call-pill { background: var(--color-primary-dark); color: var(--color-white); }
+  .whatsapp-pill { background: #25D366; color: var(--color-white); }
   /* the fixed bottom bar replaces the corner button on mobile */
   .whatsapp-button { display: none !important; }
   body { padding-bottom: 68px; }
@@ -2048,8 +2102,8 @@ header h1 { color: #10c21f; font-weight: 800; }
    Hidden on small screens since the fixed mobile-contact-bar already
    surfaces Call/WhatsApp persistently there - avoids redundant bars. */
 .top-info-bar {
-  background: #14331f;
-  color: #eafff1;
+  background: var(--color-brand-dark);
+  color: var(--color-mint-light);
   font-size: 12.5px;
   padding: 6px 0;
 }
@@ -2065,15 +2119,15 @@ header h1 { color: #10c21f; font-weight: 800; }
 }
 .top-info-bar a,
 .top-info-bar span {
-  color: #eafff1;
+  color: var(--color-mint-light);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
 }
-.top-info-bar a:hover { color: #fff; text-decoration: underline; }
-.top-info-bar i { color: #d4a437; font-size: 12px; }
+.top-info-bar a:hover { color: var(--color-white); text-decoration: underline; }
+.top-info-bar i { color: var(--color-accent-gold); font-size: 12px; }
 
 @media (max-width: 600px) {
   .top-info-bar { display: none; }
@@ -2087,21 +2141,21 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 .gallery-card:focus-visible {
-  outline: 3px solid #d4a437;
+  outline: 3px solid var(--color-accent-gold);
   outline-offset: 2px;
 }
 
 /* --- Contact page --- */
 .contact-hero {
-  background: linear-gradient(#0a8010, #1ba320, #0a8010);
-  color: #fff;
+  background: linear-gradient(var(--color-primary-dark), var(--color-primary-light), var(--color-primary-dark));
+  color: var(--color-white);
   text-align: center;
   padding: 70px 20px 60px;
 }
 .contact-hero h1 {
   font-size: clamp(2rem, 4vw, 2.8rem);
   margin: 0.4rem 0 0.75rem;
-  color: #fff;
+  color: var(--color-white);
 }
 .contact-hero .hero-eyebrow {
   font-size: 0.8rem;
@@ -2113,10 +2167,10 @@ textarea:focus-visible,
 .contact-hero p:not(.hero-eyebrow) {
   max-width: 560px;
   margin: 0 auto;
-  color: #eafff1;
+  color: var(--color-mint-light);
   font-size: 1.05rem;
 }
-.contact-page { padding: 50px 20px 70px; background: #fff; }
+.contact-page { padding: 50px 20px 70px; background: var(--color-white); }
 .contact-layout {
   display: flex;
   gap: 3rem;
@@ -2125,7 +2179,7 @@ textarea:focus-visible,
 }
 .contact-details, .contact-form-wrap { flex: 1 1 400px; }
 .contact-details h2, .contact-form-wrap h2 {
-  color: #14331f;
+  color: var(--color-brand-dark);
   margin-bottom: 1rem;
 }
 .contact-detail-item {
@@ -2135,14 +2189,14 @@ textarea:focus-visible,
   margin-bottom: 1.5rem;
 }
 .contact-detail-item i {
-  color: #10c21f;
+  color: var(--color-primary);
   font-size: 1.3rem;
   margin-top: 4px;
   flex: 0 0 24px;
 }
-.contact-detail-item h4 { margin: 0 0 4px; color: #14331f; font-size: 1rem; }
-.contact-detail-item p { margin: 0; color: #444; line-height: 1.6; }
-.contact-detail-item a { color: #10c21f; text-decoration: none; font-weight: 600; }
+.contact-detail-item h4 { margin: 0 0 4px; color: var(--color-brand-dark); font-size: 1rem; }
+.contact-detail-item p { margin: 0; color: var(--color-text-muted); line-height: 1.6; }
+.contact-detail-item a { color: var(--color-primary); text-decoration: none; font-weight: 600; }
 .contact-detail-item a:hover { text-decoration: underline; }
 
 .contact-form-wrap {
@@ -2152,20 +2206,20 @@ textarea:focus-visible,
 }
 .contact-form-wrap p { color: #555; margin-bottom: 1.25rem; }
 #contactForm { display: flex; flex-direction: column; gap: 6px; }
-#contactForm label { font-weight: 600; color: #14331f; font-size: 0.9rem; margin-top: 10px; }
+#contactForm label { font-weight: 600; color: var(--color-brand-dark); font-size: 0.9rem; margin-top: 10px; }
 #contactForm input,
 #contactForm textarea {
   font: inherit;
   padding: 12px 14px;
   border: 1px solid #d5ded6;
   border-radius: 8px;
-  background: #fff;
+  background: var(--color-white);
   resize: vertical;
 }
 #contactForm input:focus,
 #contactForm textarea:focus {
   outline: none;
-  border-color: #10c21f;
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(16,194,31,0.15);
 }
 #contactForm button {
@@ -2173,10 +2227,10 @@ textarea:focus-visible,
   align-self: flex-start;
   border: none;
   cursor: pointer;
-  background: #10c21f;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-white);
 }
-#contactForm button:hover { background: #0ea01a; }
+#contactForm button:hover { background: var(--color-primary-hover); }
 @media (max-width: 600px) {
   .contact-layout { gap: 2rem; }
   #contactForm button { align-self: stretch; text-align: center; }
@@ -2188,7 +2242,7 @@ textarea:focus-visible,
   width: 100%;
   max-width: 1200px;
   text-align: left;
-  color: #14331f;
+  color: var(--color-brand-dark);
   font-size: 1.4rem;
   font-weight: 700;
   margin: 1.5rem 0 0.75rem;
@@ -2210,7 +2264,7 @@ textarea:focus-visible,
 .gallery-caption {
   margin-top: 10px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text);
   font-size: 0.95rem;
 }
 .lightbox {
@@ -2232,7 +2286,7 @@ textarea:focus-visible,
   box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 .lightbox-caption-text, #lightbox-caption {
-  color: #eafff1;
+  color: var(--color-mint-light);
   margin-top: 14px;
   font-size: 1rem;
   font-weight: 600;
@@ -2241,7 +2295,7 @@ textarea:focus-visible,
   position: absolute;
   top: 18px;
   right: 28px;
-  color: #fff;
+  color: var(--color-white);
   font-size: 2.2rem;
   line-height: 1;
   cursor: pointer;
@@ -2263,7 +2317,7 @@ textarea:focus-visible,
 
 .dropbtn {
   background: none;
-  color: #fff;
+  color: var(--color-white);
   border: none;
   font-family: inherit;
   font-size: clamp(12.5px, 1.05vw, 15px);
@@ -2281,7 +2335,7 @@ textarea:focus-visible,
 }
 
 .dropbtn:hover {
-  color: #d9ffd9;
+  color: var(--color-mint-pale);
 }
 
 .dropdown-content {
@@ -2290,7 +2344,7 @@ textarea:focus-visible,
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #ffffff;
+  background-color: var(--color-white);
   min-width: 190px;
   border-radius: 6px;
   overflow: hidden;
@@ -2309,7 +2363,7 @@ textarea:focus-visible,
 
 .dropdown-content a:hover {
   background-color: #f1f1f1;
-  color: #10c21f;
+  color: var(--color-primary);
 }
 
 @media (max-width: 900px) {
@@ -2331,7 +2385,7 @@ textarea:focus-visible,
   justify-content: center;
   align-items: flex-start;
   gap: 0;
-  background: linear-gradient(#0a8010, #1ba320, #0a8010);
+  background: linear-gradient(var(--color-primary-dark), var(--color-primary-light), var(--color-primary-dark));
   padding: 30px 20px;
 }
 
@@ -2339,21 +2393,21 @@ textarea:focus-visible,
   flex: 1 1 180px;
   max-width: 220px;
   text-align: center;
-  color: #fff;
+  color: var(--color-white);
   padding: 15px 10px;
 }
 
 .trust-item i {
   display: block;
   font-size: 26px;
-  color: #d4a437;
+  color: var(--color-accent-gold);
   margin-bottom: 10px;
 }
 
 .trust-item span,
 .trust-item a {
   font-weight: 600;
-  color: #fff;
+  color: var(--color-white);
   text-decoration: none;
 }
 
@@ -2367,7 +2421,7 @@ textarea:focus-visible,
 }
 
 .about-feature-card {
-  background-color: #f2ede4;
+  background-color: var(--color-bg-cream);
   border-radius: 10px;
   padding: 28px 24px;
   flex: 1 1 260px;
@@ -2376,7 +2430,7 @@ textarea:focus-visible,
 
 .about-feature-card i {
   font-size: 22px;
-  color: #10c21f;
+  color: var(--color-primary);
   margin-bottom: 12px;
   display: block;
 }
@@ -2384,13 +2438,13 @@ textarea:focus-visible,
 .about-feature-card h4 {
   margin: 0 0 10px;
   font-size: 18px;
-  color: #14331f;
+  color: var(--color-brand-dark);
 }
 
 .about-feature-card p {
   margin: 0;
   font-size: 15px;
-  color: #444;
+  color: var(--color-text-muted);
   line-height: 1.5;
 }
 
@@ -2403,7 +2457,7 @@ textarea:focus-visible,
 }
 
 .testimonials blockquote {
-  background-color: #fff;
+  background-color: var(--color-white);
   border-radius: 10px;
   padding: 28px 24px;
   flex: 1 1 300px;
@@ -2411,11 +2465,11 @@ textarea:focus-visible,
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   margin: 0;
   font-style: italic;
-  color: #333;
+  color: var(--color-text);
 }
 
 .testimonials .stars {
-  color: #d4a437;
+  color: var(--color-accent-gold);
   font-style: normal;
   margin-bottom: 12px;
   display: block;
@@ -2426,7 +2480,7 @@ textarea:focus-visible,
   margin-top: 14px;
   font-style: normal;
   font-weight: 700;
-  color: #14331f;
+  color: var(--color-brand-dark);
 }
 
 /* Mobile nav items (<=900px) had no width/font override of their own, so
