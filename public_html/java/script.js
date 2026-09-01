@@ -146,7 +146,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           });
         }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-        revealTargets.forEach(el => revealObserver.observe(el));
+        // Starting the observer on the very next tick can fire its first
+        // callback before the browser has painted the opacity:0 starting
+        // state even once - for anything already in view on load (the
+        // homepage's category cards, hero-adjacent content), that means
+        // "is-visible" lands before there's ever a hidden frame to
+        // transition FROM, so it just appears instantly with no visible
+        // fade. A double rAF guarantees at least one paint happens first,
+        // so the entrance animation actually plays instead of being
+        // invisible on exactly the content most people see first.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            revealTargets.forEach(el => revealObserver.observe(el));
+          });
+        });
       } else {
         revealTargets.forEach(el => el.classList.add('is-visible'));
       }

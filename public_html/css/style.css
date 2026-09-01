@@ -216,12 +216,12 @@ width: 200px;
    doesn't restart the animation from frame 0. */
 .reveal-up, .reveal-left, .reveal-right, .reveal-zoom {
   opacity: 0;
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal-up { transform: translateY(34px); }
-.reveal-left { transform: translateX(-36px); }
-.reveal-right { transform: translateX(36px); }
-.reveal-zoom { transform: scale(0.92); }
+.reveal-up { transform: translateY(46px); }
+.reveal-left { transform: translateX(-48px); }
+.reveal-right { transform: translateX(48px); }
+.reveal-zoom { transform: scale(0.88); }
 
 .reveal-up.is-visible,
 .reveal-left.is-visible,
@@ -1051,8 +1051,13 @@ h1.product-card2 {
     border-radius: 16px;
   }
   .institutional-gallery {
-    grid-auto-columns: 78%;
-    gap: 14px;
+    /* 78% left only a sliver of the next card peeking at the edge,
+       reading as one near-full-width photo rather than a horizontally
+       flowing gallery. 68% keeps the current card comfortably sized
+       while making the next one clearly visible as an invitation to
+       swipe. */
+    grid-auto-columns: 68%;
+    gap: 12px;
     margin: 22px 0 28px;
   }
   .institutional-gallery figcaption {
@@ -2872,6 +2877,7 @@ textarea:focus-visible,
      instead of ten sparse, disconnected lines. */
   .nav-links > li > a {
     display: block;
+    text-align: left;
     padding: 9px 2px;
   }
   .dropbtn {
