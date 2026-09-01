@@ -1950,16 +1950,20 @@ h1, h2, h3, h4 {
   overflow: hidden;
   color: var(--color-white);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   min-height: 640px;
   padding: 0;
 }
+/* The gradient now only needs to carry contrast at the very bottom,
+   where the (much lighter, unboxed) text sits - most of the photo
+   stays clear so the crossfading showroom images read as the actual
+   showcase instead of being dimmed under a headline block. */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   height: 100%;
-  background: linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.38) 55%, rgba(0,0,0,.54) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,.06) 0%, rgba(0,0,0,.14) 55%, rgba(0,0,0,.62) 100%);
   z-index: 1;
 }
 .hero img {
@@ -1970,64 +1974,79 @@ h1, h2, h3, h4 {
   object-fit: cover;
   opacity: 0;
   z-index: 0;
-  animation: crossfade 40s infinite;
+  animation: crossfade 64s infinite;
   transition: opacity 1.5s ease-in-out;
 }
-.hero .img1 { animation-delay: 0s; }
-.hero .img2 { animation-delay: 4s; }
-.hero .img3 { animation-delay: 8s; }
-.hero .img4 { animation-delay: 12s; }
-.hero .img5 { animation-delay: 16s; }
-.hero .img6 { animation-delay: 20s; }
-.hero .img7 { animation-delay: 24s; }
-.hero .img8 { animation-delay: 28s; }
-.hero .img9 { animation-delay: 32s; }
+/* 16 images now rotate through (was 10) - kept each photo's own
+   on-screen time the same (~4s delay step, ~1s fade, ~3.8s fully
+   visible) by stretching the cycle to 64s (16 * 4s) and rescaling the
+   keyframe's percentages to match, rather than showing each image
+   for a shorter, choppier slice of a still-40s cycle. */
+.hero .img1  { animation-delay: 0s; }
+.hero .img2  { animation-delay: 4s; }
+.hero .img3  { animation-delay: 8s; }
+.hero .img4  { animation-delay: 12s; }
+.hero .img5  { animation-delay: 16s; }
+.hero .img6  { animation-delay: 20s; }
+.hero .img7  { animation-delay: 24s; }
+.hero .img8  { animation-delay: 28s; }
+.hero .img9  { animation-delay: 32s; }
 .hero .img10 { animation-delay: 36s; }
+.hero .img11 { animation-delay: 40s; }
+.hero .img12 { animation-delay: 44s; }
+.hero .img13 { animation-delay: 48s; }
+.hero .img14 { animation-delay: 52s; }
+.hero .img15 { animation-delay: 56s; }
+.hero .img16 { animation-delay: 60s; }
 @keyframes crossfade {
   0%     { opacity: 0; }
-  2.4%   { opacity: 1; }
-  12%    { opacity: 1; }
-  16.8%  { opacity: 0; }
+  1.5%   { opacity: 1; }
+  7.5%   { opacity: 1; }
+  10.5%  { opacity: 0; }
   100%   { opacity: 0; }
 }
 .container-hero-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 2rem 1.25rem;
+  padding: 0 1.25rem 3rem;
   margin: 0;
   text-align: center;
 }
+/* No more boxed/blurred card behind the text - per the client's brief,
+   the crossfading showroom photos are the showcase, so the copy now
+   sits directly on the image (kept legible by text-shadow plus the
+   .hero::before gradient, which is darkest right at this bottom band)
+   instead of dimming the photo behind a dark panel. */
 .hero-text {
-  max-width: 720px;
+  max-width: 640px;
   margin: 0 auto;
-  padding: 2.25rem 2rem;
-  background: rgba(6, 20, 8, 0.32);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 18px;
-  backdrop-filter: blur(3px);
 }
 .hero .hero-eyebrow {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 1.6px;
   text-transform: uppercase;
   color: var(--color-accent-gold);
-  margin-bottom: 0.6rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,.5);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
   opacity: 0;
   transform: translateY(24px);
   animation: heroTitleFadeIn 0.8s ease-out forwards;
   animation-delay: 0s;
 }
+/* Shrunk from a dominant clamp(1.85rem, 4.2vw, 3.25rem) headline down
+   to this - the brief was to make the wordmark heading less prominent
+   ("lower the Moodfoam Better Nights Better Days") so it reads as a
+   caption over the photo, not a block covering it. */
 .hero h1 {
-  font-size: clamp(1.85rem, 4.2vw, 3.25rem);
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
   color: var(--color-white);
   font-weight: 800;
   letter-spacing: 0.3px;
-  text-shadow: 0 3px 12px rgba(0,0,0,.55);
+  text-shadow: 0 3px 12px rgba(0,0,0,.65);
   opacity: 0;
   transform: translateY(24px);
   animation: heroTitleFadeIn 1s ease-out forwards;
@@ -2038,11 +2057,11 @@ h1, h2, h3, h4 {
    heading being the only piece of hero copy that animated in - the
    rest of the block used to appear instantly with no entrance at all. */
 .hero .hero-desc {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--color-mint-light);
-  max-width: 560px;
-  margin: 0 auto 1.5rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,.5);
+  max-width: 520px;
+  margin: 0 auto 1.1rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
   opacity: 0;
   transform: translateY(24px);
   animation: heroTitleFadeIn 0.9s ease-out forwards;
@@ -2050,10 +2069,10 @@ h1, h2, h3, h4 {
 }
 .hero .hero-desc-short {
   display: none;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--color-mint-light);
-  margin: 0 auto 1.5rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,.5);
+  margin: 0 auto 1.1rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
 }
 .hero-cta {
   display: flex;
@@ -2098,16 +2117,16 @@ h1, h2, h3, h4 {
 
 @media (max-width: 1024px) {
   .hero { min-height: 560px; }
-  .hero-text { max-width: 90%; padding: 1.9rem 1.4rem; }
+  .hero-text { max-width: 90%; }
 }
 @media (max-width: 768px) {
   .hero { min-height: 520px; }
-  .hero h1 { font-size: clamp(1.6rem, 5.5vw, 2.1rem); }
-  .hero .hero-desc { font-size: .95rem; }
+  .hero h1 { font-size: clamp(1.3rem, 5vw, 1.7rem); }
+  .hero .hero-desc { font-size: .88rem; }
 }
 @media (max-width: 480px) {
   .hero { min-height: 480px; }
-  .hero-text { padding: 1.5rem 1.1rem; border-radius: 14px; }
+  .container-hero-content { padding: 0 1rem 2.25rem; }
   .hero .hero-desc { display: none; }
   .hero .hero-desc-short { display: block; }
   .hero-cta { flex-direction: column; }
