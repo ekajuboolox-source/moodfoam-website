@@ -264,8 +264,8 @@ width: 200px;
   align-items: center; /* Center items horizontally */
   justify-content: center; /* Center items vertically (if height is defined) */
   text-align: center; /* Align text inside paragraphs */
-  gap: 1rem; /* Add spacing between elements */
-  margin-top: 20px; /* Optional: add space at the top */
+  gap: 0.55rem; /* Add spacing between elements */
+  margin-top: 12px; /* Optional: add space at the top */
 }
 footer a{
   color: var(--color-mint-light); /* Link color - Mood Foam brand */
@@ -728,7 +728,7 @@ h1.product-card2 {
 .footer {
   position: relative;
   color: #ddd;
-  padding: 40px 20px 20px;
+  padding: 32px 20px 16px;
   font-family: Arial, sans-serif;
   background-color: var(--color-brand-dark); /* Mood Foam brand dark green (was an off-brand blue) */
   margin-top: 4rem;
@@ -751,20 +751,26 @@ h1.product-card2 {
   z-index: -1; /* Make sure it stays behind the content */
 }
 
+/* .footer-grid also carries the shared .container class (for the
+   1200px max-width/centering), which otherwise brings along that
+   class's 48px top+bottom hero padding - doubling up with the
+   footer's own padding and making the whole band far taller than
+   its Company/Products/Support content needs. */
 .footer .container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0;
 }
 
 .footer-grid {
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
+  gap: clamp(28px, 6vw, 100px);
+  justify-content: center;
 }
 
 .footer-grid > div {
-  flex: 1 1 200px;
-  min-width: 180px;
+  flex: 0 1 200px;
+  min-width: 140px;
 }
 
 #footer_one{
@@ -773,9 +779,9 @@ h1.product-card2 {
 
 .footer h4 {
   color: #f5f8f6;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .footer ul {
@@ -785,7 +791,7 @@ h1.product-card2 {
 }
 
 .footer ul li {
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 }
 
 .footer ul li a {
@@ -1235,7 +1241,7 @@ h1.product-card2 {
 
 .card-img {
   width: 400px; /* You can adjust as needed */
-  height: auto;
+  height: 320px;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -1295,7 +1301,7 @@ h1.product-card2 {
     .thumbnails {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 24px;
     }
     .thumbnail-card {
@@ -1306,10 +1312,10 @@ h1.product-card2 {
     }
     .thumbnail-card img {
       width: 100%;
-      max-height: 240px;
+      height: 220px;
       border-radius: 12px;
       box-shadow: 2px 8px rgba(0, 0, 0, 0.1);
-      object-fit: contain;
+      object-fit: cover;
       margin-bottom: 8px;
     }
     .thumbnail-title {
@@ -1598,6 +1604,7 @@ ul.menu ul li > ul li a {
         .card-img {
           width: 100% !important;
           max-width: 98vw !important;
+          height: 260px !important;
         }
         .main-section .thumbnails {
           flex-direction: column;
@@ -1620,6 +1627,7 @@ ul.menu ul li > ul li a {
         .card-img {
           width: 100% !important;
           max-width: 98vw !important;
+          height: 220px !important;
         }
         .main-section .thumbnails {
           flex-direction: column;
@@ -1649,7 +1657,8 @@ ul.menu ul li > ul li a {
       }
       .card-img {
         width: 400px;
-        height: auto;
+        height: 320px;
+        object-fit: cover;
         border-radius: 8px;
         max-width: 100%;
       }
@@ -1657,7 +1666,7 @@ ul.menu ul li > ul li a {
         display: flex;
         flex-wrap: wrap;
         gap: 24px;
-        justify-content: space-between;
+        justify-content: flex-start;
       }
       .thumbnail-card {
         flex: 1 1 calc(25% - 24px);
@@ -1676,9 +1685,9 @@ ul.menu ul li > ul li a {
       }
       .thumbnail-card img {
         width: 100%;
-        max-height: 180px;
+        height: 200px;
         border-radius: 8px;
-        object-fit: contain;
+        object-fit: cover;
         margin-bottom: 8px;
       }
       .thumbnail-card-card img {
@@ -2074,15 +2083,20 @@ h1, h2, h3, h4 {
   background: linear-gradient(135deg, var(--color-brand-dark) 0%, var(--color-primary-dark) 100%);
   color: var(--color-white);
   text-align: center;
-  padding: 4.5rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 /* Keep the band itself full-bleed (that's the premium look), but
    contain the heading/copy/buttons to a width that reads as one
    deliberate block instead of sparse text floating in a wide expanse
    of color - the site's usual 1200px .container is too wide for a
    heading + one line + 3 buttons. */
+/* Same double-padding issue as .footer .container: the shared .container
+   class carries its own 48px top+bottom hero padding, which stacked with
+   .contact-cta's own padding to make this band nearly 200px taller than
+   its heading + one line + 3 buttons needed. */
 .contact-cta .container {
   max-width: 640px;
+  padding: 0 24px;
 }
 .contact-cta h2 {
   color: var(--color-white);
@@ -2091,7 +2105,7 @@ h1, h2, h3, h4 {
 }
 .contact-cta p {
   max-width: 560px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.5rem;
   color: var(--color-mint-light);
   font-size: 1.05rem;
 }
@@ -2686,8 +2700,10 @@ textarea:focus-visible,
 .footer .trust-strip {
   background: none;
   border-bottom: 1px solid rgba(255,255,255,0.15);
-  padding: 0 20px 24px;
-  margin-bottom: 32px;
+  padding: 0 20px 16px;
+  margin-bottom: 20px;
+  max-width: 900px;
+  gap: 0.5rem 1.75rem;
 }
 
 .trust-item {
