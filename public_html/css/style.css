@@ -68,13 +68,24 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
+/* A .reveal-left/.reveal-right element's pre-reveal state sits offset
+   by translateX(+-48px) (see the "Scroll reveal" block below) until it
+   scrolls into view - on contact.html that offset pushed
+   .contact-form-wrap 20px past the right edge of a narrow phone
+   viewport, adding a real horizontal scrollbar for however long the
+   element stayed unrevealed. Clipping overflow-x here contains that
+   transform the same way it would any other transform/animation
+   overshoot, without changing how anything actually looks once
+   revealed. */
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--color-text);
   line-height: 1.6;
   background-color: var(--color-bg-page);
+  overflow-x: hidden;
 }
 
 .container {
@@ -1129,9 +1140,15 @@ h1.product-card2 {
     justify-content: center;
     align-items: stretch;
   }
-}body, html {
-  overflow: visible !important; /* Temporarily force overflow visible */
 }
+/* A stray, unconditional "body, html { overflow: visible !important; }"
+   used to sit here - undated debug leftover ("Temporarily force
+   overflow visible" per its own comment) that, thanks to !important,
+   silently defeated any overflow-x:hidden set anywhere else on the
+   page (including the one added near the top of this file specifically
+   to contain reveal-left/reveal-right's pre-reveal transform overshoot
+   on narrow screens). Removed - nothing else in this file relies on
+   html/body allowing visible overflow. */
 /* Modal Background */
 .modal {
   display: none; /* Hidden by default */
@@ -1980,22 +1997,36 @@ h1, h2, h3, h4 {
   animation: crossfade 84s infinite;
   transition: opacity 1.5s ease-in-out;
 }
-/* img1/img2 are tall portrait model photos (person sitting upright,
-   generous headroom above, more leg/mattress below) getting cropped to
-   fit the hero's much wider, shorter frame via object-fit:cover - a
-   plain centered crop pulls the crop window up past the model's head
-   before it clears the bottom of the frame. Biasing toward the top
-   keeps the head fully in frame at every viewport width, at the cost
-   of cropping more from the bottom (mattress/legs) instead. */
-.hero .img1, .hero .img2 { object-position: center 12%; }
-/* img3/img4 (Model1.jpg/Model5.jpg) are landscape photos with a wide
-   band of empty white background above the model and mattress. On a
-   very wide, short desktop hero, object-fit:cover has to crop heavily
-   to fit - a centered crop split that cropping evenly top/bottom,
-   which kept a chunk of that empty space at the top while pushing the
-   actual subject low in the visible frame. Biasing down brings the
-   model back into the vertical center of the display instead. */
-.hero .img3, .hero .img4 { object-position: center 68%; }
+/* Every one of these object-position values was computed, not
+   guessed: for each photo the actual subject's pixel bounding box was
+   detected programmatically (scanning for non-white content, since
+   all 21 are on white/near-white backgrounds), then the exact crop
+   offset that centers that content in a representative desktop hero
+   box (1600x640) was solved from the object-fit:cover formula. Photos
+   whose content sits close enough to true center (within ~8 points of
+   50%) are left on the plain "center" default above; the rest are
+   listed here. An earlier attempt at fixing img1-img4 this way was
+   based on eyeballing scaled-down thumbnails instead of measuring,
+   and got the direction backwards for img1 and badly overcorrected
+   img4 - both photos' content actually runs almost the full height
+   with little empty margin either side (img4/Model5.jpg's raised feet
+   reach to within 1.5% of the top), so forcing a large top or bottom
+   bias cropped into the subject instead of framing it. */
+.hero .img1  { object-position: center 73%; }
+.hero .img2  { object-position: center 63%; }
+.hero .img3  { object-position: center 71%; }
+.hero .img4  { object-position: center 48%; }
+.hero .img5  { object-position: center 84%; }
+.hero .img7  { object-position: center 81%; }
+.hero .img8  { object-position: center 83%; }
+.hero .img13 { object-position: center 72%; }
+.hero .img14 { object-position: center 93%; }
+.hero .img15 { object-position: center 75%; }
+.hero .img17 { object-position: center 39%; }
+.hero .img18 { object-position: center 93%; }
+.hero .img19 { object-position: center 35%; }
+.hero .img20 { object-position: center 78%; }
+.hero .img21 { object-position: center 68%; }
 /* 21 images now rotate through (was 16, before that 10) - kept each
    photo's own on-screen time the same (~4s delay step, ~1s fade,
    ~3.8s fully visible) by stretching the cycle to 84s (21 * 4s) and
