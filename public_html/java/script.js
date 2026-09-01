@@ -217,6 +217,93 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // === Site search ===
+    // Static site, no backend to query - matches against a small hand-built
+    // index of pages/products instead. Every page carries the same overlay
+    // markup and this same index, so search works identically everywhere.
+    const searchIndex = [
+      { title: 'Home', url: 'index.html', keywords: 'home mood foam mattresses better nights better days welcome' },
+      { title: 'About Us', url: 'about.html', keywords: 'about busujju industries vision mission values company history mityana' },
+      { title: 'Contact', url: 'contact.html', keywords: 'contact phone whatsapp email address enquiry get in touch location' },
+      { title: 'Showroom & Gallery', url: 'showroom.html', keywords: 'showroom gallery photos all products browse catalogue' },
+      { title: 'Blog', url: 'about.html#blog', keywords: 'blog sleep science orthopedic comfort mattress materials articles' },
+      { title: 'Delux Quilted Mattress', url: 'delux-quilted-mattress.html', keywords: 'delux quilted standard mattress foam' },
+      { title: 'PVC Mattress', url: 'pvc.html', keywords: 'pvc mattress vinyl standard' },
+      { title: 'Tape Edge Mattress', url: 'tape-edge.html', keywords: 'tape edge mattress standard' },
+      { title: 'Open End Mattress', url: 'open-end.html', keywords: 'open end mattress standard' },
+      { title: 'Rebonded Mattress', url: 'Rebonded.html', keywords: 'rebonded mattress premium' },
+      { title: 'Orthopedic Mattress', url: 'Orthopedic.html', keywords: 'orthopedic mattress premium back pain spine support' },
+      { title: 'Beds', url: 'beds.html', keywords: 'beds platform canopy divan storage upholstered adjustable bed frame' },
+      { title: 'Pillows', url: 'pillow.html', keywords: 'pillows beddings quilted deluxe' },
+      { title: 'Toppers', url: 'topper.html', keywords: 'mattress toppers beddings' },
+      { title: 'Mattress Protectors', url: 'mattres-protectors.html', keywords: 'mattress protectors waterproof beddings' },
+      { title: 'Leather Cover', url: 'leather.html', keywords: 'leather cover mattress beddings' },
+      { title: 'Sofas', url: 'sofas.html', keywords: 'sofas chesterfield scandinavian tufted living room couch' },
+      { title: 'Cushions & Foam Sheets', url: 'cushions.html', keywords: 'cushions foam sheets economy' },
+      { title: 'Spring Mattress', url: 'spring.html', keywords: 'spring mattress pocket coil bonnell' },
+    ];
+
+    const searchToggleBtns = document.querySelectorAll('.search-toggle');
+    const searchOverlay = document.getElementById('search-overlay');
+    const searchInputEl = document.getElementById('search-input');
+    const searchResultsEl = document.getElementById('search-results');
+    const searchCloseBtn = document.getElementById('search-close');
+
+    if (searchToggleBtns.length && searchOverlay && searchInputEl && searchResultsEl) {
+      const renderResults = (query) => {
+        const q = query.trim().toLowerCase();
+        searchResultsEl.innerHTML = '';
+        if (!q) {
+          searchResultsEl.innerHTML = '<li class="search-empty">Start typing to search mattresses, beds, sofas, beddings and more...</li>';
+          return;
+        }
+        const matches = searchIndex.filter(item =>
+          item.title.toLowerCase().includes(q) || item.keywords.includes(q)
+        );
+        if (!matches.length) {
+          searchResultsEl.innerHTML = '<li class="search-empty">No matches. Try "mattress", "bed", "pillow" or "sofa"...</li>';
+          return;
+        }
+        matches.forEach(item => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = item.url;
+          const titleSpan = document.createElement('span');
+          titleSpan.className = 'result-title';
+          titleSpan.textContent = item.title;
+          a.appendChild(titleSpan);
+          li.appendChild(a);
+          searchResultsEl.appendChild(li);
+        });
+      };
+
+      const openSearch = () => {
+        searchOverlay.classList.add('open');
+        renderResults('');
+        setTimeout(() => searchInputEl.focus(), 60);
+      };
+      const closeSearch = () => {
+        searchOverlay.classList.remove('open');
+        searchInputEl.value = '';
+      };
+
+      searchToggleBtns.forEach(btn => btn.addEventListener('click', openSearch));
+      if (searchCloseBtn) searchCloseBtn.addEventListener('click', closeSearch);
+      searchOverlay.addEventListener('click', (e) => {
+        if (e.target === searchOverlay) closeSearch();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
+      });
+      searchInputEl.addEventListener('input', () => renderResults(searchInputEl.value));
+      searchInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const firstLink = searchResultsEl.querySelector('a');
+          if (firstLink) window.location.href = firstLink.getAttribute('href');
+        }
+      });
+    }
+
     // === Contact form (static site, no backend - hands off to WhatsApp) ===
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {

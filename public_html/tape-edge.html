@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=23" />
+  <link rel="stylesheet" href="css/style.css?v=25" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -53,8 +53,9 @@
         <span></span>
       </div>
       <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="MOOD FOAM logo" class="logo-img" />
+        <img src="images/logo-header.png" alt="MOOD FOAM logo" class="logo-img" />
       </a>
+      <div class="nav-search-wrap">
       <nav>
   <ul class="nav-links">
     <li><a href="index.html">HOME</a></li>
@@ -106,9 +107,23 @@
     <li><a href="contact.html">CONTACT</a></li>
   </ul>
 </nav>
+        <button class="search-toggle" id="search-toggle" aria-label="Search the site">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
 
     </div>
   </header>
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-panel">
+      <div class="search-input-row">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Search mattresses, beds, sofas, pillows..." autocomplete="off">
+        <button class="search-close" id="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+  </div>
   <div class="container">
     <h1 class="product-card2">Tape-edge mattresses</h1>
     <div class="product-display">
@@ -187,7 +202,7 @@
   </div>
 
  
-  <script src="java/script.js?v=5"></script>
+  <script src="java/script.js?v=6"></script>
   <a href="https://wa.me/256743053096" target="_blank" class="whatsapp-button">
     <i class="fab fa-whatsapp"></i> Chat with us
   </a>
