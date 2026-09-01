@@ -201,52 +201,44 @@ width: 200px;
  padding-right: 70px;
   }
 }
-/* Set initial state for transition (hidden and slightly offset) */
-.institutional-gallery, .institutional-content {
+/* ============================================================
+   Scroll reveal: shared entrance-animation system for text and
+   card content, applied site-wide by java/script.js (one
+   IntersectionObserver tags elements with .is-visible as they
+   scroll in - see the "Scroll reveal" block there). Replaces what
+   used to be three separate, near-identical scroll-listener blocks
+   here (one each for the institutional gallery, goals row and blog
+   cards) with one reusable set of classes any element can opt into.
+   Transition-based rather than @keyframes so a mid-scroll interrupt
+   doesn't restart the animation from frame 0. */
+.reveal-up, .reveal-left, .reveal-right, .reveal-zoom {
   opacity: 0;
-  transform: translateY(30px); /* Start with a slight downward shift */
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Transition properties */
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.reveal-up { transform: translateY(34px); }
+.reveal-left { transform: translateX(-36px); }
+.reveal-right { transform: translateX(36px); }
+.reveal-zoom { transform: scale(0.92); }
 
-/* Add effect when section comes into view */
-.institutional-gallery.visible, .institutional-content.visible {
+.reveal-up.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-zoom.is-visible {
   opacity: 1;
-  transform: translateY(0); /* Move to normal position */
+  transform: none;
 }
 
-/* Add slight delay for the image */
-.institutional-gallery {
-  transition-delay: 0.5s;
-}
-
-/* Set initial state for transition (hidden and slightly offset) */
-.goals-content, .goals-image {
-  opacity: 0;
-  transform: translateX(-50px); /* Initially slide in from the left */
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transition properties */
-}
-
-/* Add effect when section comes into view or is hovered */
-.goals-content.visible, .goals-image.visible {
-  opacity: 1;
-  transform: translateX(0); /* Move to normal position */
-}
-
-/* Add a slight delay for the second section to appear */
-.goals-image {
-  transition-delay: 0.1s;
-}
-/* Set initial state for blog articles (invisible and offset) */
-.blog-preview article {
-  opacity: 0;
-  transform: translateY(30px); /* Start with a slight downward shift */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transition properties */
-}
-
-/* Add effect when article comes into view */
-.blog-preview article.visible {
-  opacity: 1;
-  transform: translateY(0); /* Move to normal position */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up, .reveal-left, .reveal-right, .reveal-zoom {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero .hero-eyebrow, .hero h1, .hero .hero-desc, .hero .hero-desc-short, .hero-cta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 
@@ -1993,6 +1985,10 @@ h1, h2, h3, h4 {
   color: var(--color-accent-gold);
   margin-bottom: 0.6rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.5);
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroTitleFadeIn 0.8s ease-out forwards;
+  animation-delay: 0s;
 }
 .hero h1 {
   font-size: clamp(1.85rem, 4.2vw, 3.25rem);
@@ -2007,12 +2003,20 @@ h1, h2, h3, h4 {
   animation: heroTitleFadeIn 1s ease-out forwards;
   animation-delay: 0.2s;
 }
+/* Eyebrow, heading, description and CTA fade up in sequence on load
+   (a shared keyframe with staggered animation-delay) instead of the
+   heading being the only piece of hero copy that animated in - the
+   rest of the block used to appear instantly with no entrance at all. */
 .hero .hero-desc {
   font-size: 1.05rem;
   color: var(--color-mint-light);
   max-width: 560px;
   margin: 0 auto 1.5rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.5);
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroTitleFadeIn 0.9s ease-out forwards;
+  animation-delay: 0.4s;
 }
 .hero .hero-desc-short {
   display: none;
@@ -2026,6 +2030,10 @@ h1, h2, h3, h4 {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroTitleFadeIn 0.9s ease-out forwards;
+  animation-delay: 0.6s;
 }
 /* Generalized beyond .hero-cta so any dark-background CTA band (e.g.
    .contact-cta) can reuse the same primary/secondary button look. */

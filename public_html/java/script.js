@@ -108,44 +108,48 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // === Institutional visibility check ===
-    const institutionalImage = document.querySelector('.institutional-gallery');
-    const institutionalContent = document.querySelector('.institutional-content');
-    if (institutionalImage && institutionalContent) {
-      const checkVisibility = () => {
-        const windowHeight = window.innerHeight;
-        const imageRect = institutionalImage.getBoundingClientRect();
-        const contentRect = institutionalContent.getBoundingClientRect();
+    // === Scroll reveal: staggered entrance animations for text/card
+    // content, applied site-wide from here rather than per-page markup
+    // so every page (not just the ones with bespoke JS) gets them.
+    // Replaces what used to be three separate, near-identical
+    // scroll-listener blocks (institutional gallery, goals row, blog
+    // cards), each polling on every scroll event, with one shared
+    // IntersectionObserver and a reusable .reveal-* class vocabulary
+    // (see the CSS "Scroll reveal" block in style.css). ===
+    const revealGroups = [
+      // Whole-block fade-up, no stagger: one settled entrance per section.
+      { selector: '.hero-text, .about-content, .contact-hero .container, section > .container > h2, .goals h2, .institutional h2, .blog h2, .products h2, h1.product-card2', anim: 'reveal-up', stagger: 0 },
+      // Card/list groups: cascade in one after another.
+      { selector: '.cards-container .card, .info-grid > div, .about-feature-card, .testimonials blockquote, .thumbnail-card, .goals-content, .goals-image, .institutional-content, .blog-preview article, .product-card', anim: 'reveal-up', stagger: 90 },
+      { selector: '.institutional-gallery figure', anim: 'reveal-zoom', stagger: 80 },
+      { selector: '.contact-detail-item', anim: 'reveal-left', stagger: 90 },
+      { selector: '.contact-form-wrap', anim: 'reveal-right', stagger: 0 },
+    ];
 
-        if (imageRect.top <= windowHeight - 100) {
-          institutionalImage.classList.add('visible');
-        }
-        if (contentRect.top <= windowHeight - 100) {
-          institutionalContent.classList.add('visible');
-        }
-      };
-      window.addEventListener('scroll', checkVisibility);
-      checkVisibility();
-    }
+    const revealTargets = new Set();
+    revealGroups.forEach(({ selector, anim, stagger }) => {
+      document.querySelectorAll(selector).forEach((el, i) => {
+        if (revealTargets.has(el)) return; // a selector overlap shouldn't double-tag an element
+        revealTargets.add(el);
+        el.classList.add(anim);
+        if (stagger) el.style.transitionDelay = Math.min(i * stagger, 480) + 'ms';
+      });
+    });
 
-    // === Goals content visibility check ===
-    const goalsContent = document.querySelector('.goals-content');
-    const goalsImage = document.querySelector('.goals-image');
-    if (goalsContent && goalsImage) {
-      const checkVisibility = () => {
-        const windowHeight = window.innerHeight;
-        const contentRect = goalsContent.getBoundingClientRect();
-        const imageRect = goalsImage.getBoundingClientRect();
-
-        if (contentRect.top <= windowHeight - 100) {
-          goalsContent.classList.add('visible');
-        }
-        if (imageRect.top <= windowHeight - 100) {
-          goalsImage.classList.add('visible');
-        }
-      };
-      window.addEventListener('scroll', checkVisibility);
-      checkVisibility();
+    if (revealTargets.size) {
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+        revealTargets.forEach(el => revealObserver.observe(el));
+      } else {
+        revealTargets.forEach(el => el.classList.add('is-visible'));
+      }
     }
 
     // === Contact form (static site, no backend - hands off to WhatsApp) ===
@@ -199,21 +203,5 @@ document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeLightbox();
       });
-    }
-
-    // === Blog visibility on scroll ===
-    const articles = document.querySelectorAll('.blog-preview article');
-    if (articles.length > 0) {
-      const checkVisibility = () => {
-        const windowHeight = window.innerHeight;
-        articles.forEach(article => {
-          const articleRect = article.getBoundingClientRect();
-          if (articleRect.top <= windowHeight - 100) {
-            article.classList.add('visible');
-          }
-        });
-      };
-      window.addEventListener('scroll', checkVisibility);
-      checkVisibility();
     }
 });
