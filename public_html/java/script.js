@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // === Institutional visibility check ===
-    const institutionalImage = document.querySelector('.institutional-image');
+    const institutionalImage = document.querySelector('.institutional-gallery');
     const institutionalContent = document.querySelector('.institutional-content');
     if (institutionalImage && institutionalContent) {
       const checkVisibility = () => {
