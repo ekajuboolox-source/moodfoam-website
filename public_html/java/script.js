@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // each one in from the left in sequence, holds the fully-assembled
     // text for a few seconds, then makes every word disappear together in
     // one instant (not word by word) and keeps it away for the rest of the
-    // hero's 64s image-crossfade cycle (see .hero .img16's animation-delay
+    // hero's 84s image-crossfade cycle (see .hero .img21's animation-delay
     // in style.css) before the whole sequence repeats - so the text never
     // comes back until every rotating image has had its turn.
     const heroText = document.querySelector('.hero .hero-text');
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         const WORD_STEP_MS = 90;
         const HOLD_MS = 2500;
-        const FULL_CYCLE_MS = 64000; // matches .hero img's 64s crossfade animation
+        const FULL_CYCLE_MS = 84000; // matches .hero img's 84s crossfade animation
 
         const runCycle = () => {
           words.forEach((w, i) => {

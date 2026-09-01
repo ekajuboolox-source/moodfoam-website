@@ -1977,7 +1977,7 @@ h1, h2, h3, h4 {
   object-position: center;
   opacity: 0;
   z-index: 0;
-  animation: crossfade 64s infinite;
+  animation: crossfade 84s infinite;
   transition: opacity 1.5s ease-in-out;
 }
 /* img1/img2 are tall portrait model photos (person sitting upright,
@@ -1988,11 +1988,19 @@ h1, h2, h3, h4 {
    keeps the head fully in frame at every viewport width, at the cost
    of cropping more from the bottom (mattress/legs) instead. */
 .hero .img1, .hero .img2 { object-position: center 12%; }
-/* 16 images now rotate through (was 10) - kept each photo's own
-   on-screen time the same (~4s delay step, ~1s fade, ~3.8s fully
-   visible) by stretching the cycle to 64s (16 * 4s) and rescaling the
-   keyframe's percentages to match, rather than showing each image
-   for a shorter, choppier slice of a still-40s cycle. */
+/* img3/img4 (Model1.jpg/Model5.jpg) are landscape photos with a wide
+   band of empty white background above the model and mattress. On a
+   very wide, short desktop hero, object-fit:cover has to crop heavily
+   to fit - a centered crop split that cropping evenly top/bottom,
+   which kept a chunk of that empty space at the top while pushing the
+   actual subject low in the visible frame. Biasing down brings the
+   model back into the vertical center of the display instead. */
+.hero .img3, .hero .img4 { object-position: center 68%; }
+/* 21 images now rotate through (was 16, before that 10) - kept each
+   photo's own on-screen time the same (~4s delay step, ~1s fade,
+   ~3.8s fully visible) by stretching the cycle to 84s (21 * 4s) and
+   rescaling the keyframe's percentages to match, rather than showing
+   each image for a shorter, choppier slice of a fixed-length cycle. */
 .hero .img1  { animation-delay: 0s; }
 .hero .img2  { animation-delay: 4s; }
 .hero .img3  { animation-delay: 8s; }
@@ -2009,11 +2017,16 @@ h1, h2, h3, h4 {
 .hero .img14 { animation-delay: 52s; }
 .hero .img15 { animation-delay: 56s; }
 .hero .img16 { animation-delay: 60s; }
+.hero .img17 { animation-delay: 64s; }
+.hero .img18 { animation-delay: 68s; }
+.hero .img19 { animation-delay: 72s; }
+.hero .img20 { animation-delay: 76s; }
+.hero .img21 { animation-delay: 80s; }
 @keyframes crossfade {
   0%     { opacity: 0; }
-  1.5%   { opacity: 1; }
-  7.5%   { opacity: 1; }
-  10.5%  { opacity: 0; }
+  1.14%  { opacity: 1; }
+  5.71%  { opacity: 1; }
+  8%     { opacity: 0; }
   100%   { opacity: 0; }
 }
 .container-hero-content {
