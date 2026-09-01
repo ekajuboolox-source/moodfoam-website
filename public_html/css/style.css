@@ -183,14 +183,16 @@ padding-left: 15px;
     right: 20px;
     background: #1e723d;
     flex-direction: column;
-    gap: 1.5rem;
-    width: 200px;
-    padding: 1.5rem 1rem;
+    gap: 0.15rem;
+    width: 220px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    padding: 0.75rem 1rem;
     border-radius: 10px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     display: none;
     z-index: 9999;
-    align-items: flex-start;
+    align-items: stretch;
     transition: all 0.3s;
   }
   .nav-links.open {
@@ -1023,7 +1025,7 @@ h1.product-card2 {
   }
   .nav-links {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.15rem;
     font-size: 1.1rem;
   }
   .section-icon {
@@ -1097,6 +1099,16 @@ h1.product-card2 {
 @media (max-width: 480px) {
   .footer-grid {
     flex-direction: column;
+    gap: 22px;
+  }
+  /* .footer-grid > div's shared flex:0 1 200px sets a 200px flex-basis,
+     which is a WIDTH basis in the desktop row layout but becomes a
+     HEIGHT basis the moment flex-direction flips to column here -
+     forcing every column (even "Company", with just 2 short links) to
+     a fixed 200px tall box with a big empty gap below its real content.
+     auto lets each column size to its own content instead. */
+  .footer-grid > div {
+    flex-basis: auto;
   }
 }
 
@@ -2292,17 +2304,13 @@ header h1 { color: var(--color-primary); font-weight: 800; }
   letter-spacing: 0.4px;
 }
 /* The full .testimonials/.testimonials blockquote/.testimonials cite
-   ruleset lives further down (search ".testimonials .stars") - this is
-   just the shared mobile layout override, kept separate since the
-   later block doesn't set flex-direction. */
+   ruleset lives further down (search ".testimonials .stars") - along
+   with the blockquote's own mobile override, kept there since it must
+   come after the base flex:1 1 300px rule to win the cascade. This is
+   just the shared flex-direction/gap override. */
 @media (max-width: 600px) {
   .trust-indicators { gap: 1.5rem; }
-  .testimonials { flex-direction: column; align-items: center; }
-  .testimonials blockquote {
-    max-width: 92%;
-    width: 92%;
-    padding: 20px 18px;
-  }
+  .testimonials { flex-direction: column; align-items: center; gap: 16px; }
 }
 
 /* --- Product category cards: clean single column on phones --- */
@@ -2806,6 +2814,20 @@ textarea:focus-visible,
   color: var(--color-text);
 }
 
+/* Placed right after the base rule above (not just inside the earlier
+   "Scroll reveal" media block) because .testimonials blockquote's own
+   flex:1 1 300px sits AFTER that block in file order and was winning
+   the cascade despite the @media condition matching - a plain media
+   query doesn't add specificity, so source order still decides. */
+@media (max-width: 600px) {
+  .testimonials blockquote {
+    flex: 0 0 auto;
+    max-width: 92%;
+    width: 92%;
+    padding: 18px 16px;
+  }
+}
+
 .testimonials .stars {
   color: var(--color-accent-gold);
   font-style: normal;
@@ -2833,27 +2855,35 @@ textarea:focus-visible,
     display: block;
     width: 100%;
     padding-left: 0;
-    font-size: 16px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .nav-links li:last-child {
+    border-bottom: none;
   }
   /* Nav links/dropdown buttons had no padding in the mobile menu, so
      their tappable area was just the text's line height (~22px) -
      under the ~44px minimum touch-target size. Padding on the link
      itself (not just gap between list items) fixes this without
-     changing the visual text size. */
+     changing the visual text size. A generous 1.5rem gap on the
+     .nav-links container plus this same padding on every item used
+     to stack into ~50px of dead space between each label - trimmed
+     to a tight 9px so the whole menu reads as one organized list
+     instead of ten sparse, disconnected lines. */
   .nav-links > li > a {
     display: block;
-    padding: 12px 0;
+    padding: 9px 2px;
   }
   .dropbtn {
     /* .dropbtn's own base rule sets font-size via a desktop-oriented
        clamp(12.5px, 1.05vw, 15px), which bottoms out at 12.5px on a
        narrow phone - both visually smaller than and (with the padding
        below) a shorter tap target than its sibling plain nav links.
-       Match them at 16px, same as .nav-links li's mobile font-size. */
+       Match them at 14px, same as .nav-links li's mobile font-size. */
     display: block;
     width: 100%;
     text-align: left;
-    padding: 12px 0;
-    font-size: 16px;
+    padding: 9px 2px;
+    font-size: 14px;
   }
 }
