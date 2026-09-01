@@ -237,11 +237,13 @@ width: 200px;
     transform: none;
     transition: none;
   }
-  .hero .hero-eyebrow, .hero h1, .hero .hero-desc, .hero .hero-desc-short, .hero-cta {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
+  /* The hero text's own reduced-motion override lives right next to its
+     animation rules further down (search "heroFlyInOut") - it has to be
+     positioned AFTER those rules to win the cascade, since a media query
+     doesn't add specificity and an unconditional rule appearing later in
+     the file would otherwise override this block despite the media
+     condition matching. .hero-cta keeps its one-shot fade-in regardless
+     (it never loops), so it's not listed here or there. */
 }
 
 
@@ -2022,6 +2024,24 @@ h1, h2, h3, h4 {
   max-width: 640px;
   margin: 0 auto;
 }
+/* Eyebrow, heading and description fly in, hold for a few seconds,
+   then fly back out - on an endless loop rather than a one-time
+   entrance - so the hero keeps making an impression rather than
+   settling into a static caption after the first load. Each piece
+   shares the same 9s cycle with a slight animation-delay offset, and
+   because that offset is baked into each element's own timeline (not
+   just the first run), the staggered cascade repeats identically on
+   every loop, not only the first one. The CTA buttons deliberately do
+   NOT join this loop (they keep the old one-shot fade-in below) - a
+   button that periodically flies off-screen would be a usability trap
+   for anyone trying to click it mid-cycle. */
+@keyframes heroFlyInOut {
+  0%   { opacity: 0; transform: translateX(-70px); }
+  9%   { opacity: 1; transform: translateX(0); }
+  75%  { opacity: 1; transform: translateX(0); }
+  88%  { opacity: 0; transform: translateX(70px); }
+  100% { opacity: 0; transform: translateX(-70px); }
+}
 .hero .hero-eyebrow {
   font-size: 0.72rem;
   font-weight: 700;
@@ -2031,8 +2051,7 @@ h1, h2, h3, h4 {
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.6);
   opacity: 0;
-  transform: translateY(24px);
-  animation: heroTitleFadeIn 0.8s ease-out forwards;
+  animation: heroFlyInOut 9s ease-in-out infinite;
   animation-delay: 0s;
 }
 /* Shrunk from a dominant clamp(1.85rem, 4.2vw, 3.25rem) headline down
@@ -2048,14 +2067,9 @@ h1, h2, h3, h4 {
   letter-spacing: 0.3px;
   text-shadow: 0 3px 12px rgba(0,0,0,.65);
   opacity: 0;
-  transform: translateY(24px);
-  animation: heroTitleFadeIn 1s ease-out forwards;
-  animation-delay: 0.2s;
+  animation: heroFlyInOut 9s ease-in-out infinite;
+  animation-delay: 0.15s;
 }
-/* Eyebrow, heading, description and CTA fade up in sequence on load
-   (a shared keyframe with staggered animation-delay) instead of the
-   heading being the only piece of hero copy that animated in - the
-   rest of the block used to appear instantly with no entrance at all. */
 .hero .hero-desc {
   font-size: 0.95rem;
   color: var(--color-mint-light);
@@ -2063,9 +2077,8 @@ h1, h2, h3, h4 {
   margin: 0 auto 1.1rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.6);
   opacity: 0;
-  transform: translateY(24px);
-  animation: heroTitleFadeIn 0.9s ease-out forwards;
-  animation-delay: 0.4s;
+  animation: heroFlyInOut 9s ease-in-out infinite;
+  animation-delay: 0.3s;
 }
 .hero .hero-desc-short {
   display: none;
@@ -2073,6 +2086,16 @@ h1, h2, h3, h4 {
   color: var(--color-mint-light);
   margin: 0 auto 1.1rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.6);
+  opacity: 0;
+  animation: heroFlyInOut 9s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-eyebrow, .hero h1, .hero .hero-desc, .hero .hero-desc-short, .hero-cta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 .hero-cta {
   display: flex;
