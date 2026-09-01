@@ -1994,44 +1994,46 @@ h1, h2, h3, h4 {
   object-position: center;
   opacity: 0;
   z-index: 0;
-  animation: crossfade 84s infinite;
+  animation: crossfade 80s infinite;
   transition: opacity 1.5s ease-in-out;
 }
-/* Every one of these object-position values was computed, not
-   guessed: for each photo the actual subject's pixel bounding box was
-   detected programmatically (scanning for non-white content, since
-   all 21 are on white/near-white backgrounds), then the exact crop
+/* img2 (modal 3.jpg) was removed from the rotation entirely rather
+   than kept with a corrective crop: it's an extremely tall portrait
+   photo (1461x2000) next to the hero's very wide, short box, so
+   object-fit:cover only has room to show ~29% of its height at any
+   position - not enough to frame both her head and enough of the
+   shot to look composed rather than an odd tight crop. Every other
+   image renumbered up by one to close the gap (old img3 is now img2,
+   old img21 is now img20 - 20 images total).
+
+   Every object-position value below was computed, not guessed: for
+   each photo the actual subject's pixel bounding box was detected
+   programmatically (scanning for non-white content, since all of
+   these are on white/near-white backgrounds), then the exact crop
    offset that centers that content in a representative desktop hero
    box (1600x640) was solved from the object-fit:cover formula. Photos
    whose content sits close enough to true center (within ~8 points of
    50%) are left on the plain "center" default above; the rest are
-   listed here. An earlier attempt at fixing img1-img4 this way was
-   based on eyeballing scaled-down thumbnails instead of measuring,
-   and got the direction backwards for img1 and badly overcorrected
-   img4 - both photos' content actually runs almost the full height
-   with little empty margin either side (img4/Model5.jpg's raised feet
-   reach to within 1.5% of the top), so forcing a large top or bottom
-   bias cropped into the subject instead of framing it. */
+   listed here. */
 .hero .img1  { object-position: center 73%; }
-.hero .img2  { object-position: center 63%; }
-.hero .img3  { object-position: center 71%; }
-.hero .img4  { object-position: center 48%; }
-.hero .img5  { object-position: center 84%; }
-.hero .img7  { object-position: center 81%; }
-.hero .img8  { object-position: center 83%; }
-.hero .img13 { object-position: center 72%; }
-.hero .img14 { object-position: center 93%; }
-.hero .img15 { object-position: center 75%; }
-.hero .img17 { object-position: center 39%; }
-.hero .img18 { object-position: center 93%; }
-.hero .img19 { object-position: center 35%; }
-.hero .img20 { object-position: center 78%; }
-.hero .img21 { object-position: center 68%; }
-/* 21 images now rotate through (was 16, before that 10) - kept each
-   photo's own on-screen time the same (~4s delay step, ~1s fade,
-   ~3.8s fully visible) by stretching the cycle to 84s (21 * 4s) and
-   rescaling the keyframe's percentages to match, rather than showing
-   each image for a shorter, choppier slice of a fixed-length cycle. */
+.hero .img2  { object-position: center 71%; }
+.hero .img3  { object-position: center 48%; }
+.hero .img4  { object-position: center 84%; }
+.hero .img6  { object-position: center 81%; }
+.hero .img7  { object-position: center 83%; }
+.hero .img12 { object-position: center 72%; }
+.hero .img13 { object-position: center 93%; }
+.hero .img14 { object-position: center 75%; }
+.hero .img16 { object-position: center 39%; }
+.hero .img17 { object-position: center 93%; }
+.hero .img18 { object-position: center 35%; }
+.hero .img19 { object-position: center 78%; }
+.hero .img20 { object-position: center 68%; }
+/* 20 images now rotate through - kept each photo's own on-screen time
+   the same (~4s delay step, ~1s fade, ~3.8s fully visible) by sizing
+   the cycle to 80s (20 * 4s) and scaling the keyframe's percentages to
+   match, rather than showing each image for a shorter, choppier slice
+   of a fixed-length cycle. */
 .hero .img1  { animation-delay: 0s; }
 .hero .img2  { animation-delay: 4s; }
 .hero .img3  { animation-delay: 8s; }
@@ -2052,12 +2054,11 @@ h1, h2, h3, h4 {
 .hero .img18 { animation-delay: 68s; }
 .hero .img19 { animation-delay: 72s; }
 .hero .img20 { animation-delay: 76s; }
-.hero .img21 { animation-delay: 80s; }
 @keyframes crossfade {
   0%     { opacity: 0; }
-  1.14%  { opacity: 1; }
-  5.71%  { opacity: 1; }
-  8%     { opacity: 0; }
+  1.2%   { opacity: 1; }
+  6%     { opacity: 1; }
+  8.4%   { opacity: 0; }
   100%   { opacity: 0; }
 }
 .container-hero-content {
