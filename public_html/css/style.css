@@ -1974,11 +1974,20 @@ h1, h2, h3, h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   opacity: 0;
   z-index: 0;
   animation: crossfade 64s infinite;
   transition: opacity 1.5s ease-in-out;
 }
+/* img1/img2 are tall portrait model photos (person sitting upright,
+   generous headroom above, more leg/mattress below) getting cropped to
+   fit the hero's much wider, shorter frame via object-fit:cover - a
+   plain centered crop pulls the crop window up past the model's head
+   before it clears the bottom of the frame. Biasing toward the top
+   keeps the head fully in frame at every viewport width, at the cost
+   of cropping more from the bottom (mattress/legs) instead. */
+.hero .img1, .hero .img2 { object-position: center 12%; }
 /* 16 images now rotate through (was 10) - kept each photo's own
    on-screen time the same (~4s delay step, ~1s fade, ~3.8s fully
    visible) by stretching the cycle to 64s (16 * 4s) and rescaling the
@@ -2024,23 +2033,27 @@ h1, h2, h3, h4 {
   max-width: 640px;
   margin: 0 auto;
 }
-/* Eyebrow, heading and description fly in, hold for a few seconds,
-   then fly back out - on an endless loop rather than a one-time
-   entrance - so the hero keeps making an impression rather than
-   settling into a static caption after the first load. Each piece
-   shares the same 9s cycle with a slight animation-delay offset, and
-   because that offset is baked into each element's own timeline (not
-   just the first run), the staggered cascade repeats identically on
-   every loop, not only the first one. The CTA buttons deliberately do
-   NOT join this loop (they keep the old one-shot fade-in below) - a
-   button that periodically flies off-screen would be a usability trap
-   for anyone trying to click it mid-cycle. */
-@keyframes heroFlyInOut {
-  0%   { opacity: 0; transform: translateX(-70px); }
-  9%   { opacity: 1; transform: translateX(0); }
-  75%  { opacity: 1; transform: translateX(0); }
-  88%  { opacity: 0; transform: translateX(70px); }
-  100% { opacity: 0; transform: translateX(-70px); }
+/* Eyebrow, heading and description assemble word by word (each word
+   flown in from the left by java/script.js, which wraps every word in
+   a .hero-word span and reveals them one at a time), hold complete for
+   a few seconds, then every word disappears together in one instant -
+   not word by word - and the text stays gone for the rest of the
+   hero's 64s image-crossfade cycle (see the "Hero word-by-word intro"
+   block in script.js) before the whole sequence repeats. The CSS here
+   only defines each word's two states (hidden/shown); script.js owns
+   all the timing. The CTA buttons deliberately sit outside this system
+   entirely (own one-shot fade-in further below) - a "Shop Now" button
+   that periodically vanishes mid-cycle would be a real usability trap
+   for anyone trying to click it. */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+}
+.hero-word.in {
+  opacity: 1;
+  transform: translateX(0);
 }
 .hero .hero-eyebrow {
   font-size: 0.72rem;
@@ -2050,9 +2063,6 @@ h1, h2, h3, h4 {
   color: var(--color-accent-gold);
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.6);
-  opacity: 0;
-  animation: heroFlyInOut 9s ease-in-out infinite;
-  animation-delay: 0s;
 }
 /* Shrunk from a dominant clamp(1.85rem, 4.2vw, 3.25rem) headline down
    to this - the brief was to make the wordmark heading less prominent
@@ -2066,9 +2076,6 @@ h1, h2, h3, h4 {
   font-weight: 800;
   letter-spacing: 0.3px;
   text-shadow: 0 3px 12px rgba(0,0,0,.65);
-  opacity: 0;
-  animation: heroFlyInOut 9s ease-in-out infinite;
-  animation-delay: 0.15s;
 }
 .hero .hero-desc {
   font-size: 0.95rem;
@@ -2076,9 +2083,6 @@ h1, h2, h3, h4 {
   max-width: 520px;
   margin: 0 auto 1.1rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.6);
-  opacity: 0;
-  animation: heroFlyInOut 9s ease-in-out infinite;
-  animation-delay: 0.3s;
 }
 .hero .hero-desc-short {
   display: none;
@@ -2086,12 +2090,18 @@ h1, h2, h3, h4 {
   color: var(--color-mint-light);
   margin: 0 auto 1.1rem;
   text-shadow: 0 2px 6px rgba(0,0,0,.6);
-  opacity: 0;
-  animation: heroFlyInOut 9s ease-in-out infinite;
-  animation-delay: 0.3s;
 }
+/* Reduced-motion users get the full text immediately, always visible,
+   no word-by-word cycling - java/script.js also checks this same media
+   query and skips starting the cycle at all, this is just the visual
+   fallback in case JS runs before that check settles. */
 @media (prefers-reduced-motion: reduce) {
-  .hero .hero-eyebrow, .hero h1, .hero .hero-desc, .hero .hero-desc-short, .hero-cta {
+  .hero-word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-cta {
     animation: none;
     opacity: 1;
     transform: none;

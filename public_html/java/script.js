@@ -165,6 +165,58 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // === Hero word-by-word intro (homepage only) ===
+    // Splits the eyebrow/heading/description into individual words, flies
+    // each one in from the left in sequence, holds the fully-assembled
+    // text for a few seconds, then makes every word disappear together in
+    // one instant (not word by word) and keeps it away for the rest of the
+    // hero's 64s image-crossfade cycle (see .hero .img16's animation-delay
+    // in style.css) before the whole sequence repeats - so the text never
+    // comes back until every rotating image has had its turn.
+    const heroText = document.querySelector('.hero .hero-text');
+    if (heroText) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const wordTargets = [
+        heroText.querySelector('.hero-eyebrow'),
+        heroText.querySelector('h1'),
+        heroText.querySelector('.hero-desc'),
+      ].filter(Boolean);
+
+      const words = [];
+      wordTargets.forEach(el => {
+        const text = el.textContent.trim();
+        el.textContent = '';
+        text.split(/\s+/).forEach((word, i) => {
+          if (i > 0) el.appendChild(document.createTextNode(' '));
+          const span = document.createElement('span');
+          span.className = 'hero-word';
+          span.textContent = word;
+          el.appendChild(span);
+          words.push(span);
+        });
+      });
+
+      if (prefersReducedMotion || !words.length) {
+        words.forEach(w => w.classList.add('in'));
+      } else {
+        const WORD_STEP_MS = 90;
+        const HOLD_MS = 2500;
+        const FULL_CYCLE_MS = 64000; // matches .hero img's 64s crossfade animation
+
+        const runCycle = () => {
+          words.forEach((w, i) => {
+            setTimeout(() => w.classList.add('in'), i * WORD_STEP_MS);
+          });
+          const disappearAt = words.length * WORD_STEP_MS + HOLD_MS;
+          setTimeout(() => {
+            words.forEach(w => w.classList.remove('in'));
+          }, disappearAt);
+          setTimeout(runCycle, FULL_CYCLE_MS);
+        };
+        runCycle();
+      }
+    }
+
     // === Contact form (static site, no backend - hands off to WhatsApp) ===
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
