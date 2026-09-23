@@ -1,0 +1,50 @@
+# Mood Foam Mattresses - Apache config for iFastnet shared hosting
+# Every directive is wrapped in <IfModule> so a module iFastnet hasn't
+# enabled is silently skipped instead of causing a 500 error.
+
+# --- Canonical host: force https:// and www. ---------------------------
+# Matches the https://www.moodfoammattresses.com canonical/og:url tags
+# already set on every page, so search engines see one consistent URL
+# per page instead of splitting signal across http/https and www/non-www.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # http -> https
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # non-www -> www
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- Custom 404 page ------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Compression ------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Browser caching ------------------------------------------------------
+# Long cache for versioned/static assets (images, fonts) that rarely
+# change; short cache for css/js since they're cache-busted with a
+# ?v= query string on every edit and should still be revalidated.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# --- Directory listing / hygiene ------------------------------------------
+Options -Indexes
