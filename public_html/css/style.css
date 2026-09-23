@@ -808,13 +808,41 @@ h1.product-card2 {
 
 .footer-brand {
   flex: 1 1 280px;
-  max-width: 340px;
+  max-width: 400px;
 }
 
-.footer-logo {
-  height: 40px;
+/* Footer brand lockup: the flattened logo PNG bakes "MOODFOAM
+   MATTRESSES" in as solid black text, which reads fine on the
+   header's lighter green but was nearly invisible against the
+   footer's much darker gradient. Built as icon + real HTML text
+   instead (logo-icon.png is a tight crop of just the gold bed mark,
+   cut from the same source file), so the wordmark can be styled
+   white here and stays crisp at a larger size instead of upscaling a
+   small raster crop. */
+.footer-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  text-decoration: none;
+}
+
+/* Scales down at narrow widths so "MOODFOAM MATTRESSES" (kept on one
+   line via white-space:nowrap below) still fits next to it instead of
+   overflowing a phone-width footer column. */
+.footer-logo-icon {
+  height: clamp(40px, 11vw, 60px);
   width: auto;
-  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.footer-logo-text {
+  color: var(--color-white);
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 
 .footer-tagline {
@@ -883,10 +911,15 @@ h1.product-card2 {
 /* Bottom bar: copyright left, credit right, separated from the
    brand/links row above by a divider - replaces the old fully
    centered, stacked copyright/credit lines. */
+/* Centered rather than space-between: the fixed WhatsApp button sits
+   in the viewport's bottom-right corner on desktop, which is exactly
+   where a right-aligned .credit line would land once the footer is
+   scrolled fully into view - covering it. Centering keeps both lines
+   clear of that corner. */
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 6px 16px;
   border-top: 1px solid rgba(255,255,255,0.15);
@@ -1216,10 +1249,6 @@ footer .credit {
   .footer-links {
     flex-direction: column;
     gap: 18px;
-  }
-  .footer-bottom {
-    justify-content: center;
-    text-align: center;
   }
 }
 
