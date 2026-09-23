@@ -309,47 +309,13 @@ width: 200px;
 .about-us{
   margin-top: 0;
 }
-.container-contact-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically (if height is defined) */
-  text-align: center; /* Align text inside paragraphs */
-  gap: 0.4rem; /* Add spacing between elements */
-  margin-top: 12px; /* Optional: add space at the top */
-}
 footer a{
   color: var(--color-mint-light); /* Link color - Mood Foam brand */
   text-decoration: none; /* Remove underline */
   font-weight: 600; /* Make links bold */
 }
-.container-contact-info p {
-  margin: 0; /* Remove default margin */
-  display: flex;
-  align-items: center; /* Vertically center the icons and text */
-  justify-content: center; /* Horizontally center the text */
-}
-
-.container-contact-info i {
-  margin-right: 10px; /* Add space between icon and text */
-}
-
-footer .credit {
-  text-align: center;
-  margin-top: 4px;
-  font-size: 12px;
-  color: var(--color-accent-gold);
-  letter-spacing: 0.2px;
-}
-
-/* Optional: style the copyright section */
-footer .copyright {
-  text-align: center;
-  margin-top: 14px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #a8b8ac;
-}
+/* Footer bottom bar (copyright + credit) styling lives with the rest
+   of the .footer rules below, next to .footer-bottom. */
 
 .btn {
   padding: 0.8rem 2rem;
@@ -814,30 +780,77 @@ h1.product-card2 {
   z-index: -1; /* Make sure it stays behind the content */
 }
 
-/* .footer-grid also carries the shared .container class (for the
-   1200px max-width/centering), which otherwise brings along that
-   class's 48px top+bottom hero padding - doubling up with the
-   footer's own padding and making the whole band far taller than
-   its Company/Products/Support content needs. */
+/* .footer-top/.footer-bottom also carry the shared .container class
+   (for the 1200px max-width/centering), which otherwise brings along
+   that class's 48px top+bottom hero padding - doubling up with the
+   footer's own padding and making the whole band far taller than its
+   content needs. */
 .footer .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
 }
 
-.footer-grid {
+/* Brand column (logo/tagline/contact) on the left, link columns on
+   the right - replaces the old .footer-grid, which centered three
+   narrow columns inside the full 1200px container with a gap that
+   scaled up to 100px, spreading them across mostly-empty space
+   instead of reading as one organized block. */
+.footer-top {
   display: flex;
-  gap: clamp(28px, 6vw, 100px);
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  text-align: left;
+  padding-bottom: 22px;
 }
 
-.footer-grid > div {
-  flex: 0 1 200px;
-  min-width: 140px;
+.footer-brand {
+  flex: 1 1 280px;
+  max-width: 340px;
 }
 
-#footer_one{
-  margin-left: 15px;
+.footer-logo {
+  height: 40px;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.footer-tagline {
+  margin: 0 0 14px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #c3d1c6;
+}
+
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #c3d1c6;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-contact-list i {
+  margin-top: 3px;
+  width: 14px;
+  color: var(--color-accent-gold);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(32px, 5vw, 64px);
 }
 
 .footer h4 {
@@ -867,6 +880,32 @@ h1.product-card2 {
   color: var(--color-white);
 }
 
+/* Bottom bar: copyright left, credit right, separated from the
+   brand/links row above by a divider - replaces the old fully
+   centered, stacked copyright/credit lines. */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px 16px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 14px;
+}
+
+footer .copyright {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a8b8ac;
+}
+
+footer .credit {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-accent-gold);
+  letter-spacing: 0.2px;
+}
 
 /* Subscribe input and button */
 .footer input[type="email"] {
@@ -1051,7 +1090,7 @@ h1.product-card2 {
     width: 120px;
     height: 120px;
   }
-  .footer-grid > div {
+  .footer-links > div {
     min-width: 120px;
   }
   .product-card {
@@ -1140,7 +1179,11 @@ h1.product-card2 {
   .footer {
     padding: 2rem 0 1rem;
   }
-  .footer-grid > div {
+  .footer-top {
+    flex-direction: column;
+    gap: 26px;
+  }
+  .footer-links > div {
     min-width: 100px;
   }
   .whatsapp-button {
@@ -1163,25 +1206,20 @@ h1.product-card2 {
     object-fit: cover;
   }
 }
-/* Even at its narrowest tier above, .footer-grid's 3 columns
+/* Even at its narrowest tier above, .footer-links' 3 columns
    (Company/Products/Support) need 3*100px + 2*20px gap = 340px
    minimum - already tight, and real column content (padding, "Support"
    plus its list items) pushed actual width past that, overflowing the
    page by 50+px on a 320px-wide phone. Stack to one column instead of
    trying to shrink 3 columns to fit under ~360px. */
 @media (max-width: 480px) {
-  .footer-grid {
+  .footer-links {
     flex-direction: column;
-    gap: 22px;
+    gap: 18px;
   }
-  /* .footer-grid > div's shared flex:0 1 200px sets a 200px flex-basis,
-     which is a WIDTH basis in the desktop row layout but becomes a
-     HEIGHT basis the moment flex-direction flips to column here -
-     forcing every column (even "Company", with just 2 short links) to
-     a fixed 200px tall box with a big empty gap below its real content.
-     auto lets each column size to its own content instead. */
-  .footer-grid > div {
-    flex-basis: auto;
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -1835,8 +1873,8 @@ ul.menu ul li > ul li a {
         .product-card2 {
           font-size: 1rem !important;
         }
-        .footer .container-contact-info {
-          font-size: 0.9rem;
+        .footer-contact-list {
+          font-size: 0.85rem;
         }
       }
       .product-display {
@@ -2221,6 +2259,25 @@ h1, h2, h3, h4 {
   1.2%   { opacity: 1; }
   6%     { opacity: 1; }
   8.4%   { opacity: 0; }
+  100%   { opacity: 0; }
+}
+/* Showroom page's hero only has 3 images (vs. the homepage's 20), so
+   reusing the homepage's 80s/20-image crossfade left ~64s of every
+   80s loop with all 3 already faded out - a blank hero for most of
+   each cycle, reading as an empty/blurry screen. Scope a matching
+   3-image/12s cycle instead, sized the same way as .about-image's
+   crossfade (4s step per image, one fades out exactly as the next
+   fades in, so it loops with no gap). img1/2/3's existing
+   animation-delay (0s/4s/8s) already lines up, so only the duration
+   and keyframe percentages need overriding here. */
+.hero--showroom img {
+  animation: showroomCrossfade 12s infinite;
+}
+@keyframes showroomCrossfade {
+  0%     { opacity: 0; }
+  3.33%  { opacity: 1; }
+  30%    { opacity: 1; }
+  33.33% { opacity: 0; }
   100%   { opacity: 0; }
 }
 .container-hero-content {
