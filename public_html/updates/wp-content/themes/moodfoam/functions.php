@@ -49,6 +49,23 @@ add_filter( 'excerpt_length', function () { return 26; } );
 add_filter( 'excerpt_more', function () { return '&hellip;'; } );
 add_filter( 'document_title_separator', function () { return '|'; } );
 
+/* --------------------------------------------------------------- hardening */
+/* WordPress publishes the login username of every author (the public
+   "users" REST endpoint, /?author=1 and author archive pages). Hiding those
+   makes password guessing harder. Logged-in users (the editors) are unaffected. */
+add_filter( 'rest_endpoints', function ( $endpoints ) {
+	if ( ! is_user_logged_in() ) {
+		unset( $endpoints['/wp/v2/users'], $endpoints['/wp/v2/users/(?P<id>[d]+)'] );
+	}
+	return $endpoints;
+} );
+add_action( 'template_redirect', function () {
+	if ( is_author() ) { wp_safe_redirect( home_url( '/' ), 301 ); exit; }
+} );
+add_action( 'init', function () {
+	if ( ! is_admin() && isset( $_GET['author'] ) ) { wp_safe_redirect( home_url( '/' ), 301 ); exit; }
+} );
+
 /* ----------------------------------------------------------------- assets */
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'mf-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap', array(), null );
@@ -128,7 +145,8 @@ add_action( 'wp_head', function () {
 
 /** Article structured data (JSON-LD) for single posts. */
 add_action( 'wp_head', function () {
-	if ( ! is_singular( 'post' ) ) { return; }
+	// SEO plugins already print Article/BlogPosting data; avoid duplicates.
+	if ( ! is_singular( 'post' ) || mf_seo_plugin_active() ) { return; }
 	$data = array(
 		'@context'         => 'https://schema.org',
 		'@type'            => 'BlogPosting',
