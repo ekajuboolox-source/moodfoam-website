@@ -13,9 +13,9 @@ define( 'MOODFOAM_ROOT', 'https://www.moodfoammattresses.com' );
 
 /**
  * Cache-busting versions of the static site's files. Keep these equal to the
- * ?v= numbers used on the static pages (css/style.css?v=30, java/script.js?v=9).
+ * ?v= numbers used on the static pages (css/style.css?v=31, java/script.js?v=9).
  */
-define( 'MOODFOAM_CSS_VER', '30' );
+define( 'MOODFOAM_CSS_VER', '31' );
 define( 'MOODFOAM_JS_VER', '9' );
 
 /** Absolute URL of a file/page on the main site, e.g. mf_url( 'about.html' ). */

@@ -162,11 +162,11 @@ Edit the **design tokens** at the top of `css/style.css` (the `:root { … }` bl
 Browsers cache `style.css` and `script.js`. After editing either, increase the version number on the link in **every** page:
 
 ```html
-<link rel="stylesheet" href="css/style.css?v=30" />   → ?v=31
+<link rel="stylesheet" href="css/style.css?v=31" />   → ?v=32
 <script src="java/script.js?v=9"></script>             → ?v=10
 ```
 
-Current versions: **CSS `v=30`, JS `v=9`**. Keep them the same on all pages.
+Current versions: **CSS `v=31`, JS `v=9`**. Keep them the same on all pages.
 
 ---
 

@@ -3338,7 +3338,8 @@ textarea:focus-visible,
 .latest-news h2 { margin-top: 2.2rem; }
 .ln-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 380px));
+  justify-content: center;   /* 1-2 posts stay card-sized instead of stretching full width */
   gap: 24px;
   text-align: left;
   margin-top: 1.4rem;
