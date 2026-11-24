@@ -1,0 +1,6 @@
+# Build output / backups
+*.zip
+
+# Local scratch files
+.claude/logo-cropped-preview.png
+.claude/check-image-dims.ps1
