@@ -66,6 +66,14 @@
   box-sizing: border-box;
 }
 
+/* Images carry width/height attributes (intrinsic size) so the browser
+   reserves space before they load and the page does not jump (CLS).
+   height:auto keeps those attributes from ever distorting an image: it
+   outranks the attribute but loses to any class rule that sets a height. */
+img {
+  height: auto;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -3237,4 +3245,85 @@ textarea:focus-visible,
     padding: 9px 2px;
     font-size: 14px;
   }
+}
+
+/* =====================================================================
+   FOOTER - phone/tablet refinement
+   Appended last so it wins over the earlier footer rules and the
+   site-wide "@media (max-width:700px/600px) .footer .container" block,
+   which sets "padding: 0 5vw/2vw !important" and so wiped out the
+   footer's own bottom/top padding (links touched the divider line and
+   the copyright touched its border) and left only 2vw side margins.
+   ===================================================================== */
+
+/* Quieter, consistent type: small gold uppercase column headings and
+   regular-weight links instead of oversized bold white ones. */
+.footer h4 {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+}
+.footer ul li { margin-bottom: 2px; }
+.footer ul li a {
+  display: inline-block;
+  padding: 4px 0;            /* comfortable tap target */
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-mint-light);
+}
+.footer-contact-list li a { padding: 0; font-size: inherit; font-weight: 600; }
+
+@media (max-width: 900px) {
+  /* Stack: brand block first, then one full-width row of link columns. */
+  .footer .footer-top {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 22px;
+    padding-bottom: 20px !important;
+  }
+  .footer-brand { flex: none; max-width: none; width: 100%; }
+  .footer-tagline { max-width: 38em; }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .footer-links > div { min-width: 0; }
+  .footer-links a { overflow-wrap: anywhere; }
+
+  .footer .footer-bottom {
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 14px !important;
+    text-align: center;
+  }
+}
+
+@media (max-width: 700px) {
+  /* Real side margins (the older rule left 2vw-5vw). */
+  .footer .footer-top,
+  .footer .footer-bottom {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .footer .trust-strip { padding-left: 16px; padding-right: 16px; }
+}
+
+@media (max-width: 480px) {
+  /* Two columns: Company + Support stacked on the left, the longer
+     Products list on the right, so nothing is a lone narrow column. */
+  .footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 16px;
+  }
+  .footer-links > div:nth-child(2) { grid-row: span 2; }
+  .footer .copyright { font-size: 0.8rem; }
+  .footer-contact-list { gap: 10px; }
 }
