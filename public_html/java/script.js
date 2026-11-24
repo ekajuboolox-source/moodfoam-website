@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lnSection = document.getElementById("latest-news");
     const lnGrid = document.getElementById("latest-news-grid");
     if (lnSection && lnGrid && window.fetch) {
-      const api = "updates/wp-json/wp/v2/posts?per_page=3&_embed=wp:featuredmedia&_fields=link,title,date,excerpt,_embedded";
+      const api = "updates/wp-json/wp/v2/posts?per_page=3&_embed=wp:featuredmedia&_fields=link,title,date,excerpt,featured_media,_links,_embedded";
       fetch(api, { headers: { Accept: "application/json" } })
         .then(r => (r.ok ? r.json() : []))
         .then(posts => {

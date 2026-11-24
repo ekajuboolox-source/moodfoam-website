@@ -163,10 +163,10 @@ Browsers cache `style.css` and `script.js`. After editing either, increase the v
 
 ```html
 <link rel="stylesheet" href="css/style.css?v=30" />   → ?v=31
-<script src="java/script.js?v=8"></script>             → ?v=9
+<script src="java/script.js?v=9"></script>             → ?v=10
 ```
 
-Current versions: **CSS `v=30`, JS `v=8`**. Keep them the same on all pages.
+Current versions: **CSS `v=30`, JS `v=9`**. Keep them the same on all pages.
 
 ---
 
