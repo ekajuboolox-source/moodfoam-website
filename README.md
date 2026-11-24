@@ -326,6 +326,18 @@ The site is static HTML, so there is no admin screen. For news, offers and photo
 If you change the main site's header or footer, regenerate the theme copies by hand (copy the same HTML into `header.php` / `footer.php` and turn each `href`/`src` into `<?php echo esc_url( mf_url( '...' ) ); ?>`).
 When you bump the `?v=` numbers on the static site, update `MOODFOAM_CSS_VER` / `MOODFOAM_JS_VER` at the top of `functions.php` to match.
 
+### Guardrails that keep client posts on-brand and SEO-safe (theme 1.2.0)
+
+Implemented in `functions.php`, `editor.css` and the end of `style.css`; change them there if the client later needs more freedom.
+
+- **No colour, gradient or font-size pickers** in the editor, and the post body CSS forces readable text colours, so white-on-white / dark-on-dark text cannot happen.
+- **Only simple blocks** are offered for posts: paragraph, heading, list, quote, image, gallery, table, separator, spacer, buttons, columns, video, embed, "more". No Cover/Group/Custom HTML/Shortcode.
+- **Editors cannot paste raw scripts/iframes** (`unfiltered_html` removed for everyone except administrators).
+- **Photos wider than 1600px** are scaled down on upload.
+- **H1 in the body becomes H2** (the post title is the page's one H1); **images saved without alt text get the post title** as alt text.
+- **Forgotten Featured image:** the first photo in the post is used automatically.
+- The **editing screen** is styled like the live site (`editor.css`).
+
 ### Giving the client access
 
 1. In WordPress go to **Users > Add New** and create the client's account with the **Editor** role (can publish posts and upload images, cannot install plugins or change the site). Keep the original Administrator account for the developer only.
