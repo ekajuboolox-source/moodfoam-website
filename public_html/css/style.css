@@ -3327,3 +3327,41 @@ textarea:focus-visible,
   .footer .copyright { font-size: 0.8rem; }
   .footer-contact-list { gap: 10px; }
 }
+
+/* =====================================================================
+   HOMEPAGE "Latest News & Updates" strip (filled by java/script.js from
+   the WordPress news section; hidden until posts exist).
+   ===================================================================== */
+.latest-news[hidden] { display: none; }
+.latest-news { padding: 10px 0 30px; }
+.latest-news .container { text-align: center; }
+.latest-news h2 { margin-top: 2.2rem; }
+.ln-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  text-align: left;
+  margin-top: 1.4rem;
+}
+.ln-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.ln-card:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0, 0, 0, 0.13); }
+.ln-img { aspect-ratio: 800 / 520; background: var(--color-bg-cream); overflow: hidden; }
+.ln-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ln-img--none { display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, var(--color-brand-dark), #0d2314); }
+.ln-img--none img { width: 90px; height: auto; object-fit: contain; }
+.ln-body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.ln-body time { font-size: 0.78rem; font-weight: 600; color: var(--color-primary-dark); text-transform: uppercase; letter-spacing: 0.6px; }
+.ln-body h3 { margin: 0; font-size: 1.05rem; line-height: 1.35; color: var(--color-heading-dark); }
+.ln-body p { margin: 0; font-size: 0.92rem; color: var(--color-text-muted); }
+.ln-more { margin-top: 1.6rem; }
+.ln-more .btn { display: inline-block; }

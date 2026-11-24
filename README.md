@@ -63,6 +63,7 @@ Mood_Foam/
     ├── about.html, contact.html, showroom.html
     ├── <product>.html         ← one page per product line (see table below)
     ├── 404.html               ← "Page not found" page (served by .htaccess)
+    ├── updates/               ← WordPress news section (only the theme is in Git, see below)
     ├── robots.txt, sitemap.xml
     ├── css/style.css          ← ALL styling for every page
     ├── java/script.js         ← ALL behaviour for every page
@@ -161,11 +162,11 @@ Edit the **design tokens** at the top of `css/style.css` (the `:root { … }` bl
 Browsers cache `style.css` and `script.js`. After editing either, increase the version number on the link in **every** page:
 
 ```html
-<link rel="stylesheet" href="css/style.css?v=29" />   → ?v=30
-<script src="java/script.js?v=6"></script>             → ?v=7
+<link rel="stylesheet" href="css/style.css?v=30" />   → ?v=31
+<script src="java/script.js?v=8"></script>             → ?v=9
 ```
 
-Current versions: **CSS `v=29`, JS `v=6`**. Keep them the same on all pages.
+Current versions: **CSS `v=30`, JS `v=8`**. Keep them the same on all pages.
 
 ---
 
@@ -258,6 +259,49 @@ git -c core.autocrlf=false archive --format=zip --prefix=public_html/ -o public_
 > The `.htaccess` assumes **SSL is active** for the domain. Do not deploy it to a host or staging domain without a valid certificate, or the site will be unreachable.
 
 ---
+
+## News & Updates section (WordPress, for the client to post himself)
+
+The site is static HTML, so there is no admin screen. For news, offers and photo posts that the **client** publishes without a developer, a small **WordPress** install lives in its own folder:
+
+| | |
+|---|---|
+| Public address | <https://www.moodfoammattresses.com/updates/> |
+| Admin login | <https://www.moodfoammattresses.com/updates/wp-admin/> |
+| Installed with | cPanel > WordPress Manager by Softaculous |
+| Theme (in this repo) | `public_html/updates/wp-content/themes/moodfoam/` |
+
+### How it fits together
+
+- Only the **theme** is in this repository. WordPress itself, its database, plugins and uploaded images live **on the server only** and are never in Git. The deploy workflow only uploads files that are in the repo and never touches WordPress's own files.
+- The theme **reuses the main site's own `css/style.css` and `java/script.js`** (loaded by absolute URL from `functions.php`), and `header.php` / `footer.php` are copies of the static pages' header and footer. So the News pages look identical, and a styling change on the main site shows up there too.
+- The homepage has a **"Latest News & Updates"** strip (`#latest-news` in `index.html`, filled by `java/script.js`). It reads the three newest posts from WordPress's REST API (`updates/wp-json/wp/v2/posts`) and stays **hidden** when there are no posts or the request fails.
+- The top menu says **NEWS** (links to `updates/`) and the footer has a **News & Updates** link. `robots.txt` lists the WordPress sitemap (`updates/wp-sitemap.xml`) next to the main one.
+
+### Theme files
+
+| File | Purpose |
+|---|---|
+| `style.css` | Theme header (name/version) + news-only styles (cards, article, pagination) |
+| `functions.php` | Loads the main site's CSS/JS, image size, SEO tags + `BlogPosting` JSON-LD, turns comments off |
+| `header.php`, `footer.php` | Same markup as the static pages (links made absolute with `mf_url()`) |
+| `index.php` | News list (also categories, dates, search) |
+| `single.php` | One post (image, text, WhatsApp/Facebook share, previous/next, call-to-action) |
+| `page.php`, `404.php` | Standalone pages and the "not found" page |
+
+If you change the main site's header or footer, regenerate the theme copies by hand (copy the same HTML into `header.php` / `footer.php` and turn each `href`/`src` into `<?php echo esc_url( mf_url( '...' ) ); ?>`).
+When you bump the `?v=` numbers on the static site, update `MOODFOAM_CSS_VER` / `MOODFOAM_JS_VER` at the top of `functions.php` to match.
+
+### Giving the client access
+
+1. In WordPress go to **Users > Add New** and create the client's account with the **Editor** role (can publish posts and upload images, cannot install plugins or change the site). Keep the original Administrator account for the developer only.
+2. He logs in at `/updates/wp-admin/`, clicks **Posts > Add New**, writes the text, sets a **Featured image**, and presses **Publish**. The post appears on `/updates/` and on the homepage strip immediately.
+
+### Housekeeping
+
+- **WordPress address:** in *Settings > General* both addresses must be `https://www.moodfoammattresses.com/updates` (with `www`) so they match the rest of the site.
+- **Updates:** keep WordPress, plugins and themes updated (the Softaculous tool can auto-update) and keep a **strong, unique admin password**; the Loginizer plugin limits password guessing.
+- **Backups:** use cPanel > Backup (and/or the Backuply plugin) regularly. Posts and uploaded photos are **not** in Git.
 
 ## Helper scripts
 

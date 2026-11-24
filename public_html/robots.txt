@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.moodfoammattresses.com/sitemap.xml
+Sitemap: https://www.moodfoammattresses.com/updates/wp-sitemap.xml

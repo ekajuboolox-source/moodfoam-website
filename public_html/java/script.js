@@ -226,7 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
       { title: 'About Us', url: 'about.html', keywords: 'about busujju industries vision mission values company history mityana' },
       { title: 'Contact', url: 'contact.html', keywords: 'contact phone whatsapp email address enquiry get in touch location' },
       { title: 'Showroom & Gallery', url: 'showroom.html', keywords: 'showroom gallery photos all products browse catalogue' },
-      { title: 'Blog', url: 'about.html#blog', keywords: 'blog sleep science orthopedic comfort mattress materials articles' },
+            { title: 'News & Updates', url: 'updates/', keywords: 'news updates latest offers announcements promotions new arrivals' },
+{ title: 'Blog', url: 'about.html#blog', keywords: 'blog sleep science orthopedic comfort mattress materials articles' },
       { title: 'Delux Quilted Mattress', url: 'delux-quilted-mattress.html', keywords: 'delux quilted standard mattress foam' },
       { title: 'PVC Mattress', url: 'pvc.html', keywords: 'pvc mattress vinyl standard' },
       { title: 'Tape Edge Mattress', url: 'tape-edge.html', keywords: 'tape edge mattress standard' },
@@ -267,7 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
         matches.forEach(item => {
           const li = document.createElement('li');
           const a = document.createElement('a');
-          a.href = item.url;
+          // MOODFOAM_ROOT is only defined on the WordPress /updates/ pages, where
+          // the relative page links below would otherwise resolve inside /updates/.
+          a.href = (window.MOODFOAM_ROOT ? window.MOODFOAM_ROOT + '/' : '') + item.url;
           const titleSpan = document.createElement('span');
           titleSpan.className = 'result-title';
           titleSpan.textContent = item.title;
@@ -355,5 +358,52 @@ document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeLightbox();
       });
+    }
+
+    // === Latest news strip (homepage): pulls the newest WordPress posts ===
+    // Posts live in the WordPress install at /updates/ (see README). The strip
+    // stays hidden if there are no posts or the request fails, so the page
+    // never shows an empty box.
+    const lnSection = document.getElementById("latest-news");
+    const lnGrid = document.getElementById("latest-news-grid");
+    if (lnSection && lnGrid && window.fetch) {
+      const api = "updates/wp-json/wp/v2/posts?per_page=3&_embed=wp:featuredmedia&_fields=link,title,date,excerpt,_embedded";
+      fetch(api, { headers: { Accept: "application/json" } })
+        .then(r => (r.ok ? r.json() : []))
+        .then(posts => {
+          if (!Array.isArray(posts) || !posts.length) return;
+          const text = html => new DOMParser().parseFromString(html || "", "text/html").body.textContent.trim();
+          posts.forEach(p => {
+            const a = document.createElement("a");
+            a.className = "ln-card";
+            a.href = p.link;
+            const media = p._embedded && p._embedded["wp:featuredmedia"] && p._embedded["wp:featuredmedia"][0];
+            const sizes = media && media.media_details && media.media_details.sizes;
+            const img = sizes ? (sizes["mf-card"] || sizes.medium_large || sizes.large || {}).source_url : (media && media.source_url);
+            const pic = document.createElement("div");
+            pic.className = "ln-img";
+            const im = document.createElement("img");
+            im.alt = "";
+            im.loading = "lazy";
+            im.src = img || "images/logo-icon.png";
+            if (!img) pic.classList.add("ln-img--none");
+            pic.appendChild(im);
+            const body = document.createElement("div");
+            body.className = "ln-body";
+            const d = document.createElement("time");
+            d.dateTime = p.date;
+            d.textContent = new Date(p.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+            const h = document.createElement("h3");
+            h.textContent = text(p.title && p.title.rendered);
+            const ex = document.createElement("p");
+            const t = text(p.excerpt && p.excerpt.rendered);
+            ex.textContent = t.length > 110 ? t.slice(0, 107).trim() + "..." : t;
+            body.append(d, h, ex);
+            a.append(pic, body);
+            lnGrid.appendChild(a);
+          });
+          lnSection.hidden = false;
+        })
+        .catch(() => {});
     }
 });

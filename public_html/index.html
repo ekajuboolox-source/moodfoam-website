@@ -108,7 +108,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=29" />
+  <link rel="stylesheet" href="css/style.css?v=30" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -187,7 +187,7 @@
 
           <li><a href="spring.html">Spring Mattress</a></li>
 
-          <li><a href="about.html#blog">BLOG</a></li>
+          <li><a href="updates/">NEWS</a></li>
           <li><a href="contact.html">CONTACT</a></li>
         </ul>
       </nav>
@@ -416,6 +416,16 @@
 
   </section>
 
+  <!-- Latest news: filled from the WordPress news section (/updates/) by
+       java/script.js. Stays hidden until at least one post exists. -->
+  <section class="latest-news" id="latest-news" hidden>
+    <div class="container">
+      <h2>Latest News &amp; Updates</h2>
+      <div class="ln-grid" id="latest-news-grid"></div>
+      <p class="ln-more"><a class="btn" href="updates/">See all news</a></p>
+    </div>
+  </section>
+
   <!-- Closing contact CTA: the brief calls for the homepage to end with a
        direct invitation to get in touch, rather than trailing off after
        the About/testimonials block into just the footer. -->
@@ -466,6 +476,7 @@
           <h4>Company</h4>
           <ul>
             <li><a href="about.html">About Us</a></li>
+            <li><a href="updates/">News &amp; Updates</a></li>
             <li><a href="index.html#about">Reviews</a></li>
           </ul>
         </div>
@@ -494,6 +505,6 @@
   </footer>
 
   <!-- JavaScript -->
-  <script src="java/script.js?v=6"></script>
+  <script src="java/script.js?v=8"></script>
 </body>
 </html>
