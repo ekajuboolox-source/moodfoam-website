@@ -1,0 +1,60 @@
+# Deploys public_html/ to the iFastnet (cPanel) web root over FTPS
+# whenever something is pushed to the main branch.
+#
+# Setup (one time): GitHub repo > Settings > Secrets and variables > Actions
+# > "New repository secret". Create:
+#   FTP_SERVER    FTP hostname from cPanel > FTP Accounts > "Configure FTP Client"
+#   FTP_USERNAME  the FTP account name (e.g. deploy@moodfoammattresses.com)
+#   FTP_PASSWORD  that account's password
+#   FTP_DIR       (optional) remote folder, e.g. "public_html/". Leave unset if
+#                 the FTP account's home folder IS the web root.
+#
+# Until FTP_SERVER / FTP_USERNAME / FTP_PASSWORD exist, the workflow skips
+# deployment instead of failing.
+
+name: Deploy to iFastnet
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # lets you run it by hand from the Actions tab
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check FTP secrets are configured
+        id: check
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          if [ -n "$FTP_SERVER" ] && [ -n "$FTP_USERNAME" ] && [ -n "$FTP_PASSWORD" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::FTP secrets not set yet - skipping deployment."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.ready == 'true'
+
+      - name: Upload changed files
+        if: steps.check.outputs.ready == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          # Shared hosts often present a certificate issued for the server's
+          # own hostname; "loose" still encrypts but tolerates that mismatch.
+          security: loose
+          local-dir: ./public_html/
+          server-dir: ${{ secrets.FTP_DIR || './' }}
+          # Only uploads files that changed; never deletes files on the server.
