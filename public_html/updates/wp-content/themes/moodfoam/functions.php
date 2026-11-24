@@ -175,3 +175,81 @@ function mf_card_image() {
 		echo '<span class="mf-card-placeholder"><img src="' . esc_url( mf_url( 'images/logo-icon.png' ) ) . '" alt="" width="180" height="134"></span>';
 	}
 }
+
+/* ======================================================================
+   EDITOR GUARDRAILS
+   The client writes posts in WordPress's block editor, which by default
+   lets anyone pick any text/background colour, paste styled text from
+   Word, add H1 headings and upload huge photos. These rules keep every
+   post on-brand and keep SEO healthy no matter who writes it.
+   ====================================================================== */
+
+/* 1. No colour / gradient / font-size pickers: text and backgrounds come
+      from the theme, so a post can never end up white-on-white or dark-on-dark. */
+add_action( 'after_setup_theme', function () {
+	add_theme_support( 'disable-custom-colors' );
+	add_theme_support( 'disable-custom-gradients' );
+	add_theme_support( 'disable-custom-font-sizes' );
+	add_theme_support( 'editor-color-palette', array() );
+	add_theme_support( 'editor-gradient-presets', array() );
+	add_theme_support( 'editor-font-sizes', array() );
+	remove_theme_support( 'core-block-patterns' );
+
+	// The editing screen uses the same fonts and colours as the live page.
+	add_theme_support( 'editor-styles' );
+	add_editor_style( 'editor.css' );
+}, 11 );
+
+/* 2. Only simple blocks in posts (text, headings, lists, images, gallery,
+      quote, table, buttons, video/embeds, columns, separator). Blocks that
+      carry their own colours or raw code (Cover, Group, Custom HTML,
+      Shortcode...) are not offered. */
+add_filter( 'allowed_block_types_all', function ( $allowed, $context ) {
+	if ( ! empty( $context->post ) && 'post' === $context->post->post_type ) {
+		return array(
+			'core/paragraph', 'core/heading', 'core/list', 'core/list-item', 'core/quote',
+			'core/image', 'core/gallery', 'core/table', 'core/separator', 'core/spacer',
+			'core/buttons', 'core/button', 'core/columns', 'core/column', 'core/video',
+			'core/embed', 'core/more',
+		);
+	}
+	return $allowed;
+}, 10, 2 );
+
+/* 3. Editors can write and publish but not paste raw scripts or iframes
+      ("unfiltered_html" is a security risk if a client account is compromised).
+      Administrators keep it. */
+add_filter( 'map_meta_cap', function ( $caps, $cap, $user_id ) {
+	if ( 'unfiltered_html' === $cap && ! user_can( $user_id, 'install_plugins' ) ) {
+		$caps[] = 'do_not_allow';
+	}
+	return $caps;
+}, 10, 3 );
+
+/* 4. Photos: scale anything wider than 1600px down on upload (phone photos
+      are often 4000px / several MB), keeping pages fast. */
+add_filter( 'big_image_size_threshold', function () { return 1600; } );
+
+/* 5. SEO safety nets applied to the post body when it is shown:
+      - the post title is already the page's single H1, so any H1 typed in
+        the body is demoted to H2;
+      - images saved without alt text get the post title as alt text. */
+add_filter( 'the_content', function ( $html ) {
+	if ( ! is_singular( 'post' ) || ! in_the_loop() ) { return $html; }
+	$html = preg_replace( '#<h1(\s[^>]*)?>#i', '<h2$1>', $html );
+	$html = preg_replace( '#</h1>#i', '</h2>', $html );
+	$alt  = esc_attr( get_the_title() );
+	$html = preg_replace( '#<img((?:(?!\balt=)[^>])*)>#i', '<img alt="' . $alt . '"$1>', $html );
+	$html = preg_replace( '#(<img[^>]*?)\balt=""#i', '$1alt="' . $alt . '"', $html );
+	return $html;
+}, 20 );
+
+/* 6. If the writer forgets the Featured image, use the first photo in the
+      post so list cards, the homepage strip and WhatsApp/Facebook previews
+      are never blank. */
+add_action( 'save_post_post', function ( $post_id, $post ) {
+	if ( wp_is_post_revision( $post_id ) || has_post_thumbnail( $post_id ) ) { return; }
+	if ( preg_match( '/wp-image-(\d+)/', (string) $post->post_content, $m ) && wp_attachment_is_image( (int) $m[1] ) ) {
+		set_post_thumbnail( $post_id, (int) $m[1] );
+	}
+}, 10, 2 );

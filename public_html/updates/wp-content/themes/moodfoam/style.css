@@ -3,7 +3,7 @@ Theme Name: Mood Foam News
 Theme URI: https://www.moodfoammattresses.com/updates/
 Author: Boolox Technologies
 Description: Styles the Mood Foam Mattresses news and updates section so it matches the main website. The header, footer and base styles come from the main site's own CSS and JavaScript.
-Version: 1.1.0
+Version: 1.2.0
 Requires at least: 6.0
 Requires PHP: 7.4
 License: Proprietary
@@ -208,3 +208,23 @@ body.admin-bar .search-overlay { top: 32px; }
 @media (min-width: 1600px) {
   .mf-content { font-size: 1.1rem; }
 }
+
+/* =====================================================================
+   POST BODY SAFETY: whatever formatting is pasted or saved in a post,
+   text always stays dark on the white page and links stay brand green.
+   (Colour pickers are also switched off in the editor - see functions.php.)
+   ===================================================================== */
+.mf-content p, .mf-content li, .mf-content span, .mf-content strong, .mf-content em,
+.mf-content td, .mf-content th, .mf-content blockquote, .mf-content figcaption { color: var(--color-text) !important; }
+.mf-content h2, .mf-content h3, .mf-content h4, .mf-content h5, .mf-content h6 { color: var(--color-heading-dark) !important; }
+.mf-content a:not(.wp-block-button__link) { color: var(--color-primary-dark) !important; }
+.mf-content [style*="background"], .mf-content [class*="has-background"]:not(.wp-block-button__link) { background: none !important; }
+.mf-content .wp-block-button__link {
+  background: var(--color-primary-dark) !important; color: var(--color-white) !important;
+  border-radius: 8px; padding: 12px 24px; text-decoration: none; font-weight: 600; display: inline-block;
+}
+.mf-content .wp-block-button__link:hover { background: var(--color-primary) !important; }
+.mf-content h2 { font-size: 1.5rem; }
+.mf-content [style*="font-size"] { font-size: inherit !important; }
+.mf-content .wp-block-columns { display: flex; flex-wrap: wrap; gap: 24px; }
+.mf-content .wp-block-column { flex: 1 1 260px; min-width: 0; }
