@@ -4,8 +4,22 @@
     {
       "name": "moodfoam-site-root",
       "runtimeExecutable": "node",
-      "runtimeArgs": [".claude/static-server.js"],
+      "runtimeArgs": [
+        ".claude/static-server.js"
+      ],
       "port": 5175
+    },
+    {
+      "name": "guide-docs",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5180",
+        "--directory",
+        "docs"
+      ],
+      "port": 5180
     }
   ]
 }

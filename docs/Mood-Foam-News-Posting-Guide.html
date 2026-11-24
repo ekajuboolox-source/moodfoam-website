@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mood Foam News Posting Guide | Boolox Technologies</title>
+<style>
+/* ---------------------------------------------------------------
+   BOOLOX TECHNOLOGIES BRAND TOKENS
+   These four values (plus the wordmark in .brand) are the only things
+   to change to re-skin the whole guide with the official Boolox colours.
+   --------------------------------------------------------------- */
+:root {
+  --brand-ink: #0b1b3a;      /* main dark colour: cover, headings */
+  --brand-accent: #1f6feb;   /* accent: numbers, links, highlights */
+  --brand-soft: #eaf1ff;     /* pale tint for info boxes */
+  --brand-spark: #f5a524;    /* small highlight colour */
+  --text: #26324a;
+  --muted: #5d6a85;
+  --line: #d8e0f0;
+  --ok: #157347;  --ok-bg: #e8f6ee;
+  --warn: #9a5b00; --warn-bg: #fff4de;
+  --bad: #a1262f; --bad-bg: #fdecee;
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0; background: #e9edf5; color: var(--text);
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; line-height: 1.55;
+}
+@page { size: A4; margin: 0; }
+.page {
+  width: 210mm; min-height: 297mm; margin: 0 auto 10mm; background: #fff;
+  padding: 20mm 18mm 22mm; position: relative; page-break-after: always; break-after: page;
+  box-shadow: 0 2px 14px rgba(11, 27, 58, .15);
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+@media print { body { background: #fff; } .page { margin: 0; box-shadow: none; } }
+
+/* running header / footer inside each page */
+.runhead { position: absolute; top: 8mm; left: 18mm; right: 18mm; display: flex; justify-content: space-between;
+  font-size: 8pt; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 2mm; }
+.runfoot { position: absolute; bottom: 8mm; left: 18mm; right: 18mm; display: flex; justify-content: space-between;
+  font-size: 8pt; color: var(--muted); }
+
+/* brand wordmark (placeholder - replace with the Boolox logo file when available) */
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; letter-spacing: 2px; font-size: 11pt; }
+.brand .mark { width: 22px; height: 22px; position: relative; display: inline-block; }
+.brand .mark i { position: absolute; width: 10px; height: 10px; border-radius: 2px; }
+.brand .mark i:nth-child(1) { left: 0; top: 0; background: var(--brand-accent); }
+.brand .mark i:nth-child(2) { right: 0; top: 0; background: var(--brand-spark); }
+.brand .mark i:nth-child(3) { left: 0; bottom: 0; background: var(--brand-spark); }
+.brand .mark i:nth-child(4) { right: 0; bottom: 0; background: var(--brand-accent); }
+.brand small { font-weight: 500; letter-spacing: 3px; font-size: 7pt; display: block; opacity: .8; margin-top: -2px; }
+
+/* ---------- cover ---------- */
+.cover { background: var(--brand-ink); color: #fff; padding: 0; overflow: hidden; }
+.cover::before { content: ""; position: absolute; right: -60mm; top: -40mm; width: 150mm; height: 150mm; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(31,111,235,.55), rgba(31,111,235,0) 70%); }
+.cover::after { content: ""; position: absolute; left: -40mm; bottom: -50mm; width: 130mm; height: 130mm; border-radius: 50%;
+  background: radial-gradient(circle at 60% 60%, rgba(245,165,36,.35), rgba(245,165,36,0) 70%); }
+.cover-inner { position: relative; z-index: 1; padding: 22mm 20mm; min-height: 297mm; display: flex; flex-direction: column; }
+.cover .brand { color: #fff; }
+.cover h1 { margin: auto 0 4mm; font-size: 34pt; line-height: 1.1; font-weight: 800; }
+.cover h1 span { color: var(--brand-spark); }
+.cover .sub { font-size: 14pt; color: #cfdcf7; max-width: 130mm; margin: 0 0 12mm; }
+.cover .meta { border-top: 1px solid rgba(255,255,255,.25); padding-top: 6mm; display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 10mm; font-size: 9.5pt; color: #cfdcf7; }
+.cover .meta b { color: #fff; display: block; font-size: 8pt; letter-spacing: 1.5px; text-transform: uppercase; opacity: .7; font-weight: 600; }
+
+/* ---------- typography ---------- */
+h2 { font-size: 20pt; line-height: 1.2; color: var(--brand-ink); margin: 0 0 3mm; font-weight: 800; }
+h2 .num { color: var(--brand-accent); }
+h3 { font-size: 12.5pt; color: var(--brand-ink); margin: 7mm 0 2mm; font-weight: 700; }
+p { margin: 0 0 3mm; }
+.lead { font-size: 12pt; color: var(--muted); margin-bottom: 6mm; }
+a { color: var(--brand-accent); text-decoration: none; font-weight: 600; }
+code, .kbd { background: var(--brand-soft); color: var(--brand-ink); padding: 1px 6px; border-radius: 4px; font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; }
+.btn-ui { display: inline-block; background: #fff; border: 1.5px solid var(--brand-accent); color: var(--brand-accent); padding: 0 7px; border-radius: 5px; font-weight: 700; font-size: 9.5pt; }
+.btn-ui.solid { background: var(--brand-accent); color: #fff; }
+.url { display: block; background: var(--brand-ink); color: #fff; padding: 3mm 4mm; border-radius: 8px; font-family: Consolas, monospace; font-size: 10.5pt; margin: 2mm 0 4mm; word-break: break-all; }
+
+/* ---------- steps ---------- */
+ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 3mm 0 4mm; }
+ol.steps > li { counter-increment: s; position: relative; padding: 0 0 3.2mm 11mm; break-inside: avoid; }
+ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 7.5mm; height: 7.5mm; border-radius: 50%;
+  background: var(--brand-accent); color: #fff; font-weight: 700; font-size: 9.5pt; display: flex; align-items: center; justify-content: center; }
+ol.steps > li::after { content: ""; position: absolute; left: 3.7mm; top: 8.5mm; bottom: 0.5mm; width: 1px; background: var(--line); }
+ol.steps > li:last-child::after { display: none; }
+ol.steps b { color: var(--brand-ink); }
+ul.tick { list-style: none; padding: 0; margin: 2mm 0 4mm; }
+ul.tick li { padding-left: 7mm; position: relative; margin-bottom: 1.6mm; break-inside: avoid; }
+ul.tick li::before { content: "\2713"; position: absolute; left: 0; color: var(--ok); font-weight: 800; }
+ul.cross li::before { content: "\2715"; color: var(--bad); }
+
+/* ---------- boxes ---------- */
+.box { border-radius: 10px; padding: 4mm 5mm; margin: 4mm 0; break-inside: avoid; border-left: 5px solid var(--brand-accent); background: var(--brand-soft); }
+.box .t { font-weight: 800; color: var(--brand-ink); display: block; margin-bottom: 1mm; font-size: 10pt; letter-spacing: .3px; }
+.box p:last-child { margin-bottom: 0; }
+.box.tip { border-color: var(--ok); background: var(--ok-bg); }
+.box.warn { border-color: var(--brand-spark); background: var(--warn-bg); }
+.box.stop { border-color: var(--bad); background: var(--bad-bg); }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin: 5mm 0; }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 4mm; break-inside: avoid; }
+.card .ic { width: 10mm; height: 10mm; border-radius: 10px; background: var(--brand-soft); color: var(--brand-accent); font-size: 14pt; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 2mm; }
+.card h4 { margin: 0 0 1mm; font-size: 10.5pt; color: var(--brand-ink); }
+.card p { font-size: 9.5pt; margin: 0; color: var(--muted); }
+
+/* ---------- mock UI ---------- */
+.mock { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 3mm 0 5mm; break-inside: avoid; background: #fff; }
+.mock .bar { background: #f1f4fa; padding: 2mm 4mm; font-size: 8pt; color: var(--muted); border-bottom: 1px solid var(--line); display: flex; gap: 6px; align-items: center; }
+.mock .bar i { width: 8px; height: 8px; border-radius: 50%; background: #c6cfe3; display: inline-block; }
+.mock .body { padding: 4mm; font-size: 9.5pt; }
+.mock .row { display: flex; gap: 4mm; }
+.mock .side { width: 32mm; background: #1d2327; color: #c3c8cd; border-radius: 6px; padding: 3mm; font-size: 8.5pt; }
+.mock .side div { padding: 1.2mm 2mm; border-radius: 4px; }
+.mock .side .on { background: var(--brand-accent); color: #fff; font-weight: 700; }
+.mock .main { flex: 1; }
+.fakefield { border: 1px solid var(--line); border-radius: 6px; padding: 2mm 3mm; color: var(--muted); margin: 1.5mm 0; font-size: 9pt; background: #fbfcff; }
+.hl { outline: 2px solid var(--brand-spark); outline-offset: 1px; border-radius: 4px; }
+.flow { display: flex; align-items: stretch; gap: 3mm; margin: 4mm 0; }
+.flow .n { flex: 1; border: 1px solid var(--line); border-radius: 10px; padding: 3mm; text-align: center; font-size: 9pt; }
+.flow .n b { display: block; color: var(--brand-ink); margin-bottom: 1mm; }
+.flow .arr { align-self: center; color: var(--brand-accent); font-weight: 800; font-size: 14pt; }
+
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm; font-size: 9.5pt; break-inside: avoid; }
+th { background: var(--brand-ink); color: #fff; text-align: left; padding: 2.2mm 3mm; font-weight: 600; }
+td { padding: 2.2mm 3mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:nth-child(even) td { background: #f8faff; }
+.checklist td:first-child { width: 8mm; font-size: 13pt; color: var(--brand-accent); }
+.fill { border-bottom: 1px dotted var(--muted); display: inline-block; min-width: 60mm; height: 5mm; }
+</style>
+</head>
+<body>
+
+<!-- ================================ COVER ================================ -->
+<section class="page cover">
+  <div class="cover-inner">
+    <div class="brand"><span class="mark"><i></i><i></i><i></i><i></i></span><span>BOOLOX<small>TECHNOLOGIES</small></span></div>
+    <h1>Mood Foam <span>News</span><br>Posting Guide</h1>
+    <p class="sub">How to publish news, offers and photos on the Mood Foam Mattresses website, step by step, without a developer.</p>
+    <div class="meta">
+      <div><b>Prepared for</b>Busujju Industries Limited<br>(Mood Foam Mattresses)</div>
+      <div><b>Prepared by</b>Boolox Technologies</div>
+      <div><b>Your news page</b>moodfoammattresses.com/updates</div>
+      <div><b>Version</b>1.0 &middot; November 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AT A GLANCE ============================ -->
+<section class="page">
+  <div class="runhead"><span>Mood Foam News Posting Guide</span><span>Boolox Technologies</span></div>
+  <h2>Welcome</h2>
+  <p class="lead">You can now publish updates on your own website: new arrivals, special offers, delivery news, happy customers. This guide takes you from logging in to a live post in about 10 minutes.</p>
+
+  <div class="grid3">
+    <div class="card"><div class="ic">&#9998;</div><h4>Write</h4><p>Type your update, add photos and a short title. Works from a phone or a computer.</p></div>
+    <div class="card"><div class="ic">&#10003;</div><h4>Publish</h4><p>Press one button. Your post appears on the site within a few minutes.</p></div>
+    <div class="card"><div class="ic">&#9733;</div><h4>Be found</h4><p>Google, WhatsApp and Facebook pick up your post automatically.</p></div>
+  </div>
+
+  <h3>Your login page</h3>
+  <span class="url">https://www.moodfoammattresses.com/updates/wp-admin/</span>
+  <p>Add this page to your bookmarks, and on your phone use <b>Add to Home screen</b>, so it is always one tap away.</p>
+
+  <h3>Your account</h3>
+  <p>You have an <b>Editor</b> account. An Editor can write, edit, delete and publish posts and upload photos. The technical settings (themes, plugins, the main website pages) are managed by Boolox Technologies, so nothing you do can accidentally break the website.</p>
+
+  <h3>Where your posts appear</h3>
+  <div class="flow">
+    <div class="n"><b>You publish</b>a post</div><div class="arr">&rarr;</div>
+    <div class="n"><b>News page</b>moodfoammattresses.com/updates</div><div class="arr">&rarr;</div>
+    <div class="n"><b>Homepage</b>3 newest posts shown automatically</div><div class="arr">&rarr;</div>
+    <div class="n"><b>Google &amp; social</b>previews with your photo</div>
+  </div>
+
+  <div class="box tip"><span class="t">The routine in one line</span>
+    <p>Log in &rarr; <b>Posts &rarr; Add New</b> &rarr; title &rarr; text &rarr; photo &rarr; <b>Featured image</b> &rarr; <b>Publish</b>.</p></div>
+
+  <div class="runfoot"><span>Page 2</span><span>Busujju Industries Limited</span></div>
+</section>
+
+<!-- ================================ LOG IN =============================== -->
+<section class="page">
+  <div class="runhead"><span>Mood Foam News Posting Guide</span><span>Boolox Technologies</span></div>
+  <h2><span class="num">1.</span> Logging in for the first time</h2>
+
+  <ol class="steps">
+    <li><b>Open your welcome email.</b> You will receive an email from <i>Mood Foam Mattresses News</i> with the subject about your new account. Check Spam or Promotions if you cannot see it.</li>
+    <li><b>Click the link to set your password.</b> Choose a long password you can remember (for example three or four unrelated words and a number). Save it in your phone's password manager.</li>
+    <li><b>Go to the login page</b> <code>moodfoammattresses.com/updates/wp-admin/</code>, type your username (or email) and your password, then press <span class="btn-ui solid">Log In</span>.</li>
+    <li><b>You are in.</b> The screen you see is the <b>Dashboard</b>. You only need three things from the black menu on the left (or the menu icon on a phone): <b>Posts</b>, <b>Media</b> and <b>Profile</b>.</li>
+  </ol>
+
+  <div class="mock"><div class="bar"><i></i><i></i><i></i>&nbsp; moodfoammattresses.com/updates/wp-admin</div>
+    <div class="body"><div class="row">
+      <div class="side"><div>Dashboard</div><div class="on hl">Posts</div><div class="hl">Media</div><div>Pages</div><div class="hl">Profile</div></div>
+      <div class="main"><b style="color:#0b1b3a;font-size:11pt;">Dashboard</b><div class="fakefield">Welcome to WordPress!</div><div class="fakefield">At a glance &middot; Activity</div>
+      <p style="font-size:8.5pt;color:#5d6a85;margin-top:2mm">Highlighted items are the only ones you need.</p></div>
+    </div></div></div>
+
+  <h3>Forgot your password?</h3>
+  <ol class="steps">
+    <li>On the login page click <b>Lost your password?</b></li>
+    <li>Type your email address and press <b>Get New Password</b>.</li>
+    <li>Open the email, click the link and choose a new password.</li>
+  </ol>
+
+  <div class="box warn"><span class="t">Keep your login private</span>
+    <p>Do not share your password on WhatsApp or write it on the page. If you think someone else knows it, change it under <b>Users &rarr; Profile &rarr; Account Management &rarr; Set New Password</b>, and tell Boolox Technologies.</p></div>
+
+  <div class="runfoot"><span>Page 3</span><span>Busujju Industries Limited</span></div>
+</section>
+
+<!-- ============================ WRITE A POST ============================= -->
+<section class="page">
+  <div class="runhead"><span>Mood Foam News Posting Guide</span><span>Boolox Technologies</span></div>
+  <h2><span class="num">2.</span> Write your first post</h2>
+  <p class="lead">Do these steps in order. Each one takes under a minute.</p>
+
+  <ol class="steps">
+    <li><b>Start a new post.</b> In the left menu click <b>Posts</b>, then <span class="btn-ui">Add New Post</span>. If a welcome pop-up appears, close it with the <b>X</b>.</li>
+    <li><b>Type the title</b> where it says <i>Add title</i>. Make it clear and short: <code>New Spring Mattresses Now Available</code>. Aim for 40 to 60 characters. Avoid ALL CAPITALS and use at most one emoji.</li>
+    <li><b>Write your message.</b> Click the line under the title and type, or paste your text. Press <b>Enter</b> for a new paragraph. Short paragraphs of two or three sentences read best on phones.</li>
+    <li><b>Make the first sentence count.</b> It becomes the short preview on the news page and in Google. Say the main news straight away, for example <i>"Our new orthopedic range is now available in Mityana, with free delivery this month."</i></li>
+    <li><b>Add a heading</b> (optional, for longer posts). Click the <b>+</b> button, choose <b>Heading</b>, then type. Use level <b>H2</b> for main headings and <b>H3</b> for smaller ones.</li>
+    <li><b>Add a list</b> (optional). Click <b>+</b> &rarr; <b>List</b>, type one item per line.</li>
+    <li><b>Add a link</b> (optional). Highlight some words, click the chain icon in the small toolbar, paste the address and press <b>Enter</b>. To invite WhatsApp chats, link to <code>https://wa.me/256743053096</code>.</li>
+  </ol>
+
+  <div class="box tip"><span class="t">Good to know</span>
+    <p>You will notice there are no colour or font-size options. That is on purpose: the website's design is applied automatically, so every post looks professional and is easy to read on every screen.</p></div>
+
+  <div class="mock"><div class="bar"><i></i><i></i><i></i>&nbsp; Add New Post</div>
+    <div class="body">
+      <div class="fakefield hl" style="font-weight:700;color:#0b1b3a;font-size:11pt">New Spring Mattresses Now Available</div>
+      <div class="fakefield">Our new range of spring mattresses has arrived at the Mityana factory&hellip;</div>
+      <div class="fakefield" style="width:30mm;text-align:center">+ Add block</div>
+    </div></div>
+
+  <div class="runfoot"><span>Page 4</span><span>Busujju Industries Limited</span></div>
+</section>
+
+<!-- ================================ PHOTOS =============================== -->
+<section class="page">
+  <div class="runhead"><span>Mood Foam News Posting Guide</span><span>Boolox Technologies</span></div>
+  <h2><span class="num">3.</span> Photos: adding them and setting the cover</h2>
+
+  <h3>Prepare your photo first</h3>
+  <table>
+    <tr><th>Item</th><th>Recommended</th></tr>
+    <tr><td><b>Cover (Featured) photo</b></td><td><b>1200 &times; 800 pixels</b>, landscape (wider than tall), JPG, under 1 MB</td></tr>
+    <tr><td><b>Photos inside the post</b></td><td>Up to 1200 pixels wide, JPG, under 1 MB each</td></tr>
+    <tr><td><b>Posters / flyers</b></td><td>Allowed (tall is fine). Keep the important words away from the edges.</td></tr>
+  </table>
+  <p style="font-size:9.5pt;color:var(--muted)">The website shrinks anything over 1600 pixels automatically, but smaller files upload faster on mobile data. The free tool <b>squoosh.app</b> or your phone's "resize" option does the job.</p>
+
+  <h3>Add a photo inside the post</h3>
+  <ol class="steps">
+    <li>Click the <b>+</b> button where you want the photo, choose <b>Image</b>.</li>
+    <li>Click <span class="btn-ui">Upload</span> and choose the photo from your phone or computer. (Already uploaded? Pick <b>Media Library</b> instead.)</li>
+    <li>In the panel on the right, find <b>Alt text</b> and describe the photo in a few words, for example <code>Queen size orthopedic mattress in the Mityana showroom</code>. This helps Google and visually impaired visitors. If you leave it empty, the site uses your post title.</li>
+    <li>Optional: type a <b>caption</b> under the photo. For several photos together choose <b>+ &rarr; Gallery</b>.</li>
+  </ol>
+
+  <h3>Set the cover (Featured image): important</h3>
+  <p>The cover photo is the picture shown on the news page, on the homepage and in WhatsApp and Facebook previews.</p>
+  <ol class="steps">
+    <li>Click the <b>Settings icon</b> in the top-right corner (a square with a panel on the right). Make sure the <b>Post</b> tab is selected.</li>
+    <li>Open the <b>Featured image</b> section and click <span class="btn-ui">Set featured image</span>.</li>
+    <li>Choose a photo from the Media Library (or upload one), click it so it gets a blue border, then press <span class="btn-ui solid">Set featured image</span>.</li>
+  </ol>
+  <div class="box warn"><span class="t">If you forget</span>
+    <p>The website uses the first photo in your post as the cover. Choose it yourself so you control which picture people see.</p></div>
+
+  <div class="runfoot"><span>Page 5</span><span>Busujju Industries Limited</span></div>
+</section>
+
+<!-- ============================ PUBLISH ================================== -->
+<section class="page">
+  <div class="runhead"><span>Mood Foam News Posting Guide</span><span>Boolox Technologies</span></div>
+  <h2><span class="num">4.</span> Finish and publish</h2>
+
+  <h3>Make the web address short</h3>
+  <ol class="steps">
+    <li>In the Settings panel (<b>Post</b> tab) find the <b>Link</b> (or <b>Permalink</b>) row and click it.</li>
+    <li>In the <b>URL</b> box type 3 to 5 words with hyphens, lowercase only, no spaces or emojis. Example: <code>new-spring-mattresses</code></li>
+  </ol>
+
+  <h3>Write a short summary (Excerpt)</h3>
+  <p>Still in the Settings panel, open <b>Excerpt</b> and write one or two sentences. This is the text visitors see under the title on the news page and often what Google shows. If you leave it empty, the first sentences of the post are used.</p>
+
+  <h3>Preview, then publish</h3>
+  <ol class="steps">
+    <li>Click <b>Preview</b> at the top and choose <b>Preview in new tab</b>. Read it once and check the photos.</li>
+    <li>Come back and press the blue <span class="btn-ui solid">Publish</span> button at the top right. A panel asks you to confirm: press <span class="btn-ui solid">Publish</span> again.</li>
+    <li>Click <b>View Post</b> to see it live. Done.</li>
+  </ol>
+
+  <div class="box tip"><span class="t">It is not instant everywhere</span>
+    <p>Your post is on the news page straight away. The homepage and some browsers can take up to <b>5 minutes</b> to refresh. Google usually needs a few hours to a few days to list a new post.</p></div>
+
+  <h3>Not ready yet? Draft and schedule</h3>
+  <table>
+    <tr><th>I want to&hellip;</th><th>Do this</th></tr>
+    <tr><td>Save and finish later</td><td>Click <b>Save draft</b> at the top. Nobody can see it. Find it again under <b>Posts &rarr; All Posts</b>.</td></tr>
+    <tr><td>Publish at a set time</td><td>In the Settings panel click the date next to <b>Publish</b>, choose the date and time, then the button changes to <b>Schedule</b>. Press it.</td></tr>
+  </table>
+
+  <h3>Share it with customers</h3>
+  <p>At the bottom of every published post there are <b>WhatsApp</b> and <b>Facebook</b> share buttons. You can also copy the post's web address from the browser and paste it into your WhatsApp status, group or broadcast list. The cover photo and title appear automatically in the preview.</p>
+
+  <div class="runfoot"><span>Page 6</span><span>Busujju Industries Limited</span></div>
+</section>
+
+<!-- ============================ MANAGE POSTS ============================= -->
+<section class="page">
+  <div class="runhead"><span>Mood Foam News Posting Guide</span><span>Boolox Technologies</span></div>
+  <h2><span class="num">5.</span> Edit, delete and restore posts</h2>
+
+  <table>
+    <tr><th>I want to&hellip;</th><th>Steps</th></tr>
+    <tr><td><b>Fix a typo or change a photo</b></td><td><b>Posts &rarr; All Posts</b>, hover over the title, click <b>Edit</b>, make the change and press <span class="btn-ui solid">Update</span>.</td></tr>
+    <tr><td><b>Remove a post</b></td><td>Hover over the title and click <b>Trash</b>. It disappears from the website immediately.</td></tr>
+    <tr><td><b>Bring a deleted post back</b></td><td><b>Posts &rarr; All Posts &rarr; Trash</b> (link above the list), hover over the post and click <b>Restore</b>.</td></tr>
+    <tr><td><b>Hide a post without deleting</b></td><td>Open it, click the status next to <b>Status</b> in the Settings panel, choose <b>Draft</b> and press <b>Update</b>.</td></tr>
+    <tr><td><b>Find an old post</b></td><td>Use the search box at the top of <b>All Posts</b>.</td></tr>
+  </table>
+
+  <h2 style="margin-top:9mm"><span class="num">6.</span> The 30-second quality check</h2>
+  <p>Tick these before pressing Publish. They keep every post looking professional and help people find it on Google.</p>
+  <table class="checklist">
+    <tr><td>&#9744;</td><td><b>Title</b> is clear, 40 to 60 characters, not in ALL CAPITALS.</td></tr>
+    <tr><td>&#9744;</td><td><b>First sentence</b> says the main news.</td></tr>
+    <tr><td>&#9744;</td><td><b>Cover photo (Featured image)</b> is set and landscape (1200 &times; 800).</td></tr>
+    <tr><td>&#9744;</td><td>Photos have a few words of <b>Alt text</b>.</td></tr>
+    <tr><td>&#9744;</td><td><b>Link</b> (web address) is short, lowercase, with hyphens, no emoji.</td></tr>
+    <tr><td>&#9744;</td><td><b>Excerpt</b> is a clear one or two sentences.</td></tr>
+    <tr><td>&#9744;</td><td>Phone number and WhatsApp details are correct: <b>0764 513341</b> and <b>0743 053096</b>.</td></tr>
+    <tr><td>&#9744;</td><td>Previewed once and read through.</td></tr>
+  </table>
+
+  <div class="runfoot"><span>Page 7</span><span>Busujju Industries Limited</span></div>
+</section>
+
+<!-- ============================ DO / DON'T / HELP ======================== -->
+<section class="page">
+  <div class="runhead"><span>Mood Foam News Posting Guide</span><span>Boolox Technologies</span></div>
+  <h2><span class="num">7.</span> Do and don't</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm">
+    <div>
+      <h3 style="margin-top:2mm;color:var(--ok)">Do</h3>
+      <ul class="tick">
+        <li>Post regularly. One or two posts a week is better than ten in one day.</li>
+        <li>Use real photos of your products and showroom.</li>
+        <li>Mention prices, sizes, delivery areas and offer end-dates clearly.</li>
+        <li>Preview before publishing.</li>
+        <li>Log out on shared computers.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:2mm;color:var(--bad)">Don't</h3>
+      <ul class="tick cross">
+        <li>Do not click <b>Update</b> on WordPress, themes or plugins if a notice appears. Boolox handles those.</li>
+        <li>Do not change <b>Settings</b>, <b>Appearance</b> or <b>Plugins</b>.</li>
+        <li>Do not copy photos or text from other websites (copyright, and Google penalises copies).</li>
+        <li>Do not publish customers' private details.</li>
+        <li>Do not share your password.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:8mm"><span class="num">8.</span> Troubleshooting</h2>
+  <table>
+    <tr><th>Problem</th><th>What to do</th></tr>
+    <tr><td>I cannot log in</td><td>Check Caps Lock, then use <b>Lost your password?</b>. After several wrong attempts the site blocks you for a while for safety; wait 15 minutes and try again.</td></tr>
+    <tr><td>My post is not on the homepage yet</td><td>Wait up to 5 minutes and refresh. Only the 3 newest posts show on the homepage; all posts show on the news page.</td></tr>
+    <tr><td>The cover photo looks cut off</td><td>The news cards are wide. Use a landscape cover (1200 &times; 800) and keep the main subject in the centre.</td></tr>
+    <tr><td>The page looks different from what I expected</td><td>Use <b>Preview</b>. The website controls colours and fonts so posts always look consistent.</td></tr>
+    <tr><td>I deleted something by mistake</td><td>Open <b>Posts &rarr; All Posts &rarr; Trash</b> and press <b>Restore</b>. Posts stay in the Trash for 30 days.</td></tr>
+    <tr><td>Photo will not upload</td><td>Use a JPG or PNG under 5 MB. Check your internet connection and try again.</td></tr>
+  </table>
+
+  <div class="box"><span class="t">Need help?</span>
+    <p><b>Boolox Technologies</b> keeps your website secure, updated and backed up.</p>
+    <p>Phone / WhatsApp: <span class="fill"></span><br>Email: <span class="fill"></span></p></div>
+
+  <div class="runfoot"><span>Page 8</span><span>Busujju Industries Limited</span></div>
+</section>
+
+</body>
+</html>
