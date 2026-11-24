@@ -194,6 +194,40 @@ Things worth knowing:
 
 ---
 
+## Display standards (all screen sizes)
+
+Apply these to every new page, post and component. They are what the site is tested against.
+
+**Screen sizes**
+
+| Name | Width | Layout rules |
+|---|---|---|
+| Phone | up to 600px | One column, 20px side margins, hamburger menu, Call/WhatsApp bar fixed at the bottom |
+| Tablet | 601 to 900px | Hamburger menu; cards 2 per row; article one column |
+| Small laptop | 901 to 1179px | Full menu on **two** centred rows (never overflows) |
+| Laptop / desktop | 1180 to 1599px | Full menu on **one** row; cards up to 3 per row |
+| Large monitor | 1600px and up | Content stays **1200px wide and centred** (`--content-max-width`); only the margins grow |
+
+**Rules**
+
+1. **No sideways scrolling at any width** (check `document.documentElement.scrollWidth - innerWidth` is 0 or negative, from 320px to 2560px).
+2. **Content width:** main sections use `.container` (90% wide, max 1200px). News articles read best at about 650 to 820px.
+3. **Text on dark green** (header, footer, news banner) must be white or light mint, never the default dark heading colour.
+4. **Images:** always `width`/`height` attributes, descriptive `alt`, `loading="lazy"` (except the first/hero image). CSS `img { height: auto }` keeps them undistorted. Never let a single image be taller than the screen: cap with `max-height` and `object-fit`.
+5. **Menu:** the header shrinks its logo and spacing with `clamp()` so it fits one row from 1180px; do not add a menu item without re-testing at 1180, 1280 and 1440px.
+6. **Tap targets** on touch screens at least 40px high; body text at least 16px.
+7. **Cache versions:** after any CSS/JS change, bump `?v=` everywhere (see "Force visitors to get the latest CSS/JS").
+
+**Standard widths to test before every release:** 320, 390, 768, 1024, 1280, 1440, 1920, 2560.
+
+**Photos for news posts (tell the client)**
+
+| Use | Size | Notes |
+|---|---|---|
+| Featured image (cover) | **1200 x 800 px**, landscape | Shown on the news list, homepage strip and WhatsApp/Facebook previews. Under 1 MB (JPG). |
+| Photos inside the post | 1200 px wide at most | WordPress makes smaller copies automatically |
+| Tall posters / flyers | Allowed | On wide screens they sit beside the text; keep important text away from the edges |
+
 ## JavaScript guide
 
 Everything is in `public_html/java/script.js` (~360 lines), wrapped in one `DOMContentLoaded` handler. Each feature quietly does nothing on pages that don't have its markup.
