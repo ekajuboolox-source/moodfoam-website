@@ -8,6 +8,16 @@ the_post();
 
 $share_text = rawurlencode( get_the_title() . ' - ' . get_permalink() );
 $prev       = get_previous_post();
+
+// A tall (portrait) cover, e.g. a poster, sits beside the text on wide screens
+// instead of pushing the whole article far down the page.
+$portrait = false;
+if ( has_post_thumbnail() ) {
+	$meta = wp_get_attachment_metadata( get_post_thumbnail_id() );
+	if ( ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+		$portrait = $meta['height'] > $meta['width'] * 1.15;
+	}
+}
 $next       = get_next_post();
 ?>
 <main class="mf-main">
@@ -19,17 +29,18 @@ $next       = get_next_post();
 				<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
 				<?php
 				$cats = get_the_category();
-				if ( $cats ) { echo ' &middot; ' . esc_html( $cats[0]->name ); }
+				if ( $cats && 'uncategorized' !== $cats[0]->slug ) { echo ' &middot; ' . esc_html( $cats[0]->name ); }
 				?>
 			</p>
 		</div>
 	</div>
 
-	<article class="container mf-article">
+	<article class="container mf-article<?php echo $portrait ? ' mf-article--portrait' : ''; ?>">
 		<?php if ( has_post_thumbnail() ) : ?>
 			<figure class="mf-featured"><?php the_post_thumbnail( 'large', array( 'alt' => esc_attr( get_the_title() ) ) ); ?></figure>
 		<?php endif; ?>
 
+		<div class="mf-article-body">
 		<div class="mf-content"><?php the_content(); ?></div>
 
 		<div class="mf-share">
@@ -49,6 +60,7 @@ $next       = get_next_post();
 			<h2>Interested in our products?</h2>
 			<p>Call or message us on WhatsApp for prices, sizes and delivery anywhere in Uganda.</p>
 			<a class="btn" href="https://wa.me/256743053096" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+		</div>
 		</div>
 	</article>
 </main>

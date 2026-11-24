@@ -3,7 +3,7 @@ Theme Name: Mood Foam News
 Theme URI: https://www.moodfoammattresses.com/updates/
 Author: Boolox Technologies
 Description: Styles the Mood Foam Mattresses news and updates section so it matches the main website. The header, footer and base styles come from the main site's own CSS and JavaScript.
-Version: 1.0.0
+Version: 1.1.0
 Requires at least: 6.0
 Requires PHP: 7.4
 License: Proprietary
@@ -143,3 +143,68 @@ Text Domain: moodfoam
 /* WordPress's logged-in admin bar would sit on top of the fixed-position
    header on some screens; give it room. */
 body.admin-bar .search-overlay { top: 32px; }
+
+/* =====================================================================
+   DISPLAY STANDARDS (all screen sizes)
+   Phone  <= 600px : one column, 20px side margins
+   Tablet 601-999px: cards 2 per row, article one column
+   Desktop >= 1000px: cards up to 3 per row (1200px wide max), long posts
+                     with a tall cover image show it beside the text
+   Large  >= 1600px: same 1200px content width, centred; nothing stretches
+   ===================================================================== */
+
+/* Titles on the dark green banner must always be white. (The main
+   stylesheet gives every h1 a dark colour, which made them unreadable.) */
+.mf-hero h1 { color: var(--color-white); }
+.mf-hero .mf-meta, .mf-hero .mf-meta time { color: #c3d1c6; }
+
+/* News list: cards keep a sensible size and are centred, so one or two
+   posts never stretch or hug the left edge. */
+.mf-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
+  justify-content: center;
+}
+.mf-item-img img { object-position: center 30%; }
+
+/* Cover image on a post: never taller than 560px. Wide pictures fill the
+   width; tall posters are shown whole (letterboxed) instead of filling the screen. */
+.mf-featured {
+  display: flex;
+  justify-content: center;
+  background: var(--color-bg-cream);
+}
+.mf-featured img {
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+}
+
+/* Wide screens: a tall cover (poster) sits beside the text. */
+@media (min-width: 1000px) {
+  .mf-hero { padding: 44px 0 38px; }
+  .mf-hero--post { padding: 36px 0 30px; }
+  .mf-article--portrait {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+  .mf-article--portrait .mf-featured {
+    position: sticky;
+    top: 24px;
+    margin: 0;
+    background: none;
+  }
+  .mf-article--portrait .mf-featured img {
+    max-height: none;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+}
+
+/* Very large monitors: keep the reading column comfortable. */
+@media (min-width: 1600px) {
+  .mf-content { font-size: 1.1rem; }
+}

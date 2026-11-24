@@ -3366,3 +3366,23 @@ textarea:focus-visible,
 .ln-body p { margin: 0; font-size: 0.92rem; color: var(--color-text-muted); }
 .ln-more { margin-top: 1.6rem; }
 .ln-more .btn { display: inline-block; }
+
+/* =====================================================================
+   DESKTOP HEADER - one-row menu from 1180px up
+   The logo (~7vw tall) plus ten menu items did not fit side by side below
+   about 1700px, so the menu wrapped onto a second row on typical laptop
+   and desktop screens. A slightly smaller logo and tighter menu spacing
+   keep everything on one line from 1180px to 2560px+. Between 901px and
+   1180px the menu still wraps to two centred rows instead of overflowing.
+   ===================================================================== */
+@media (min-width: 901px) {
+  .logo-img, .logo img {
+    height: clamp(44px, 5vw, 96px);
+    max-width: clamp(170px, 19vw, 380px);
+  }
+  .nav-links { gap: clamp(2px, 0.55vw, 12px); }
+  .nav-links a, .dropbtn {
+    font-size: clamp(11.5px, 0.95vw, 15px);
+    padding: 8px 4px;
+  }
+}
